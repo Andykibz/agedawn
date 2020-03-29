@@ -6,12 +6,15 @@ use App\Article;
 use Faker\Generator as Faker;
 
 $factory->define(Article::class, function (Faker $faker) {
-        
+        $imgArr = [
+            'default_medium.jpg','faith_1.jpeg','hands.jpg',null
+        ];
+        $title = $faker->sentence(2);
         return [
-            'title'     => $faker->sentence(2),
-            'slug'      => $faker->unique()->safeEmail,
-            'image'     => $faker->randomDigit()%2 ? 'default':Null,
-            'headline'  => $faker->sentence(12),
-            'body'      => $faker->paragraphs(4,true),
+            'title'     => $title,
+            'slug'      => str_slug($title),
+            'image'     => $imgArr[ $faker->randomDigit()%4 ],
+            'headline'  => $faker->sentence(15),
+            'body'      => $faker->paragraphs(5,true),
         ];
 });

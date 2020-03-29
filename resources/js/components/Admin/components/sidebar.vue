@@ -11,7 +11,7 @@
           <i class="fas fa-fw fa-newspaper"></i>
           <span>Articles</span>
         </router-link>
-      </li>
+      </li>      
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-shopping-cart"></i>
@@ -20,29 +20,24 @@
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
           <h6 class="dropdown-header">
             <i class="fas fa-fw fa-tshirt"></i>
-            <span>Merchandise:</span>
+            <span>Products:</span>
           </h6>
-          <router-link class="dropdown-item" to="#">Products</router-link>
-          <router-link class="dropdown-item" to="#">Categories</router-link>
-          <router-link class="dropdown-item" to="#">Attributes</router-link>
+          <router-link class="dropdown-item" :to="{ name  : 'products' }">Products</router-link>
           <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">
             <i class="fas fa-fw fa-record-vinyl"></i>
-            <span>Media:</span>
+            <span>Orders:</span>
           </h6>
-          <router-link class="dropdown-item" to="#">Categories</router-link>
-          <router-link class="dropdown-item" to="#">Attributes</router-link>
+          <router-link class="dropdown-item" :to="{ name  : 'orders' }">Orders</router-link>
+          
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="charts.html">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Charts</span></a>
+        <router-link :to="{ name: 'info' }" class="nav-link">
+          <i class="fas fa-fw fa-info"></i>
+          <span>Info</span>
+        </router-link>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="tables.html">
-          <i class="fas fa-fw fa-table"></i>
-          <span>Tables</span></a>
-      </li>
+
     </ul>
   </template>

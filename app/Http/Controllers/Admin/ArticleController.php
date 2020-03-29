@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Article;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 class ArticleController extends Controller
 {
     /**
@@ -17,7 +18,7 @@ class ArticleController extends Controller
     {
         $articles = Article::paginate(5);
         // $articles = Article::get();
-        return response()->json($articles);    
+        return response()->json($articles);
     }
 
     /**
@@ -40,10 +41,11 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $article    =   new Article();
+        return response()->json($request);
         $this->validate($request,[
             'title'     => 'required',
             'body'      => 'required',
-            'image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1999'
+            'image'     => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1999'
         ]);
 
         if($request->hasFile('image')):
@@ -54,18 +56,18 @@ class ArticleController extends Controller
             $ext = $request->file('image')->getClientOriginalExtension();
             $filename = $name.'_'.time().'.'.$ext;
             $img->storeAs('public/Articles',$filename);
-            $path = public_path('storage/Articles/'.$filename);
+            $path = storage_path("app/public/Articles/{$filename}");
             Image::make($path)->resize(800, 500, function($constraint) { $constraint->aspectRatio(); })->save($path,80);
-            Image::make($path)->resize(400, 300, function($constraint) { $constraint->aspectRatio(); })->save(public_path('storage/Articles/thumbs/'.$filename),80);
-            $article->cover_image = (!empty($filename)) ? $filename : null ;
-        endif;     
+            Image::make($path)->resize(400, 300, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Articles/thumbs/{$filename}"),80);
+            $article->image = (!empty($filename)) ? $filename : null ;
+        endif;
 
         $article->title = $request->input('title');
         $article->headline = $request->input('headline');
         $article->body = $request->input('body');
         $article->slug = slugify(Article::class,$request->title);
-        $article->published =  $request->input('published') ? TRUE: FALSE; 
-        $article->published_at =  ( $request->input('published') !== null ) ? date("Y-m-d H:i:s") : null ; 
+        $article->published =  $request->input('published') ? TRUE: FALSE;
+        $article->published_at =  ( $request->input('published') !== null ) ? date("Y-m-d H:i:s") : null ;
         $article->save();
 
         return response()->json($article);
@@ -88,9 +90,9 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
-    {   
-        return response()->json($article);
+    public function edit($article_id)
+    {
+        return response()->json(Article::find($article_id));
     }
 
     /**
@@ -100,9 +102,47 @@ class ArticleController extends Controller
      * @param  \App\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $article_id )
     {
-        //
+        $article = Article::find($article_id);
+        // return response()->json($request->input('title'));
+        $this->validate($request,[
+            'title'     => 'required',
+            'body'      => 'required',
+            'image'     => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1999'
+        ]);
+
+
+        if($request->hasFile('image')):
+
+          if( !empty($article->image) ):
+            Storage::delete("public/Products/{$article->image}");
+            Storage::delete("public/Products/thumbs/{$article->image}");
+          endif;
+
+            //Get Filename
+            $img = $request->file('image');
+            $fullname = $request->file('image')->getClientOriginalName();
+            $name = pathinfo($fullname,PATHINFO_FILENAME );
+            $ext = $request->file('image')->getClientOriginalExtension();
+            $filename = $name.'_'.time().'.'.$ext;
+            $img->storeAs('public/Articles',$filename);
+            $path = storage_path("app/public/Articles/{$filename}");
+            Image::make($path)->resize(800, 500, function($constraint) { $constraint->aspectRatio(); })->save($path,80);
+            Image::make($path)->resize(400, 300, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Articles/thumbs/{$filename}"),80);
+            $article->image = (!empty($filename)) ? $filename : null ;
+        endif;
+
+
+        $article->title = $request->input('title');
+        $article->headline = $request->input('headline');
+        $article->body = $request->input('body');
+        $article->slug = slugify(Article::class,$request->title);
+        $article->published =  $request->input('published') ? TRUE: FALSE;
+        $article->published_at =  ( $request->input('published') !== null ) ? date("Y-m-d H:i:s") : null ;
+        $article->save();
+
+        return response()->json($article);
     }
 
     /**
@@ -113,6 +153,6 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
-        //
+        return response()->json(Article::destroy($article->id));
     }
 }

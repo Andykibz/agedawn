@@ -55,10 +55,36 @@
                                     <li><a href="#">Menu Three</a></li>
                                 </ul>
                             </li> -->
-                            <li><router-link :to="{name: 'about'}">About Us</router-link></li>
-                            <li><router-link :to="{name: 'news'}" >News</router-link></li>
-                            <li><router-link :to="{name: 'store'}">Store</router-link></li>
-                            <li><router-link :to="{name: 'media'}">Media</router-link></li>
+                            <li class=""><router-link :to="{name: 'about'}">About Us</router-link></li>
+                            <li class=""><router-link :to="{name: 'news'}" >News</router-link></li>
+                            <li class=""><router-link :to="{name: 'store'}">Store</router-link></li>
+                            <li class=""><router-link :to="{name: 'media'}">Media</router-link></li>
+                            <li class="">
+                                <router-link class="dropdown-toggle" to="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span v-if="user"> {{ user.name }} </span> 
+                                    <i class="icon-user-circle"></i>
+                                </router-link>
+                                <div class="dropdown-menu bg-transparent">
+                                    <template v-if="!!!authenticated">
+                                        <router-link id="signInLink" class=" dropdown-item" to="#signin"
+                                                type="button" data-toggle="modal" data-target="#signinModal"> 
+                                                Sign In 
+                                        </router-link>
+                                        <router-link id="signUpLink" class="dropdown-item" to="#signup"
+                                                type="button" data-toggle="modal" data-target="#signupModal"> 
+                                                Sign Up 
+                                        </router-link>
+                                        
+                                    </template>
+                                    <template v-else-if="!!authenticated">
+                                        <router-link @click.prevent="signOut" id="signOutLink" class="dropdown-item" to="#signout" type="button"> 
+                                                Sign Out
+                                        </router-link>
+                                        <div class="dropdown-divider"></div>
+                                        <router-link class="dropdown-item" data-toggle="modal" data-target="" to="#cart"> <i class=""></i> Cart </router-link>
+                                    </template>
+                                </div>
+                            </li>
                         </ul>
                         </div>
                     </nav>
@@ -72,15 +98,41 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
   export default{
       data(){
           return{
 
           }
       },
-      beforeMount(){
-          
-      }
+
+        computed: {
+            ...mapGetters({
+                authenticated : 'auth/authenticated',
+                user         : 'auth/user'
+            })
+        },
+        methods:{
+            ...mapActions({
+                signOutAction : 'auth/signOut'
+            }),
+            signOut(){
+                this.signOutAction().then(()=>{
+                    this.$router.replace({
+                        name    : 'home'
+                    });
+                })
+            }
+        },
+        beforeMount(){
+            
+        }
     
   }
 </script>
+<style scoped>
+    .dropdown-menu a{
+        color: rgba(255, 255, 255, 0.6);
+        font-weight: 700;
+    }
+</style>

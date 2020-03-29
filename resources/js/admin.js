@@ -3,9 +3,14 @@ import VueRouter from 'vue-router'
 
 import Admin from './components/Admin/Admin.vue'
 import routes from './components/Admin/router.js'
+import store from './components/Admin/store';
+
 
 import VueTimeago from 'vue-timeago'
 import CKEditor from '@ckeditor/ckeditor5-vue';
+
+window.axios = require('axios');
+
 
 window.Vue = require('vue');
 
@@ -37,6 +42,7 @@ Vue.use(VueRouter)
 
 
 new Vue({
+    store,
     router,
     render: h => h(Admin)
 }).$mount('#admin')

@@ -2,9 +2,9 @@
     <div>
         <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(./imgs/drums.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">
             <div class="container">
-                <div class="row align-items-center text-center justify-content-center">
-                <div class="col-md-8 mt-5">
-                    <span class="sub-text pt-4">Adawngae Band</span>
+                <div class="row align-items-end text-center justify-content-center">
+                <div class="col-md-8 mb-4">
+                    <span class="sub-text ">Adawngae Band</span>
                     <h1>So What about Us?</h1>
                 </div>
                 </div>

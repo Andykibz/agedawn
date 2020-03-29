@@ -36,7 +36,7 @@
                     </div>
                     
                     <div class="row">
-                        <div v-for="album in albums" :key="album.id" class="album mb-3 col-12">
+                        <!-- <div v-for="album in albums" :key="album.id" class="album mb-3 col-12">
                             <div class="album-thumb ">
                                 <a href="#" class="" >
                                     <div class="row">
@@ -52,7 +52,7 @@
                                     </div>
                                 </a>          
                             </div>
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
@@ -66,16 +66,16 @@
                             </p>
                         </div>
                     </div>
-                    <div v-for="product in products" :key="product.id">
+                    <div>
                         <span class="row">
                             <div class="col-12">
-                                <hr class="hr-text mt-4 mb-4"  :data-content="product.cat_name">
+                                <hr class="hr-text mt-4 mb-4"  :data-content="'Hoodies'">
                             </div>
                         </span>
                         <div class="row">
-                            <div v-for="item in product.items" :key="item.id" class="col-md-4 col-sm-6 col-12">                                
-                                <MerchItem :item="item" v-bind:static="false"></MerchItem>
-                            </div>
+                            
+                                <MerchItem v-for="hoodie in hoodies" :key="hoodie.id" :item="hoodie" v-bind:static="false"></MerchItem>
+        
                         </div>
                         
                     </div>
@@ -91,22 +91,21 @@
 <script>
 import MerchItem from './components/sub/merchitem'
 import Carousel from 'vue-owl-carousel'
+import { log } from 'util'
+import { mapActions,mapGetters } from 'vuex';
 export default {
     name            :   "Store",
     components      :   { MerchItem,Carousel },
+    computed :{
+            ...mapGetters({
+                    hoodies : 'shop/getHoodies',
+                    music   : 'shop/getMusic'
+            })
+    },
+
     data(){
         return{
-            "albums" : [
-                {
-                    "title"      :   "Safari",
-                    "img"       :   "storage/Shop/Music/safari.jpg",
-                    "price"     :   "Kes 500",
-                },{
-                    "title"      :   "Maisha",
-                    "img"       :   "storage/Shop/Music/maisha.jpg",
-                    "price"     :   "Kes 500",
-                }
-            ],
+            
             "carous"  :   [
                 {
                     'title' :   "Top fitted Caps",
@@ -123,80 +122,18 @@ export default {
                     'img'   :   "storage/Shop/carousel/car_img4.gif",
                 },
             ],
-            "products"  :[
-                {
-                    "cat_name"  :   "Hoodies",
-                    "items"  :   [
-                        {
-                            "id"    :   "1",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image1.jpg",
-                            "status":   true
-                        },{
-                            "id"    :   "2",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image2.jpg",
-                            "status":   true
-                        },{
-                            "id"    :   "3",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image3.jpg",
-                            "status":   true
-                        }
-                    ]
-                },
-                {
-                    "cat_name"  :   "T-Shirts",
-                    "items"  :   [
-                        {
-                            "id"    :   "4",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image1.jpg",
-                            "status":   true
-                        },{
-                            "id"    :   "5",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image2.jpg",
-                            "status":   true
-                        },{
-                            "id"    :   "6",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image3.jpg",
-                            "status":   true
-                        }
-                    ]
-                },{
-                    "cat_name"  :   "Headware",
-                    "items"  :   [
-                        {
-                            "id"    :   "7",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image1.jpg",
-                            "status":   true
-                        },{
-                            "id"    :   "8",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image2.jpg",
-                            "status":   true
-                        },{
-                            "id"    :   "9",
-                            "name"  :   "White Tee",
-                            "price" :   "KES 1300",
-                            "img"   :   "storage/Shop/Merch/work-image3.jpg",
-                            "status":   true
-                        }
-                    ]
-                }
-            ]
+            
         }
+    },
+    methods:{
+        ...mapActions({
+            getByCategories : 'shop/getByCategories'
+        })
+        
+    },
+    mounted(){
+        this.getByCategories('hoodies')
+        this.getByCategories('music')
     },
     beforeMount(){
 

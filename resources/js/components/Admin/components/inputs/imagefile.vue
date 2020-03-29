@@ -6,8 +6,8 @@
             <div class="image-wrapper">
                 <img ref="file" :src="imgsource" class="img-fluid img-thumbnail"/>
             </div>
-            <input type="file" class="custom-file-input" name="image" :id="label+'_id'">
-            <label class="custom-file-label" :for="label+'_id'">{{ label }}</label>
+            <input @change="changelabel($event)" type="file" class="custom-file-input" name="image" :id="slugify(label)+'_id'">
+            <label id="custom-file-label" class="custom-file-label" :for="slugify(label)+'_id'">{{ label }}</label>
     </div>
     </div>
 </template>
@@ -15,11 +15,26 @@
 <script>
 export default {
     name        :   'FileInput',
-    props       :   [ 'label',],
+    props       :   ['label',],
     data(){
         return{
             imgsource   :   '',
-            f
+
+        }
+    },
+    methods:{
+        changelabel(event){
+            let filename = event.target.value.split('\\').pop()
+            document.getElementById('custom-file-label').textContent = filename
+        },
+
+        slugify(text){
+            return text.toString().toLowerCase()
+                .replace(/\s+/g, '-')           // Replace spaces with -
+                .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+                .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+                .replace(/^-+/, '')             // Trim - from start of text
+                .replace(/-+$/, '');            // Trim - from end of text
         }
     }
 }

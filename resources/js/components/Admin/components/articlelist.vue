@@ -8,6 +8,9 @@
         <div id="artcile-list" class="mb-1">
             <div class="list-group">
                 <a href="#" @click.prevent="edit(article.id)" class="list-group-item list-group-item-action" v-for="article in articles" :key="article.id">
+                <button @click.prevent="delArticle($event,article.id)" class="btn btn-sm btn-outline-danger del-btn mr-2 mb-2">
+                    <i class="fa fa-trash fa-1x"></i>
+                </button>
                     <div class="d-flex w-100 justify-content-between">
                     <h5 class="mb-1">{{ article.title }}</h5>
                     <small><timeago :datetime="article.updated_at"></timeago></small>
@@ -25,6 +28,7 @@
 <script>
 import paginate from './sub/paginate';
 import { eventBus } from '../../../admin';
+import { log } from 'util';
 export default {
     name        :   "ArticleList",
     components  :   { paginate },
@@ -68,10 +72,9 @@ export default {
                 .catch( error => {  console.log(error); });
             }
         },
-        fetchArticles(page) {
-            
+        fetchArticles(page) {            
             self = this
-            axios.get('/api/admin/articles?page=1')
+            axios.get('/api/admin/articles?page='+page)
             .then(response => { 
                     this.current_page   =   response.data.current_page
                     this.articles       =   response.data.data  
@@ -81,17 +84,32 @@ export default {
                 })
             .catch( error => {  console.log(error); });
          
-		}
+        },
+        delArticle(event,id){
+            event.stopPropagation();
+            self = this
+            axios.delete('/api/admin/article/'+id)
+            .then(response => { 
+                    console.log(self.current_page)
+                    self.fetchArticles(self.current_page)
+                })
+            .catch( error => {  console.log(error); });
+        }
     },
     beforeMount(){
-        
-        
         this.fetchArticles(1)         
     }
 
 }
 </script>
 
-<style>
+<style scoped>
+.del-btn{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    
+
+}
 
 </style>
