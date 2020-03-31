@@ -20,13 +20,24 @@ class NewsController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function homeindex( )
+    {
+        $article = Article::take(4)->get();
+        return response()->json( $article );
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        
     }
 
     /**

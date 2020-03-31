@@ -1,8 +1,8 @@
-import Index from './Index'
-import Store from './Store'
-import Media from './Media'
-import About from './About'
-import News from './News'
+import Index from './pages/Index'
+import Store from './pages/Store'
+import Media from './pages/Media'
+import About from './pages/About'
+import News from './pages/News'
 import Product from './pages/ProductItem.vue'
 import NewsItem from './pages/NewsItem.vue'
 export default [

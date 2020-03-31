@@ -91,7 +91,7 @@
     </div>
 </template>
 <script>
-import Social from './components/sub/social'
+import Social from '../components/sub/social'
 export default {
     name        :   "AboutPage",
     components  :   { Social },

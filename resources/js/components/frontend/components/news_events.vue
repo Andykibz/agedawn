@@ -2,15 +2,15 @@
     <div class="section-wrapper py-3 mt-3">
         <div class="container">
             <div class="section_title text-center col-12 mb-3">
-                <h2>News & Events</h2>
+                <h2>What's News</h2>
                 <p>Esteem spirit temper too say adieus who direct esteem. <br>
                     It esteems luckily or picture placing drawing. </p>
             </div>
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 
-                    <NewsCard/>
+                    <NewsCard class="col-8" ></NewsCard>
                 
-                    <EventCard/>
+                    <!-- <EventCard/> -->
             </div>
         </div>
     </div>

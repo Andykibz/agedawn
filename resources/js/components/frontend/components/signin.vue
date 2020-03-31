@@ -20,7 +20,7 @@
       <div class="modal-footer d-flex flex-column">        
             <button type="button" @click="signinFunc" class="btn btn-block btn-primary">Sign In</button>
             <span>or</span>
-            <button type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign in With <i class="icon-google"></i> </button>
+            <a @click.prevent="googleLogin" href="auth/login/google" type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign up with Google <i class="icon-google"></i> </a>
       </div>
     </div>
   </div>
@@ -29,6 +29,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+
 export default {
     name    : 'signInModal',
     props   : [],
@@ -41,6 +42,9 @@ export default {
         }
     },
     methods:{
+        googleLogin(){
+            window.location.href = "localhost:8000/auth/login/google"
+        },
         ...mapActions({
           signIn  :'auth/signIn'
         }),

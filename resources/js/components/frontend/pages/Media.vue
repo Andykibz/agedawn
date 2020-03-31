@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import VideoPlayer from './components/video'
+import VideoPlayer from '../components/video'
 
 export default {
     name    :   "Media",

@@ -18,9 +18,9 @@
             <div class="row mb-5">
         
                 <main class="col-8 mx-auto" >
-                    <Paginate :current="current_page" :last="last_page" :getPage="getArtcles"/>
+                    <Paginate :current="current_page" :last="last_page" :getPage="getArticles"/>
                     <!-- <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
-                    <div v-for="article in articles" :key="article.id" class="" data-aos="slide-up">
+                    <div v-for="article in articles" :key="article.id" class="my-2" data-aos="slide-up">
                         <div class="row no-gutters  overflow-hidden rounded bg-dark flex-md-row mb-4 shadow-lg position-relative">
                             <div v-if="article.image" class="img-wrapper" :style="{'background-image':'url(./storage/Articles/'+article.image+')'}">
                             </div>
@@ -32,6 +32,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <Paginate :current="current_page" :last="last_page" :getPage="getArticles"/>
                 </main>
             </div>
             
@@ -40,7 +42,7 @@
     </div>
 </template>
 <script>
-import Paginate from './components/sub/paginate'
+import Paginate from '../components/sub/paginate'
 export default {
     name : "News",
     props : [''],
@@ -48,20 +50,19 @@ export default {
     data(){
         return{
             articles : [],
-            current_page : null,
-            last_page :  null,
+            current_page    : null,
+            last_page       : null,
         }
     },
     methods:{
-        getArtcles( page = 1 ){
+        getArticles( page = 1 ){
             self = this
             axios.get(`/api/news?page=${page}`)
             .then((response)=>{
-                self.articles = response.data.data
-                self.current_page = response.data.current_page
-                self.last_page = response.data.last_page
-
-                console.log( response.data.current_page );
+                self.articles = response.data.data;
+                self.current_page = response.data.current_page;
+                self.last_page = response.data.last_page;
+                
             }).catch((err)=>{
                 console.log( err.response.data.errors );
             })
@@ -73,8 +74,8 @@ export default {
             return `${month} ${new Date(date).getUTCDate()} ${year}`
         },
     },
-    beforeMount(){
-        this.getArtcles()
+    mounted(){
+        this.getArticles()
     },
     
 }

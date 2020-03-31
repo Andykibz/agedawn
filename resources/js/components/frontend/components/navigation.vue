@@ -10,7 +10,7 @@
         </div> <!-- .site-mobile-menu -->
 
             <!-- site-navbar-wrap -->
-        <div  class="site-navbar-wrap">
+        <div id="site-navbar-wrap" class="site-navbar-wrap">
             <div class="site-navbar-top">
                 <div class="container py-3">
                 <div class="row align-items-center">
@@ -60,29 +60,34 @@
                             <li class=""><router-link :to="{name: 'store'}">Store</router-link></li>
                             <li class=""><router-link :to="{name: 'media'}">Media</router-link></li>
                             <li class="">
-                                <router-link class="dropdown-toggle" to="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <router-link class="dropdown-toggle" @click.prevent to="" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                     <span v-if="user"> {{ user.name }} </span> 
                                     <i class="icon-user-circle"></i>
                                 </router-link>
                                 <div class="dropdown-menu bg-transparent">
                                     <template v-if="!!!authenticated">
-                                        <router-link id="signInLink" class=" dropdown-item" to="#signin"
+                                        <router-link id="signInLink" class="nav-link dropdown-item" to=""
                                                 type="button" data-toggle="modal" data-target="#signinModal"> 
                                                 Sign In 
                                         </router-link>
-                                        <router-link id="signUpLink" class="dropdown-item" to="#signup"
+                                        <router-link id="signUpLink" class="nav-link dropdown-item" to=""
                                                 type="button" data-toggle="modal" data-target="#signupModal"> 
                                                 Sign Up 
                                         </router-link>
+                                        <div class="dropdown-divider"></div>
                                         
                                     </template>
                                     <template v-else-if="!!authenticated">
-                                        <router-link @click.prevent="signOut" id="signOutLink" class="dropdown-item" to="#signout" type="button"> 
+                                        <router-link @click.prevent="signOut" id="signOutLink" class="nav-link dropdown-item" to="#signout" type="button"> 
                                                 Sign Out
                                         </router-link>
                                         <div class="dropdown-divider"></div>
-                                        <router-link class="dropdown-item" data-toggle="modal" data-target="" to="#cart"> <i class=""></i> Cart </router-link>
                                     </template>
+                                    <router-link @click.prevent class="nav-link dropdown-item" 
+                                                data-toggle="modal" data-target="#cartModal" to=""> 
+                                                <i class=""></i> 
+                                                Cart 
+                                    </router-link>
                                 </div>
                             </li>
                         </ul>
@@ -130,9 +135,14 @@ import { mapGetters, mapActions } from 'vuex'
     
   }
 </script>
-<style scoped>
+<style lang="scss" scoped>
     .dropdown-menu a{
         color: rgba(255, 255, 255, 0.6);
         font-weight: 700;
+    }
+    .nav-link{
+        &:hover{
+            color:#333;
+        }
     }
 </style>

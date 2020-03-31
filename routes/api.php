@@ -42,6 +42,7 @@ Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.' ],f
 
 Route::group( [ 'as' => 'news.' ],function () {
     Route::GET('news', 'NewsController@index');
+    Route::GET('homenews', 'NewsController@homeindex');
     Route::GET('news/{news}', 'NewsController@show');
 
     Route::GET('shop', 'ShopController@index');

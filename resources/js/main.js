@@ -222,25 +222,19 @@ jQuery(document).ready(function($) {
 	//   }
 	// };
 	// siteCarousel();
-
-
-
+	var navOffset = document.querySelector("#navbar-wrap").offsetTop
+	window.onscroll = () => navStickyFy(navOffset)
 });
 
-// Get the navbar
-var navbar = document.getElementById("navbar-wrap");
-
-// Get the offset position of the navbar
-var sticky = navbar.offsetTop;
 
 // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function myFunction() {
-  if (window.pageYOffset >= sticky) {
-	navbar.classList.add("sticky")
-  } else {
-	navbar.classList.remove("sticky");
-  }
+function navStickyFy(navOffset) {
+	if (window.pageYOffset >= navOffset) {
+		document.querySelector("#navbar-wrap").classList.add("sticky")
+	} else if(window.pageYOffset < navOffset ){
+		document.querySelector("#navbar-wrap").classList.remove("sticky");
+	}
 }
 
 	// When the user scrolls the page, execute myFunction
-window.onscroll = function() {myFunction()};
+

@@ -26,12 +26,12 @@
             </div> -->
         </div>
         <hr class="m-0 p-0 bg-secondary">
-        <!-- <Music></Music> -->
-        <parallax text="Nothing" image="guitar.jpg"/>
+        <Music></Music>
+        <parallax text="New Beginnings" image="guitar.jpg"/>
         <NewsEvents/>
         <hr class="m-0 p-0 bg-secondary">
         <parallax text="Check out our Merch" image="shop.jpg"/>
-        <Store/>
+        <Store :items="hoodies"/>
         <!-- <hr class="m-0 p-0 bg-secondary"> -->
 
 
@@ -39,12 +39,12 @@
 </template>
 
 <script>
-    import herocards from './components/sub/herocards'
-    import homehero from './components/homehero'
-    import parallax from './components/parallaxbg'
-    import Music from './components/music'
-    import NewsEvents from './components/news_events'
-    import Store from './components/store'
+    import herocards from '../components/sub/herocards'
+    import homehero from '../components/homehero'
+    import parallax from '../components/parallaxbg'
+    import Music from '../components/music'
+    import NewsEvents from '../components/news_events'
+    import Store from '../components/store'
     
 
 
@@ -55,8 +55,8 @@
         },
         props:[],
         data(){
-            return {
-      
+            return{
+                hoodies :   []
             }
         },
         methods: {
@@ -64,7 +64,9 @@
         },        
         mounted() {
             // setBackgroundImage()
-        }
+            
+        },
+        
     }
 </script>
 <style scoped>

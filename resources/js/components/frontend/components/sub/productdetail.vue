@@ -27,6 +27,9 @@ export default {
             'imglg'   :   '/storage/Shop/Merch/product_lg.jpg',
             'name'  :   'Bag Coat'
         }
+    },
+    methods:{
+        
     }
 }
 </script>

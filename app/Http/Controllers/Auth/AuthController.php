@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
-
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
@@ -48,6 +50,37 @@ class AuthController extends Controller
             'token_type'   => 'bearer',
             // 'expires_in'   => auth()->factory()->getTTL() * 60
         ]);
+    }
+
+    /**
+     * Redirect the user to the GitHub authentication page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function redirectToProvider()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    /**
+     * Obtain the user information from GitHub.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function handleProviderCallback()
+    {
+        $user = Socialite::driver('google')->user();
+        // dd($user);
+        $user =  User::firstOrCreate([
+            'email'     => $user->email
+        ],[
+            'name'  => $user->name,
+            'password'  => Hash::make( Str::random(24) )
+        ]);
+
+        Auth::login($user, true);
+        return redirect('/');
+        // $user->token;
     }
 
     /**

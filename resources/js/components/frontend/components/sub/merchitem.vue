@@ -11,7 +11,7 @@
                         <!-- <font-awesome-icon style="cursor:pointer;" icon="eye" class="text-primary"/> -->
                         View
                     </router-link>
-                    <router-link to="#" role="button" class="btn btn-sm btn-outline-danger">
+                    <router-link @click.native.prevent="addToCart" to="" role="button" class="btn btn-sm btn-outline-danger">
                         <!-- <font-awesome-icon style="cursor:pointer;" icon="eye" class="text-primary"/> -->
                         Add to Cart
                     </router-link>
@@ -25,6 +25,7 @@
     </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 export default {
     name        :   "MerchItem",
     computed    : {
@@ -41,7 +42,21 @@ export default {
         }
     },
     methods:{
-        
+        ...mapActions({
+            addToCartAction : 'cart/addToCart'
+        })        
+        ,
+
+        addToCart(){
+            this.addToCartAction({
+                id          : this.item.id,  
+                name        : this.item.name,
+                slug        : this.item.slug,
+                quantity    : 1,
+                image       : this.item.image,
+                price       : this.item.price,
+            })
+        },
     },
     mounted(){
         

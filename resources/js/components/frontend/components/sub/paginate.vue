@@ -2,11 +2,6 @@
     <div class="wrapper">
         <ul class="pagination">
             <li v-for="n in last" :key="n" @click.prevent="getPage(n)"  class="pagination__item " ><a href="#" :class="{ 'is_active' : n==current}" class="pagination__link">1</a></li>
-            <!-- <li @click="paginateClick" class="pagination__item"><a href="#" class="pagination__link is_active">2</a></li>
-            <li @click="paginateClick" class="pagination__item"><a href="#" class="pagination__link">3</a></li>
-            <li @click="paginateClick" class="pagination__item"><a href="#" class="pagination__link">4</a></li>
-            <li @click="paginateClick" class="pagination__item"><a href="#" class="pagination__link">5</a></li>
-            <li @click="paginateClick" class="pagination__item"><a href="#" class="pagination__link">6</a></li> -->
         </ul>
     </div>
 </template>

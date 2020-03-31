@@ -26,7 +26,7 @@
         <div class="modal-footer d-flex flex-column">        
             <button type="button" @click="signupFunc" class="btn btn-block btn-primary">Sign Up</button>
             <span>or</span>
-            <button type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign up with Google <i class="icon-google"></i> </button>
+            <a @click.prevent="googleLogin" href="auth/login/google" type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign up with Google <i class="icon-google"></i> </a>
         </div>
     </div>
   </div>
@@ -46,6 +46,10 @@ export default {
         }
     },
     methods:{
+
+        googleLogin(){
+            window.location.href = "localhost:8000/auth/login/google"
+        },
         signupFunc(){
             self = this;
           axios.post('/api/auth/signup',self.signupForm)
