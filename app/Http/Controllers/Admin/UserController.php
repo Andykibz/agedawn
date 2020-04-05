@@ -33,13 +33,13 @@ class UserController extends Controller
         $this->validate($request,[
             'permissions'        =>  'array',
           ]);
-        // if(auth()->user()->hasPermissionTo('elevated_backend_access')){
+        if(auth()->user()->hasPermissionTo('elevated_backend_access')){
             $user = User::find( $user_id );
             $user->syncPermissions( $request->permissions );
             return response()->json($request->permissions);
-        // }else{
-            // return response()->json(['error' => 'Unauthorized'], 401);
-        // }
+        }else{
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
 
     }
 

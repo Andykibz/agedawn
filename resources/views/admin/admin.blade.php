@@ -10,7 +10,7 @@
   <meta name="author" content="">
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>SB Admin - Dashboard</title>
+  <title>Adawnage Admin - Dashboard</title>
 
 
   <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">

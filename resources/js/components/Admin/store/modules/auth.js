@@ -5,9 +5,14 @@ export default{
    state:{
       token : null,
       user  : null, 
+      admin : true,
    },
 
    getters: {
+      admin( state ){
+         return state.admin
+      },
+
       authenticated( state ){
          return state.token
       },
@@ -18,12 +23,15 @@ export default{
    }, 
 
    mutations:{
+      SET_ADMIN(state,admin){
+         state.admin = admin
+      },
       SET_TOKEN(state, token){
          state.token = token
       },
-      SET_USER(state,user){
-         state.user = user  
-      }
+      SET_USER(state, token){
+         state.token = token
+      },
    },
    actions:{
       async signIn( {dispatch}, credentials ){
@@ -44,6 +52,14 @@ export default{
          dispatch('attempt',adawnage_token)
       },
 
+      isAdmin( { dispatch } ){
+         axios.get('/api/admin/isBackend').then((response)=>{
+            
+         }).catch((err)=>{
+
+         });
+      },
+
       async attempt( {commit, state}, token){
          
          if ( token ){
@@ -54,24 +70,18 @@ export default{
          }
          try {
             // Check if we are autheticated
-            let response =  await axios.get('/api/auth/getuser')                          
-            commit('SET_USER', response.data)
+            let response =  await axios.get('/api/admin/isBackend')                          
+            
+            commit('SET_ADMIN', response.data)
 
          } catch (error) {
             console.log(error);
             commit( 'SET_TOKEN', null)
-            commit( 'SET_USER', null)
+            commit( 'SET_ADMIN', false)
          }
          
       },
-      signOut( {commit}){
-         return axios.post('/api/auth/signout').then((response)=>{
-            console.log(response.data);
-            
-            commit('SET_TOKEN',null)
-            commit('SET_USER',null)
-         })
-      }
+      
 
    },
 };

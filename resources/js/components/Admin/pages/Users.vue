@@ -16,19 +16,20 @@
                         <div class="mb-3">
                             <strong class="text-dark">Permissions</strong>
                             <div class="custom-control custom-checkbox">
-                                <input name="permissions[]" value="comment" type="checkbox" class="custom-control-input" :id="`comment-${user.id}`" >
+                                
+                                <input :checked="checkPerm( user.permissions, 'comment' )" name="permissions[]" value="comment" type="checkbox" class="custom-control-input" :id="`comment-${user.id}`"  />
                                 <label class="custom-control-label" :for="`comment-${user.id}`">Comments</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input name="permissions[]" value="subscribe" type="checkbox" class="custom-control-input" :id="`subscribe-${user.id}`">
+                                <input :checked="checkPerm( user.permissions, 'subscribe' )" name="permissions[]" value="subscribe" type="checkbox" class="custom-control-input" :id="`subscribe-${user.id}`">
                                 <label class="custom-control-label" :for="`subscribe-${user.id}`">Subscribes</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input name="permissions[]" value="backend_access" type="checkbox" class="custom-control-input" :id="`backend_access-${user.id}`">
+                                <input :checked="checkPerm( user.permissions, 'backend_access' )" name="permissions[]" value="backend_access" type="checkbox" class="custom-control-input" :id="`backend_access-${user.id}`">
                                 <label class="custom-control-label" :for="`backend_access-${user.id}`">Backend Access</label>
                             </div>
                             <div class="custom-control custom-checkbox">
-                                <input name="permissions[]" value="elevated_backend_access" type="checkbox" class="custom-control-input" :id="`elevated_backend_access-${user.id}`">
+                                <input :checked="checkPerm( user.permissions, 'elevated_backend_access' )" name="permissions[]" value="elevated_backend_access" type="checkbox" class="custom-control-input" :id="`elevated_backend_access-${user.id}`">
                                 <label class="custom-control-label" :for="`elevated_backend_access-${user.id}`">Elevated Backend Access</label>
                             </div>
 
@@ -48,6 +49,11 @@
 <script>
 export default {
     name    :   "Users",
+    computed    :{
+        checking: (perms, perm)=>{
+            return ''
+        },
+    },
     data(){
         return{
             users : [],
@@ -74,6 +80,14 @@ export default {
             }).catch((err)=>{
                 console.log(err.response.data);
             })
+        },
+
+        checkPerm( permissions, perm ){
+            return permissions.find((obj)=>{
+                return  obj.name === perm 
+            })
+            
+            
         },
 
         deleteUser(id){

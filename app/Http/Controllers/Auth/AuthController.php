@@ -87,11 +87,22 @@ class AuthController extends Controller
             'password'  => Hash::make( $request->id ),
             'oauth'  => 1,
         ]);
-
+        $user->givePermissionTo('comment');
         $token = auth()->login($user);
 
         return $this->respondWithToken($token);
     }
+
+    public function is_admin(){
+        // $user = auth()->user();
+        // if (!$user->hasPermissionTo('backend_access')){
+        //     return response()->json(['error' => 'Unauthorized'], 401);
+        // }else{
+        //     return response()->json(true);
+        // }
+            return response()->json(true);
+    }
+
 //     /**
 //      * Create a new AuthController instance.
 //      *

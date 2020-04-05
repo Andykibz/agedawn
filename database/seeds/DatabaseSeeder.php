@@ -1,9 +1,11 @@
 <?php
 
 use App\Meta;
+use App\User;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
@@ -94,6 +96,14 @@ class DatabaseSeeder extends Seeder
         foreach ($this->permissions as $permission) {
             Permission::create(['name' => $permission ]);    
         }
+
+        $user = User::create([
+            'name' => 'admin',
+            'email' => 'admin@mail.com',
+            'password' => Hash::make( 'password' ),
+            'oauth'     =>  FALSE
+        ]);
+        $user->givePermissionTo('backend_access','elevated_backend_access');
 
         foreach ($this->members as $member) {
             Meta::create([

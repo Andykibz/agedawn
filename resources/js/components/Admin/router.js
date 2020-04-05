@@ -8,37 +8,37 @@ import Users from './pages/Users.vue'
 
 export default [
     {
-        path        :   '/admin',
+        path        :   '',
         component   :   Index,
         name        :   'index'
     },
     {
-        path        :   '/admin/article',
+        path        :   '/article',
         component   :   Article,
         name        :   'article'
     },
     {
-        path        :   '/admin/products',
+        path        :   '/products',
         component   :   Products,
         name        :   'products'
     },
     {
-        path        :   '/admin/orders',
+        path        :   '/orders',
         component   :   Orders,
         name        :   'orders'
     },
     {
-        path        :   '/admin/bandmembere',
+        path        :   '/bandmembers',
         component   :   Band,
         name        :   'band'
     },
     {
-        path        :   '/admin/info',
+        path        :   '/info',
         component   :   Info,
         name        :   'info'
     },
     {
-        path        :   '/admin/users',
+        path        :   '/users',
         component   :   Users,
         name        :   'users'
     },

@@ -18,6 +18,7 @@ export const eventBus = new Vue();
 
 
 Vue.use( CKEditor );
+require('./components/Admin/store/sub')
 
 Vue.use(VueTimeago, {
     name: 'Timeago', // Component name, `Timeago` by default
@@ -34,7 +35,8 @@ Vue.use(VueTimeago, {
 
 const router = new VueRouter({
     mode: 'history',
-    routes
+    routes,
+    base:'admin'
 })
 
 Vue.use(VueRouter)

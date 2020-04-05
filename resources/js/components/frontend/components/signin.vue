@@ -10,6 +10,13 @@
         </button>
       </div>
       <div class="modal-body">
+          <div v-if="errMsg" class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ errMsg }}
+            <button type="button" id="dismissErr" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
           <div class="form-group">
             <input type="text" class="form-control" v-model="signInForm.email" placeholder="Email">
           </div>
@@ -38,7 +45,8 @@ export default {
             signInForm:{
                 "email"       : null,
                 "password"    : null,
-            }
+            },
+            errMsg : null,
         }
     },
     methods:{
@@ -49,7 +57,15 @@ export default {
         }),
 
         signinFunc(){
-          this.signInAction(this.signInForm)
+          this.signInAction(this.signInForm).then((response)=>{
+              document.getElementById('closeSignInModal').click();
+          }).catch((err)=>{
+              console.log(err.response.data);
+              this.errMsg = "Wrong Username or Password"
+              setTimeout(()=>{
+                  document.querySelector('#dismissErr').click()
+              },3000)
+          })
         },
         getGoogleCredentials() {
          this.$gAuth.signIn()

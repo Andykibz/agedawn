@@ -17,7 +17,11 @@ use Illuminate\Http\Request;
 //     return $request->user();
 // });
 // Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.','middleware' => ['web','api'] ],function () {
-Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.' ],function () {
+Route::get('admin/isBackend','Auth\AuthController@is_admin');
+
+Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],function () {
+
+
     Route::resource('event', 'EventController');
     Route::GET('articles', 'ArticleController@index')->name('article.index');
     Route::POST('article', 'ArticleController@store')->name('article.store');

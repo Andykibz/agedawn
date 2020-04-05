@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,10 +11,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// ,'middleware' => ['can:publish articles']
 
 Route::namespace('Admin')->prefix('admin')->group(function () {
     // Controllers Within The "App\Http\Controllers\Admin" Namespace
     Route::get('{any?}', function () {
+        
         return view('admin.admin');
     })->where('any','.*');
 });
