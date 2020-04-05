@@ -47,27 +47,7 @@
        };
        siteStellar();
        
-       $('.albums').slick({
-            dots: false,
-            infinite: true,
-            speed: 500,
-            fade: true,
-            cssEase: 'linear',
-            //    vertical: true,
-            verticalSwiping: true,
-            arrows: false,
-            autoplay: true,
-            autoplaySpeed: 5000,
-            prevArrow: $('.prev_alb'),
-            nextArrow: $('.next_alb'),
-       });
-       $('.prev_alb').click(function(){
-            $('.albums').slick('slickPrev');
-        })
-
-        $('.next_alb').click(function(){
-            $('.albums').slick('slickNext');
-        })
+       
    });
    
 </script>

@@ -48,7 +48,6 @@ import ImageFile from './inputs/imagefile'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { eventBus } from '../../../admin';
 import { format } from 'path';
-import { log } from 'util';
 export default {
     name        :   "ArticleForm",
     components  :   { TextInput, TextAreaInput, ImageFile },

@@ -1,11 +1,10 @@
 <template>
     <div>
         <div v-for="article in articles" :key="article.id" class="article-item" data-aos="slide-up">
-
             <div class="row no-gutters  overflow-hidden rounded flex-md-row mb-4 shadow-lg position-relative">
-                <div v-if="article.image" class="col-5 img-wrapper" :style="{'background-image':'url(./storage/Articles/thumbs/'+article.image+')'}">
+                <div v-if="article.image" class="col-sm-12 col-md-5 img-wrapper" :style="{'background-image':'url(./storage/Articles/thumbs/'+article.image+')'}">
                 </div>
-                <div class="col-7 p-4 d-flex flex-column position-static">
+                <div class="col-12 col-md-7 p-4 d-flex flex-column position-static">
                     <h3 class="mb-0 text-light" v-text="'~ '+article.title">-</h3>
                     <div class="mb-1 text-muted">{{ created_date(article.created_at) }}</div>
                     <p v-if="article.headline" class="card-text mb-auto">{{ article.headline }}</p>
@@ -34,9 +33,7 @@ export default {
             self = this
             axios.get(`/api/homenews`)
             .then((response)=>{
-                self.articles = response.data
-                console.log(self.articles);
-                
+                self.articles = response.data                
             }).catch((err)=>{
                 console.log( err.response.data.errors );
             })

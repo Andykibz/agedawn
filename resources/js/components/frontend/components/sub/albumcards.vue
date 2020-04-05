@@ -1,127 +1,152 @@
 <template>
-        <!-- <carousel :autoplay="true" :nav="false" :items="1" > -->
-    <div class="position-relative">
-        <div style="z-index:2" class="position-absolute d-flex flex-column">
-          <font-awesome-icon class="prev_alb" style="cursor:pointer;" :icon="['fas','arrow-alt-circle-up']" />
-          <font-awesome-icon class="next_alb" style="cursor:pointer;" :icon="['fas','arrow-alt-circle-down']" />
-        </div>
-        <div class="albums">
-            <div v-for="album in albums" :key="album.id" class="album mb-3">
+  <!-- <div class="position-relative">
+    <div class="albums">
+        <div v-swiper:mySwiper="swiperOptions">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide" :key="album.id" v-for="album in albums">
                 <div class="album-thumb">
-                    <a href="#" >
-                        <img :src="album.img" alt="" class="img-fluid">
-                        <div class="album-info">
-                            <h3>{{ album.title }}</h3>
-                            <p>Dramatically underwhelm efficient core competencies with quality ROI. Credibly iterate distinctive customer.</p>
-                            <small>{{ album.price }}</small>
-                        </div>
-                    </a>
-                    <!-- <span class="prev"> <font-awesome-icon icon="arrow-alt-circle-up"/> </span> -->
-                    <!-- <span class="next"> <font-awseome-icon icon="arrow-alt-circle-down"/> </span> -->
-          
+                    <img :src="`/storage/Products/thumbs/${album.image}`" alt="" class="img-fluid">
+                    <div class="album-info px-3">
+                        <h3>{{ album.name }}</h3>
+                        <p>Dramatically underwhelm efficient core competencies with quality ROI. Credibly iterate distinctive customer.</p>
+                        <small class="text-warning">{{ album.price }}</small>
+                    </div>
                 </div>
-
+              
             </div>
-<span><button class="butn butn-orange butn-border-o">Carrot</button></span>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>    
+    </div>
+  </div> -->
+<!--         
+  <div v-swiper:mySwiper="swiperOptions">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" :key="album.id" v-for="album in albums">
+        <a class="linkedWrapper" :href="'product/'+album.id" >
+            <img :src="`/storage/Products/thumbs/${album.image}`" alt="" class="img-fluid">
+            <div class="album-info px-3">
+                <h3>{{ album.name }}</h3>
+                <p>Dramatically underwhelm efficient core competencies with quality ROI. Credibly iterate distinctive customer.</p>
+                <small class="text-warning">{{ album.price }}</small>
+            </div>
+        </a>          
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div> -->
+    <div class="position-relative">
+        <div class="albums">
+          <swiper ref="mySwiper" :options="swiperOptions">
+              <swiper-slide v-for="album in albums" :key="album.id" class="album mb-3">
+                <div class="album-wrapper">
+                    <figure class="mb-0">
+                        <img :src="'/storage/Products/thumbs/'+album.image" :alt="`${album.name}_Image`" class="img-fluid d-block">
+                    </figure>
+                    <div class="px-3 album-info d-flex flex-column justify-content-center align-items-center">
+                        <h3>{{ album.name }}</h3>
+                        <p>Dramatically underwhelm efficient core competencies with quality ROI. Credibly iterate distinctive customer.</p>
+                        <small class="text-warning">KES {{ album.price }}</small>
+                    </div>
+                </div>
+              </swiper-slide>
+              <div class="swiper-pagination" slot="pagination"></div>
+
+          </swiper>
+
         </div>
+        
     </div>
     <!-- </carousel> -->
 </template>
 <script>
 
+import { mapGetters, mapActions } from 'vuex'
 import carousel from 'vue-owl-carousel'
 
 export default {
     name        :   "AlbumCard",
-    props       :   [''],
-    components  :   { carousel },
+    // props       :   ['albums'],
+    
+    computed    :{
+        ...mapGetters({
+            albums      : 'shop/getMusic'
+        })
+    },
     data(){
         return{
-            "albums" : [
-                {
-                    "title"      :   "Safari",
-                    "img"       :   "storage/Shop/Music/safari.jpg",
-                    "price"     :   "Kes 500",
-                },{
-                    "title"      :   "Maisha",
-                    "img"       :   "storage/Shop/Music/maisha.jpg",
-                    "price"     :   "Kes 500",
-                }
-            ]
+            // albums : []
+            swiperOptions: {
+                effect: 'fade',
+                autoplay: {
+                      delay: 2500,
+                      disableOnInteraction: false
+                },
+              // spaceBetween: 0,
+              // direction: 'vertical',
+              
+            }
         }
-    }
+    },
+    methods:{
+        ...mapActions({
+            getProductsAction    :   'shop/getByCategories',
+            addToCartAction : 'cart/addToCart'
+        }),
+        getAlbums(){
+          self =  this
+          axios.get('/api/category/music')
+          .then((response)=>{
+              self.albums = response.data[0]
+              console.log(self.albums);
+          })
+        }
+    },
+    mounted(){
+      // this.getAlbums()
+      this.getProductsAction('music')
+        
+        
+    },
+    components  :   { carousel },
 }
 </script>
-<style scoped>
-    .album-info img {
-    width: 100%;
-    border-radius: 100%;
-  }
-
-  #album .album-thumb {
+<style lang="scss" scoped>
+  .album-info{
+    position: absolute;
+    bottom: 100%;
+    left: 0;
+    right: 0;
     overflow: hidden;
-    position: relative;
-    cursor: pointer;
-    border-radius: 3px;
+    width: 100%;
+    height:0;
+    transition: .2s ease;
+    background-color: rgba($color: #000000, $alpha: .5);
+    // text-align: justify;
+    h3{
+        font-family: 'Courier New', Courier, monospace;
+        color: aliceblue;
+        text-shadow: 1px 1px 2px 2px #333;
+    }
+    small{
+      font-size: large;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    }
   }
 
-  .album-thumb .album-info {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    text-align: center;
-  }
+  .album-wrapper{
+    overflow: hidden;
+    display:  block;
 
-  .album-thumb .album-info:after {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    right: 0px;
-    bottom: 0px;
-    content: "";
-    background: #161515a6;
-    opacity: 0;
-    transition: 0.5s;
-  }
-
-  .album-thumb .album-info:hover::after {
-    opacity: 0.9;
-  }
-
-  .album-thumb .album-info h3,
-  .album-thumb .album-info small,
-  .album-thumb .album-info p {
-    transform: translateY(100%);
-    opacity: 0;
-    display: block;
-    transition: 0.5s 0.2s;
-    color: #ffffff;
-    z-index: 2;
-    position: relative;
-  }
-
-  .album-thumb .album-info small {
-    color: #d9d9d9;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin-top: 3px;
-  }
-
-  
-
-  .album-thumb:hover .album-info h3,
-  .album-thumb:hover .album-info small,
-  .album-thumb:hover .album-info p {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-
+    img{
+      display: block;
+    }
+    
+    &:hover {
+      .album-info{
+        height: 100%;    
+        bottom: 0;
+      } 
+    }
+  } 
 </style>

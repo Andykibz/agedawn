@@ -26,7 +26,7 @@ class NewsController extends Controller
      */
     public function homeindex( )
     {
-        $article = Article::take(4)->get();
+        $article = Article::take(3)->get();
         return response()->json( $article );
     }
 

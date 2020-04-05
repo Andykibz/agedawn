@@ -1,15 +1,6 @@
 <template>
     <div>
-        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(./imgs/drums.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">
-            <div class="container">
-                <div class="row align-items-end text-center justify-content-center">
-                <div class="col-md-8 mb-4">
-                    <span class="sub-text">Interior Design Company</span>
-                    <h1>Experience Interior Design</h1>
-                </div>
-                </div>
-            </div>
-        </div>  
+        <Hero :heading="`What's up, you ask ?`" />
         <div class="container mt-5">
             <div class="section_title text-center col-12 mb-5"  data-aos="fade-in">
                 <h2>News</h2>
@@ -24,11 +15,13 @@
                         <div class="row no-gutters  overflow-hidden rounded bg-dark flex-md-row mb-4 shadow-lg position-relative">
                             <div v-if="article.image" class="img-wrapper" :style="{'background-image':'url(./storage/Articles/'+article.image+')'}">
                             </div>
-                            <div class=" p-4 d-flex flex-column position-static">
-                                <h3 class="mb-0 text-light" v-text="'~ '+article.title">-</h3>
-                                <div class="mb-1 text-muted">{{ created_date(article.created_at) }}</div>
+                            <div class=" py-3 px-5 d-flex flex-column position-static align-content-center">
+                                <div class="d-flex justify-content-between align-items-center mb-1">
+                                    <h3 class="mb-0 text-light" v-text="'~ '+article.title">-</h3>
+                                    <div class="mb-1 text-muted">{{ created_date(article.created_at) }}</div>
+                                </div>
                                 <p v-if="article.headline" class="card-text mb-auto">{{ article.headline }}</p>
-                                <router-link :to="{ name : 'newsitem', params: { id : article.id } }" class="stretched-link">Continue reading</router-link>
+                                <router-link :to="{ name : 'newsitem', params: { id : article.id } }" class="stretched-link readmore">Continue reading</router-link>
                             </div>
                         </div>
                     </div>
@@ -43,10 +36,11 @@
 </template>
 <script>
 import Paginate from '../components/sub/paginate'
+import Hero from '../components/hero'
 export default {
     name : "News",
     props : [''],
-    components : { Paginate },
+    components : { Paginate,Hero },
     data(){
         return{
             articles : [],
@@ -80,7 +74,7 @@ export default {
     
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
     .img-wrapper{
         background-origin: content-box;
         background-repeat: no-repeat;
@@ -90,5 +84,13 @@ export default {
         background-size: 100% auto;
         height: 250px;
         width: 100%;
+    }
+    .readmore{
+        font-family: 'Times New Roman', Times, serif;
+        color: rgba(#f6993f,0.8);
+        font-size: medium;
+        &:hover{
+            color: rgba(#f6993f,1);
+        }
     }
 </style>

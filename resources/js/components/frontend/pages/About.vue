@@ -1,22 +1,13 @@
 <template>
     <div>
-        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(./imgs/drums.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">
-            <div class="container">
-                <div class="row align-items-end text-center justify-content-center">
-                <div class="col-md-8 mb-4">
-                    <span class="sub-text ">Adawngae Band</span>
-                    <h1>So What about Us?</h1>
-                </div>
-                </div>
-            </div>
-        </div>  
-        <div class="container mt-5">
+        <Hero :heading="`So what about us ?`" />
+        <div class="container about-wrapper mt-5">
             <div class="section_title text-center col-12 mb-5"  data-aos="fade-in">
                 <h2>About Us</h2>
-                <p>We are Adawngage Band</p>
+                <p>We are Adawnage Band</p>
             </div>
             <div class="row mb-5">
-                <aside class="col-sm-4 col-12"  data-aos="slide-right">
+                <aside class="col-sm-4 col-12 about-info"  data-aos="slide-right">
                     <hr class="bg-secondary m-1">
                     <div class="about-sub-section">
                         <h5 class="text-muted">Founded</h5>
@@ -47,7 +38,7 @@
                     <Social/>
 
                 </aside>
-                <main class="col-sm-8 col-12"  data-aos="slide-left">
+                <main class="col-sm-8 col-12 about-contents"  data-aos="slide-left">
                     <article id="about" v-html="about"></article>
                     <article id="bio">
                         <div class="heading">
@@ -72,7 +63,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12"  data-aos="slide-up" v-for="member in members" :key="member.id">
-                            <div class="card"> <img class="card-img img-fluid" :src="member.img" :alt="member.name">
+                            <div class="card"> <img class="card-img img-fluid" :src="`/storage/About/${member.image}`" :alt="member.name">
                                 <div class="card-img-overlay"> <a href="#">
                                     <!-- <img src="assets/img/heart.png" class="heart" alt="heart icon"> -->
                                     </a>
@@ -92,9 +83,11 @@
 </template>
 <script>
 import Social from '../components/sub/social'
+import Hero from '../components/hero'
+import { METHODS } from 'http'
 export default {
     name        :   "AboutPage",
-    components  :   { Social },
+    components  :   { Social, Hero },
     data(){
         return{
             "founded"           :   "May 28, 2008",
@@ -110,83 +103,66 @@ export default {
             "gender"            :   "Plural (mixed)",
             "agent"             :   "Grace Nduku - nduku.wambua@adawnage.com | +254 (0) 792 718 750",
             "pi"                :   `<p>The inception of the band was ordained because we came together after having separately and individually tried to make it on our own, each coming too close but not quite. All these changed when we merged and the unit was born. Thus, we have made it our goal to aid upcoming Christian bands in their start-up years to teach them how to do the baby steps rather than giant leaps as the foundation of any team totally depends on how the team's journey begins.</p>`,
-            "members"           :   [
+            "memberss"          :   [
+                                        {  "name"  :   "Iganza Mudacci","role"  :   "Vocalist/Vocal Coach","image"   :   "storage/About/person_1.jpg" },
                                         {
-                                            "name"  :   "Iganza Mudacci",
-                                            "role"  :   "Vocalist/Vocal Coach",
-                                            "img"   :   "storage/About/person_1.jpg"
+                                            "name"  :   "Roseline Mwihaki","role"  :   "Vocalist/Song Writer","img"   :   "storage/About/person_2.jpg"
                                         },
                                         {
-                                            "name"  :   "Roseline Mwihaki",
-                                            "role"  :   "Vocalist/Song Writer",
-                                            "img"   :   "storage/About/person_2.jpg"
+                                            "name"  :   "Robert Njuguna","role"  :   "Vocalist/Song Writer","img"   :   "storage/About/person_3.jpg"
                                         },
                                         {
-                                            "name"  :   "Robert Njuguna",
-                                            "role"  :   "Vocalist/Song Writer",
-                                            "img"   :   "storage/About/person_3.jpg"
+                                            "name"  :   "Frank Muriuki","role"  :   "Vocalist/Song Writer","img"   :   "storage/About/person_4.jpg"
                                         },
                                         {
-                                            "name"  :   "Frank Muriuki",
-                                            "role"  :   "Vocalist/Song Writer",
-                                            "img"   :   "storage/About/person_4.jpg"
+                                            "name"  :   "Lorna Olwanda","role"  :   "Vocalist","img"   :   "storage/About/person_1.jpg",
                                         },
                                         {
-                                            "name"  :   "Lorna Olwanda",
-                                            "role"  :   "Vocalist",
-                                            "img"   :   "storage/About/person_1.jpg",
+                                            "name"  :   "Julius Julu","role"  :   "Vocalist/Percussionist","img"   :   "storage/About/person_4.jpg"
                                         },
                                         {
-                                            "name"  :   "Julius Julu",
-                                            "role"  :   "Vocalist/Percussionist",
-                                            "img"   :   "storage/About/person_4.jpg"
+                                            "name"  :   "Grace Nduku","role"  :   "Vocalist","img"   :   "storage/About/person_1.jpg"
                                         },
                                         {
-                                            "name"  :   "Grace Nduku",
-                                            "role"  :   "Vocalist",
-                                            "img"   :   "storage/About/person_1.jpg"
+                                            "name"  :   "David Ogara","role"  :   "Keyboardist/Acoustic Guitarist/Vocalist/Song Writer","img"   :   "storage/About/person_3.jpg"
                                         },
                                         {
-                                            "name"  :   "David Ogara",
-                                            "role"  :   "Keyboardist/Acoustic Guitarist/Vocalist/Song Writer",
-                                            "img"   :   "storage/About/person_3.jpg"
+                                            "name"  :   "Austine Nyambok","role"  :   "Bass Guitarist","img"   :   "storage/About/person_2.jpg"
                                         },
                                         {
-                                            "name"  :   "Austine Nyambok",
-                                            "role"  :   "Bass Guitarist",
-                                            "img"   :   "storage/About/person_2.jpg"
+                                            "name"  :   "Daniel Ndegwa","role"  :   "Lead Guitarist","img"   :   "storage/About/person_1.jpg"
                                         },
                                         {
-                                            "name"  :   "Daniel Ndegwa",
-                                            "role"  :   "Lead Guitarist",
-                                            "img"   :   "storage/About/person_1.jpg"
+                                            "name"  :   "Michael Wanyama","role"  :   "Drummer","img"   :   "storage/About/person_3.jpg"
                                         },
                                         {
-                                            "name"  :   "Michael Wanyama",
-                                            "role"  :   "Drummer",
-                                            "img"   :   "storage/About/person_3.jpg"
+                                            "name"  :   "Noah Otiende","role"  :   "Director","img"   :   "storage/About/person_2.jpg"
                                         },
                                         {
-                                            "name"  :   "Noah Otiende",
-                                            "role"  :   "Director",
-                                            "img"   :   "storage/About/person_2.jpg"
-                                        },
-                                        {
-                                            "name"  :   "Patrick Muriuki",
-                                            "role"  :   "Band Manager",
-                                            "img"   :   "storage/About/person_1.jpg"
+                                            "name"  :   "Patrick Muriuki", "role"  :   "Band Manager", "img"   :   "storage/About/person_1.jpg"
                                         },
                                         
-                                            
-                                        
+                                ],
+                    members     :    [],
 
-                                ]
-
+            }
+    },
+    methods :{
+        getBand(){
+            axios.get('/api/admin/members').then((response)=>{
+                this.members = response.data.data
+                console.log(this.members);
+                
+            });
         }
     },
+    mounted(){
+        this.getBand()
+    }
 }
 </script>
-<style scoped>
+<style  scoped>
+
 .sub-title{
     font-size: 28px;
 }
@@ -200,9 +176,28 @@ export default {
 .about-sub-section h5{
     font-size:larger
 }
-.about-sub-section span{
-    font-size: large;
-    font-family: 'Times New Roman', Times, serif;
+.about-sub-section span, .about-info p{
+    font-size: medium;
+    font-family: 'Sarala', sans-serif;
+    font-weight: 300;
+    /* font-family: 'Ubuntu', sans-serif; */
+}
+.about-contents p{
+    /* font-family: 'Sarala', sans-serif !important; */
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
 }
 
+</style>
+
+<style>
+.about-sub-section span,.about-info p{
+    font-size: medium;
+    font-family: 'Sarala', sans-serif;
+    /* font-family: 'Ubuntu', sans-serif; */
+}
+.about-contents p{
+    font-family: 'Sarala', sans-serif !important;
+    /* font-family: 'Ubuntu', sans-serif; */
+}
 </style>

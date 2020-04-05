@@ -8,26 +8,26 @@
         <li class="d-flex flex-row mb-3">
             <span>
                 <font-awesome-icon style="width:1.8em" class="mr-1" :icon="['fab','facebook-f']"/>
-                <a class="text-muted" :href="facebook">Like on Facebook </a>
+                <a target="_blank" class="text-muted" :href="facebook">Like on Facebook </a>
                 
             </span>
         </li>
         <li class="d-flex flex-row mb-3">
             <span>
                 <font-awesome-icon style="width:1.8em" class="mr-1" :icon="['fab','soundcloud']"/>
-                <a class="text-muted" :href="soundcloud">Listen on Soundcloud</a>
+                <a target="_blank" class="text-muted" :href="soundcloud">Listen on Soundcloud</a>
             </span>
         </li>
         <li class="d-flex flex-row mb-3">
             <span>
                 <font-awesome-icon style="width:1.8em" class="mr-1" :icon="['fab','youtube']"/>
-                <a class="text-muted" :href="youtube">View on Youtube</a>
+                <a target="_blank" class="text-muted" :href="youtube">View on Youtube</a>
             </span>
         </li>
         <li class="d-flex flex-row mb-3">
             <span>
                 <font-awesome-icon style="width:1.8em" class="mr-1" :icon="['fab','twitter']"/>
-                <a class="text-muted" :href="twitter">Follow on Twitter</a>
+                <a target="_blank" class="text-muted" :href="twitter">Follow on Twitter</a>
             </span>
         </li>
         <!-- <li class="d-flex flex-row">

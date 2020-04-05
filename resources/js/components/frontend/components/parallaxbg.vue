@@ -1,14 +1,15 @@
 <template>
+<div class="">
     <div class="parallax-view"             
             :style="{'background-image':'url(./imgs/'+image+')'}"
-            data-stellar-background-ratio="0.3" 
-            >
-            <div class="container">
-                <div class="inner-content" data-aos="zoom-in-up">
-                    <h2>{{ text }}</h2>
-                </div>
+            data-stellar-background-ratio="0.3">
+        <div class="container">
+            <div class="inner-content d-flex justify-content-center" data-aos="zoom-in-up">
+                <h2 class="">{{ text }}</h2>
             </div>
-        </div> 
+        </div>
+    </div> 
+</div>
 </template>
 <script>
 export default {
@@ -21,3 +22,10 @@ export default {
     }
 }
 </script>
+<style scoped>
+    @media only screen and (max-width: 600px) {
+        .inner-content{
+            width:400px
+        }
+    }
+</style>

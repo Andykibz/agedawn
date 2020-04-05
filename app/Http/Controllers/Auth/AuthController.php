@@ -27,8 +27,10 @@ class AuthController extends Controller
 
     public function signin()
     {
+        $oauth = User::where('email', request('email'))->first()->pluck('oauth')[0];
+        if( $oauth ){ return response()->json(['error' => 'Unauthorized'], 401); }
+        
         $credentials = request(['email', 'password']);
-
         if (! $token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
@@ -53,48 +55,42 @@ class AuthController extends Controller
     }
 
     /**
-     * Redirect the user to the GitHub authentication page.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function redirectToProvider()
-    {
-        return Socialite::driver('google')->redirect();
-    }
-
-    /**
-     * Obtain the user information from GitHub.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function handleProviderCallback()
-    {
-        $user = Socialite::driver('google')->user();
-        // dd($user);
-        $user =  User::firstOrCreate([
-            'email'     => $user->email
-        ],[
-            'name'  => $user->name,
-            'password'  => Hash::make( Str::random(24) )
-        ]);
-
-        Auth::login($user, true);
-        return redirect('/');
-        // $user->token;
-    }
-
-    /**
      * Get the authenticated User.
      *
      * @return \Illuminate\Http\JsonResponse
      */
     public function getuser()
     {
-    
         $user = auth()->user();
         return response()->json([
-            'name'   => $user->name
+            'name'      =>  $user->name,
+            'email'     =>  $user->email
         ]);
+    }
+
+    /**
+     * Get user authenticated via Google
+     * @param array profile
+     */
+    public function googleAuthenticate(Request $request){
+
+        $request->validate([
+            'id'    => 'required',
+            'name'  => 'required',
+            'email' => 'required|email',
+        ]);
+
+        $user =  User::firstOrCreate([
+            'email'     => $request->email
+        ],[
+            'name'  => $request->name,
+            'password'  => Hash::make( $request->id ),
+            'oauth'  => 1,
+        ]);
+
+        $token = auth()->login($user);
+
+        return $this->respondWithToken($token);
     }
 //     /**
 //      * Create a new AuthController instance.

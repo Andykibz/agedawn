@@ -1,20 +1,11 @@
 <template>
     <div>
-        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(./imgs/drums.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">
-            <div class="container">
-                <div class="row align-items-end text-center justify-content-center">
-                    <div class="col-md-8 mt-5 mb-4">
-                        <span class="sub-text">Adawnage Band</span>
-                        <h1>Check out our Store</h1>
-                    </div>
-                </div>
+        <Hero :heading="`What do we stock ?`" />
 
-            </div>
-        </div>
         <div class="container mt-4 mx-auto" data-aos="slide-up">
             <!-- <hr class="bg-secondary"> -->
             <div class="row d-flex justify-content-center">
-                <div class="col-sm-9 col-12">
+                <div class="col-lg-10 col-12">
                     <div class="row">
                         <div class="col-12 mini-heading text-center mb-3">
                             <h3 class="">Music and Merch</h3>
@@ -53,11 +44,11 @@
 <script>
 import MerchItem from '../components/sub/merchitem'
 import Carousel from 'vue-owl-carousel'
-import { log } from 'util'
+import Hero from '../components/hero'
 import { mapActions,mapGetters } from 'vuex';
 export default {
     name            :   "Store",
-    components      :   { MerchItem,Carousel },
+    components      :   { MerchItem,Carousel, Hero },
     computed :{
             ...mapGetters({
                     hoodies : 'shop/getHoodies',
@@ -67,22 +58,6 @@ export default {
     data(){
         return{
             
-            "carous"  :   [
-                {
-                    'title' :   "Top fitted Caps",
-                    'img'   :   "storage/Shop/carousel/car_img3.jpg",
-                },{
-                    'title' :   "Hot Hoodies",
-                    'img'   :   "storage/Shop/carousel/car_img2.png",
-                },{
-                    'title' :   "Hot Hoodies",
-                    'img'   :   "storage/Shop/carousel/car_img1.jpg",
-                },
-                {
-                    'title' :   "Winter Sale",
-                    'img'   :   "storage/Shop/carousel/car_img4.gif",
-                },
-            ],
             
         }
     },

@@ -14,7 +14,8 @@
 </template>
 
 <script>
-    import navigation from './components/navigation'
+    import Navigation from './components/navigation'
+    
     import Footing from './components/Footer'
     import SignIn from './components/signin'
     import SignUp from './components/signup'
@@ -25,10 +26,31 @@
     export default {
 
         components: {
-            navigation,Footing,SignIn,SignUp,Cart
+            Navigation,Footing,SignIn,SignUp,Cart
+        },
+
+        methods:{
+
         },
         mounted(){
             this.$store.dispatch('cart/retrieveCartItems')
+            this.$store.dispatch('auth/initUser')
+
+            // this.$gAuth.getAuthCode()
+            //     .then(authCode => {
+            //     //on success
+            //     return this.$http.post('/auth/login/google', { code: authCode, redirect_uri: '/auth/callback/google' })
+            //     })
+            //     .then(response => {
+            //         console.log("SUCCESS");
+                    
+            //     })
+            //     .catch(error => {
+            //     console.log("ERROR");
+            //     })
+
+            
+            
         },
         
 

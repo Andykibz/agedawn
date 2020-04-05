@@ -75,7 +75,6 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import products from '../store/modules/products';
-import { log } from 'util';
 export default {
 
     name  : "ProductForm",

@@ -12,11 +12,8 @@
                         View
                     </router-link>
                     <router-link @click.native.prevent="addToCart" to="" role="button" class="btn btn-sm btn-outline-danger">
-                        <!-- <font-awesome-icon style="cursor:pointer;" icon="eye" class="text-primary"/> -->
                         Add to Cart
                     </router-link>
-                  <!-- <font-awesome-icon style="cursor:pointer;" icon="cart-plus" size="1x" class="text-primary"/>
-                  <font-awesome-icon style="cursor:pointer;" icon="eye" size="1x" class="text-primary"/> -->
                 </div>
               </div>
               <h2 class="text-light">{{ item.name }}</h2>
@@ -28,10 +25,7 @@
 import { mapActions } from 'vuex'
 export default {
     name        :   "MerchItem",
-    computed    : {
-                  // hoodies : getCat('Hoodie'),
-                  // music : getCat('Music Albums')
-          },
+    computed    :   {},
     props       :   {
                         item: Object,
                         static: Boolean,

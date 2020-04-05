@@ -12,15 +12,25 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import CKEditor from '@ckeditor/ckeditor5-vue';
+import GAuth from 'vue-google-oauth2'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
+// import ZoomOnHover from "vue-zoom-on-hover";
+// Vue.use(ZoomOnHover);
 
+import 'swiper/css/swiper.css'
 
+const gauthOption = {
+  clientId: '948718702232-mr3fnqa6i2gndknegb82mgsreesv2onq.apps.googleusercontent.com',
+  scope: 'profile email',
+  prompt: 'select_account'
+}
 require('./components/frontend/store/sub')
 
 
-import ZoomOnHover from '@intera/vue-zoom-on-hover/zoomOnHover'
-Vue.use(ZoomOnHover)
 
+Vue.use(GAuth, gauthOption)
 Vue.use(CKEditor)
+Vue.use(VueAwesomeSwiper)
 
 library.add(fas,fab)
 import 'aos/dist/aos.css'
@@ -57,7 +67,6 @@ store.dispatch('auth/attempt',localStorage.getItem('token'))
         render: h => h(Adawnage)
     }).$mount('#adawnage')
 })
-
 
 
 require('./main.js');

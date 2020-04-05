@@ -11,11 +11,6 @@
 |
 */
 
-Route::group(['namespace' => 'Auth','prefix' => 'auth'], function ($router) {
-    Route::get('login/google', 'AuthController@redirectToProvider');
-    Route::get('callback/google', 'AuthController@handleProviderCallback');
-});
-
 Route::namespace('Admin')->prefix('admin')->group(function () {
     // Controllers Within The "App\Http\Controllers\Admin" Namespace
     Route::get('{any?}', function () {

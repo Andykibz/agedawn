@@ -5,14 +5,14 @@
             <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="cartModalLabel">Cart</h5>
-                <button id="closeSignInModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button id="closeCartModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
                 <div class="accordion" id="OrderDetails">
                     <div class="card mb-2">
-                        <label class="mb-0" type="button" data-toggle="collapse" data-target="#cartContents" aria-expanded="true" aria-controls="cartContents">
+                        <label class="mb-0 triggeraccordion" type="button" data-toggle="collapse" data-target="#cartContents" aria-expanded="true" aria-controls="cartContents">
                             <div class="border rounded p-2 mb-2" id="cartContentsHeading">
                                 Cart Contents
                             </div>
@@ -52,25 +52,29 @@
                     </div>
                     
                     <div class="card">
-                        <label class="mb-0 collapsed" type="button" data-toggle="collapse" data-target="#personalDetails" aria-expanded="false" aria-controls="PersonalDetails">
-                            <div class="border rounded p-2 mb-2" id="PersonalDetailsHeading">
-                                Personal Details
+                        <label @click.prevent="getuserdetails" class="mb-0 triggeraccordion collapsed" type="button" data-toggle="collapse" data-target="#personalDetails" aria-expanded="false" aria-controls="PersonalDetails">
+                            <div  class="border rounded p-2 mb-2" id="PersonalDetailsHeading">
+                                    Personal Details                                    
                             </div>
                         </label>
                         <div id="personalDetails" class="collapse" aria-labelledby="PersonalDetailsHeading" data-parent="#OrderDetails">
                             <div class="card-body">
                                 <div class="row personal-details">
                                     <div class="col-12 mb-2">
-                                        <input type="text" class="form-control" placeholder="Full Name">
+                                        <input v-model="fname" type="text" class="form-control" placeholder="Full Name">
+                                        <small class="text-danger" v-text="this.validMsgs.fname"></small>
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <input type="text" class="form-control" placeholder="Email address">
+                                        <input v-model="email" type="text" class="form-control" placeholder="Email address">
+                                        <small class="text-danger" v-text="this.validMsgs.email"></small>
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <input type="text" class="form-control" placeholder="Phone Number">
+                                        <input v-model="phone" type="text" class="form-control" placeholder="Phone Number">
+                                        <small class="text-danger" v-text="this.validMsgs.phone"></small>
                                     </div>
                                     <div class="col-12 mb-2">
-                                        <input type="text" class="form-control" placeholder="Location">
+                                        <input v-model="location" type="text" class="form-control" placeholder="Location eg. Nairobi, Kenya">
+                                        <small class="text-danger" v-text="this.validMsgs.location"></small>
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +84,7 @@
             </div>
                 
             <div class="modal-footer d-flex flex-row">        
-                <button @click="setcheckOut" class="btn btn-outline-danger mr-2">Check Out</button>
+                <button @click="checkoutFunc" class="btn mr-2" :class="{ 'btn-outline-danger' : checkout, 'btn-outline-success':!checkout }" >{{ checkout ? 'Cancel Order in '+countdownTime : 'Checkout' }} </button>
             </div>
         </div>
     </div>
@@ -101,33 +105,118 @@ export default {
         }),
         ...mapGetters({
             cart        :   'cart/getCartItems',
-            totalCost   :   'cart/getTotalCost'
+            totalCost   :   'cart/getTotalCost',
+            user        :   'auth/user'
         })
     },
     data(){
         return{
-            checkout    :   false,
+            checkout        :   false,
+            countdownTime   :   null,
+            fname       :   null,
+            email       :   null,
+            phone       :   null,
+            location       :   null,
+            validMsgs :{
+                fname   :   null,
+                email   :   null,
+                phone   :   null,
+                location   :   null
+            }
         }
     },
     methods:{
+
         ...mapActions({
             changeQuantityAction    :   'cart/changeQuantity',
-            deleteitemAction        :   'cart/deleteItem'
+            deleteitemAction        :   'cart/deleteItem',
+            makeOrderAction         :   'cart/makeOrder',
+            clearCartAction         :   'cart/clearCart',
         }),
+        getuserdetails(){
+            if( this.user ){
+                this.fname = this.user.name
+                this.email = this.user.email
+            }
+        },
         changeQuantity( slug, num ){
            
             this.changeQuantityAction( {
                 slug    : slug,
                 num     : num
-            } )
+            })
         },
         deleteitem( slug ){
             this.deleteitemAction(slug)
         },
-        setcheckOut(){
-            this.checkout = true
+        processOrder(){
+            this.makeOrderAction({
+                name        :   this.fname,
+                email       :   this.email,
+                location    :   this.location,
+                phone       :   this.phone,
+            }).then((response)=>{
+                if( response.data == 1 ){
+                    this.checkout = false;
+                    this.countdownTime = 4;
+                    this.fname = null
+                    this.email = null
+                    this.phone = null
+                    this.location = null
+                    document.querySelector('#closeCartModal').click()
+                    this.clearCartAction()
+                }
+            }).catch((err)=>{
+                let errors = err.response.data.errors
+                
+                
+                ( errors['name'] != undefined ) ? this.validMsgs.fname = errors['name'][0] : '';
+                ( errors['email'] != undefined ) ? this.validMsgs.email = errors['email'][0] : '';
+                ( errors['phone'] != undefined ) ? this.validMsgs.phone = errors['phone'][0] : '';
+                ( errors['location'] != undefined ) ? this.validMsgs.location = errors['location'][0] : '';
+            })
+        },
+        validate(){
+            
+            let err = false
+            if( this.fname == null || this.fname.match(/\S+/) == null ){ 
+                this.validMsgs.fname = "Enter your full names Please!"; 
+                err= true;
+            }else{ this.validMsgs.fname = null }
+            if( this.email == null || this.email.match(/\S+/) == null ) { 
+                this.validMsgs.email = "Enter a valid email Address Please!" 
+                err= true;
+            }else{ this.validMsgs.email = null }
+            if( this.phone == null || this.phone.match(/\S+/) == null ) { 
+                this.validMsgs.phone = "Enter a valid phone number Please!";
+                err= true;
+            }else{ this.validMsgs.phone = null }
+            if( this.location == null || this.location.match(/\S+/) == null ) { 
+                this.validMsgs.location = "Enter the delivery location Please!" 
+                err = true;
+            }else{ this.validMsgs.location = null }
+            return err;
+        },
+        checkoutFunc(){
+            let err = this.validate()
+            if( err == false){
+                this.checkout = !this.checkout;
+                this.countdownTime = 1;
+                this.countdownTimeFunc();                
+            }else{
+                document.querySelector('.collapse.show').classList.remove('show')
+                document.querySelector('#personalDetails').classList.add('show')
+            }
+        },
+        async countdownTimeFunc(){
+            this.countdownTime -= 1;
+            if( this.countdownTime > 0 && this.checkout ){
+                setTimeout(this.countdownTimeFunc, 1000);            
+                console.log(this.countdownTime)
+            }if( this.countdownTime == 0 ){
+                this.processOrder()            
+            }
         }
-        
         
     },
     mounted(){
@@ -138,6 +227,9 @@ export default {
 </script>
 
 <style scoped>
+    label.triggeraccordion{
+        cursor: pointer;
+    }
     img{
         /* max-height: 56px; */
     }
@@ -147,8 +239,9 @@ export default {
     input[type="text"]{
         border: none;
         border-bottom: solid #ddd 1px;
-        padding: 0;
+        padding: 0 0 0 1em;
         margin: 0;
+        line-height: 0;
     }
     label{
         text-transform: uppercase;

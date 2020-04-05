@@ -15,12 +15,14 @@
                 <main class="col-10 mx-auto" >
                     <div class="row">
                         <div class="col-md-6 col-12">
-                            <img class="img-fluid " :src="'/storage/Products/'+product.image" alt="">
+                            <!-- <img class="img-fluid " :src="'/storage/Products/'+product.image" alt=""> -->
+                              <zoom-on-hover img-normal="'/storage/Products/IMG_7093_1585442130.jpg'"></zoom-on-hover>
+
                         </div>
                         <div class="col-md-6 col-12 d-flex flex-column align-items-center text-justify">
                             <h2 class="text-light text-center mb-3" v-text="product.name"></h2>
-                            <div class="price mb-3 text-light">
-                                <span>In Stock: </span>
+                            <div class="stock mb-3 text-light">
+                                <span >In Stock: </span>
                                 <span v-text="product.quantity"></span>
                             </div>
                             <div class="price mb-3 text-light">
@@ -28,9 +30,9 @@
                                 <strong>Ksh&nbsp;</strong><span v-text="product.price"></span>
                             </div>
                             <div class="d-flex flex-row align-content-center mb-3">
-                                <i @click="(quantity > 1 ) ? quantity = quantity - 1 : quantity =  1" class="btn btn-outline-success icon-minus mr-3"></i> 
+                                <i @click="(quantity > 1 ) ? quantity = quantity - 1 : quantity =  1" class="btn btn-sm btn-outline-secondary icon-minus mr-3"></i> 
                                 <input class="quantity mr-3" type="number" v-model="quantity"  placeholder="Quantity" min="1">
-                                <i @click="quantity = quantity + 1" class="btn btn-outline-success icon-plus"></i> 
+                                <i @click="quantity = quantity + 1" class="btn btn-sm btn-outline-secondary icon-plus"></i> 
                             </div>
 
                             <div class="d-flex flex-row align-content-center mb-3">
@@ -52,6 +54,7 @@
 </template>
 <script>
 import ProductDetail from '../components/sub/productdetail'
+
 import { mapActions } from 'vuex'
 export default {
     name    :   "Product",
@@ -107,10 +110,17 @@ export default {
 </script>
 <style lang="scss" scoped>
     input.quantity{
-        width: 100px;
+        width: 60px;
         text-align: center;
         &[attr='placeholder']{
             text-align: center;
         }
+        border: none;
+        border-bottom: #ddd solid 1px;
+        background: transparent;
+        color: #f8f9fa;
+    }
+    .stock,.price{
+        font-size: large;
     }
 </style>

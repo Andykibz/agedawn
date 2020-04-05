@@ -32,12 +32,34 @@
           
         </div>
       </li>
-      <li class="nav-item">
+
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="infosDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-fw fa-info"></i>
+          <span>Settings and Info</span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="infosDropdown">
+          <h6 class="dropdown-header">
+            <i class="fas fa-fw fa-drum"></i>
+            <span>Info </span>
+          </h6>
+          <router-link class="dropdown-item" :to="{ name  : 'band' }">Band Members</router-link>
+          <div class="dropdown-divider"></div>
+          <h6 class="dropdown-header">
+            <i class="fas fa-fw fa-sliders-h"></i>
+            <span>Settings:</span>
+          </h6>
+          <router-link class="dropdown-item" :to="{ name  : 'users' }">User Management</router-link>
+          
+        </div>
+      </li>
+
+      <!-- <li class="nav-item">
         <router-link :to="{ name: 'info' }" class="nav-link">
           <i class="fas fa-fw fa-info"></i>
           <span>Info</span>
         </router-link>
-      </li>
+      </li> -->
 
     </ul>
   </template>

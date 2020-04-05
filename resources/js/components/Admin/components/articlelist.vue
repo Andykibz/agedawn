@@ -28,7 +28,6 @@
 <script>
 import paginate from './sub/paginate';
 import { eventBus } from '../../../admin';
-import { log } from 'util';
 export default {
     name        :   "ArticleList",
     components  :   { paginate },

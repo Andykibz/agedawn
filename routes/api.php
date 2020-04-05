@@ -34,13 +34,25 @@ Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.' ],f
     Route::post('product/{product}', 'ProductController@update')->name('product.update');
     Route::delete('product/{product}', 'ProductController@destroy')->name('product.destroy');
 
+    Route::get('orders', 'OrderController@index')->name('order.index');
+
     Route::get('categories', 'CategoryController@index')->name('category.index');
     Route::post('category', 'CategoryController@store')->name('category.store');
     Route::post('category/{category}', 'CategoryController@update')->name('category.update');
     Route::delete('category/{category}', 'CategoryController@destroy')->name('category.destroy');
+
+    Route::get('members', 'MetaController@listMembers');
+    Route::post('member', 'MetaController@storeMember');
+    Route::post('member/{id}', 'MetaController@updateMember');
+    Route::delete('member/{id}', 'MetaController@deleteMember');
+
+    Route::post('user/{id}/permission', 'UserController@assignPermissions');
+    Route::get('users', 'UserController@index');
+    Route::delete('user/{id}', 'UserController@destroy');
+
 });
 
-Route::group( [ 'as' => 'news.' ],function () {
+Route::group( [ 'as' => 'frontend.' ],function () {
     Route::GET('news', 'NewsController@index');
     Route::GET('homenews', 'NewsController@homeindex');
     Route::GET('news/{news}', 'NewsController@show');
@@ -48,6 +60,18 @@ Route::group( [ 'as' => 'news.' ],function () {
     Route::GET('shop', 'ShopController@index');
     Route::GET('category/{name}', 'ShopController@getByCatName');
     Route::GET('product/{id}', 'ShopController@getProduct');
+
+    Route::POST('order', 'OrdersController@store');
+});
+Route::group( [ 'as' => 'metas.' ],function () {
+    
+
+    Route::GET('members/getmembers', 'MetaController@getmembers');
+    Route::GET('members/updatemembers', 'MetaController@updateMembers');
+    Route::GET('category/{name}', 'ShopController@getByCatName');
+    Route::GET('product/{id}', 'ShopController@getProduct');
+
+    Route::POST('order', 'OrdersController@store');
 });
 
 
@@ -58,6 +82,7 @@ Route::group( [ 'as' => 'news.' ],function () {
 
 Route::group(['namespace' => 'Auth','prefix' => 'auth'], function ($router) {
     Route::post('signup', 'AuthController@signup');
+    Route::post('google/authenticate', 'AuthController@googleAuthenticate');
     Route::post('signin', 'AuthController@signin');
     Route::post('signout', 'AuthController@signout');
     Route::post('refresh', 'AuthController@refresh');

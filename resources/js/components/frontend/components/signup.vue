@@ -26,7 +26,7 @@
         <div class="modal-footer d-flex flex-column">        
             <button type="button" @click="signupFunc" class="btn btn-block btn-primary">Sign Up</button>
             <span>or</span>
-            <a @click.prevent="googleLogin" href="auth/login/google" type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign up with Google <i class="icon-google"></i> </a>
+            <a @click.prevent="getGoogleCredentials" href="" type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign up with Google <i class="icon-google"></i> </a>
         </div>
     </div>
   </div>
@@ -34,6 +34,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
     name    : 'SignUpModal',
     data(){
@@ -46,10 +47,11 @@ export default {
         }
     },
     methods:{
+        ...mapActions({
+            signInAction        : 'auth/signIn',
+            googleSignInAction  : 'auth/googleSignIn'
+        }),
 
-        googleLogin(){
-            window.location.href = "localhost:8000/auth/login/google"
-        },
         signupFunc(){
             self = this;
           axios.post('/api/auth/signup',self.signupForm)
@@ -57,7 +59,7 @@ export default {
                     
                     console.log(response);
                     document.getElementById('closeSignUpModal').click();
-                    document.getElementById('signInLink').click()
+                    
                     
                 }).catch((error)=>{
                     console.log(error);
@@ -69,6 +71,21 @@ export default {
                 })
                 
         },
+        
+        getGoogleCredentials() {
+         this.$gAuth.signIn()
+           .then(GoogleUser => {
+                let profile = {
+                    id       : GoogleUser.getBasicProfile().SU,
+                    name     : GoogleUser.getBasicProfile().Ad,
+                    email    : GoogleUser.getBasicProfile().zu
+                }
+                this.googleSignInAction( profile )               
+            })
+           .catch(error => {
+               console.log(error.response.data);               
+           });
+       },
     }
 
 }

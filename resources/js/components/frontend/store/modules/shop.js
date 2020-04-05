@@ -28,8 +28,8 @@ export default{
 
    },
    actions:{
-        async getByCategories( { commit }, name ){
-            await axios.get('/api/category/'+name)
+        getByCategories( { commit }, name ){
+            axios.get('/api/category/'+name)
                 .then((response)=>{ 
                     if ( name == 'hoodies'){
                         commit('SET_HOODIES',response.data)

@@ -20,7 +20,7 @@
       <div class="modal-footer d-flex flex-column">        
             <button type="button" @click="signinFunc" class="btn btn-block btn-primary">Sign In</button>
             <span>or</span>
-            <a @click.prevent="googleLogin" href="auth/login/google" type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign up with Google <i class="icon-google"></i> </a>
+            <a @click.prevent="getGoogleCredentials" href="" type="button" class="btn btn-block btn-danger" data-dismiss="modal"> Sign in with Google <i class="icon-google"></i> </a>
       </div>
     </div>
   </div>
@@ -42,31 +42,35 @@ export default {
         }
     },
     methods:{
-        googleLogin(){
-            window.location.href = "localhost:8000/auth/login/google"
-        },
+        
         ...mapActions({
-          signIn  :'auth/signIn'
+            signInAction        : 'auth/signIn',
+            googleSignInAction  : 'auth/googleSignIn'
         }),
 
         signinFunc(){
-          this.signIn(this.signInForm)
-        //     self = this
-        //     axios.post('/api/auth/signin',self.signInForm)
-        //         .then((response)=>{
-        //           console.log(response);
-                  
-        //         }).catch((error)=>{
-        //           console.log(error);
-        //         }).finally(()=>{
-
-        //         });
-        }
+          this.signInAction(this.signInForm)
+        },
+        getGoogleCredentials() {
+         this.$gAuth.signIn()
+           .then(GoogleUser => {
+                let profile = {
+                    id       : GoogleUser.getBasicProfile().SU,
+                    name     : GoogleUser.getBasicProfile().Ad,
+                    email    : GoogleUser.getBasicProfile().zu
+                }
+                this.googleSignInAction( profile )
+                document.getElementById('closeSignInModal').click();
+            })
+           .catch(error => {
+               console.log(error.response.data);               
+           });
+       },
     }
 
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>

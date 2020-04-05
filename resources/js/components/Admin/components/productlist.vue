@@ -35,7 +35,6 @@
 <script>
 import { mapGetters,mapActions } from 'vuex'
 import paginate from './sub/paginate';
-import { log } from 'util';
 export default {
     name        :   "ProductList",
     components  :   { paginate },

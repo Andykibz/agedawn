@@ -7,33 +7,40 @@
                     It esteems luckily or picture placing drawing. </p>
             </div>
             <div class="row">
-                <div class="col-sm-4 col-12 albums">
-                    <albumcard/>
+                <div class="col-sm-3 col-12 albums">
+                    <albumcard :albums="albums"/>
 
                 </div>
-                <div class="col-sm-8 col-12">
-                    <carousel :autoplay="true" :nav="false" :items="3" >
-                        <div v-for="item in items" :key="item.id" data-aos="slide-up" class=" mb-3 px-3">
+                <div class="col-sm-9 col-12">
+                    <swiper class="swiper" :options="swiperOption">
+                        <swiper-slide v-for="(product, index ) in products" :key="index">
                             <div class="person P-4" data-aos="zoom-in">
                                 <div class="bio-img">
-                                    <figure>
-                                        <img :src="'/storage/Products/thumbs/'+item.image" alt="Image" class="img-fluid">
+                                    <figure @click="openModal,currentSlide(index)">
+                                        <img :src="'/storage/Products/thumbs/'+product.image" :alt="product.name+'_image'" class="img-fluid">
                                     </figure>
                                     <div class="social">
-                                        <router-link :to="'/product/'+item.id" role="button" class="btn btn-sm btn-outline-info">
+                                        <router-link :to="'/product/'+product.id" role="button" class="btn btn-sm btn-outline-info">
                                             View
                                         </router-link>
-                                        <router-link to="#" role="button" class="btn btn-sm btn-outline-danger">
+                                        <router-link @click.native.prevent="addToCart({
+                                            id          : product.id, 
+                                            name        : product.name,
+                                            slug        : product.slug,
+                                            image       : product.image,
+                                            price       : product.price
+                                        })" to="" role="button" class="btn btn-sm btn-outline-danger">
                                             Add to Cart
                                         </router-link>
                                     </div>
                                 </div>
-                                <h2 class="text-light">{{ item.name }}</h2>
-                                <span class="sub-title">Ksh {{ item.price }}</span>
+                                <h2 class="text-light">{{ product.name }}</h2>
+                                <span class="sub-title">Ksh {{ product.price }}</span>
                             </div>
-                        </div>
-
-                    </carousel>
+                        </swiper-slide>
+                        <div class="swiper-pagination" slot="pagination"></div>
+                    </swiper>
+                    <LightBoxModal v-if="products" :items="products" />
                 </div>
             </div>
         </div>
@@ -41,107 +48,138 @@
 </template>
 <script>
 import albumcard from './sub/albumcards'
-import MerchItem from './sub/merchitem'
+import LightBoxModal from './home/lightboxModal'
 import carousel from 'vue-owl-carousel'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name        :   "StoreFeature",
     props       :   [ ],
-    components  :   { albumcard,MerchItem,carousel },
+    components  :   { albumcard,LightBoxModal,carousel },
     computed    :{
         ...mapGetters({
-            // items : 'shop/getHoodies'
+            products    : 'shop/getHoodies',
+            albums      : 'shop/getMusic'
         })
     },
     data(){
         return{
-            items : [
-                        {
-                            "id": 1,
-                            "name": "Adawnage Hoodie Red",
-                            "slug": "adanage-hoodie-red",
-                            "sku_num": "ADG_HD_RD_1",
-                            "image": "IMG_7091_1585442080.jpg",
-                            "category_id": "1",
-                            "description": "Distinctively revolutionize team driven deliverables through ubiquitous leadership. Uniquely brand client-centered leadership skills before synergistic benefits. Appropriately.",
-                            "quantity": "12",
-                            "price": "1000",
-                            "created_at": "2020-03-29 03:34:41",
-                            "updated_at": "2020-03-29 15:15:40"
-                        },
-                        {
-                            "id": 2,
-                            "name": "Adawnage Hoodie - Beige",
-                            "slug": "adawnage-hoodie-beige",
-                            "sku_num": "ADG_HD_BG_1",
-                            "image": "IMG_7093_1585442130.jpg",
-                            "category_id": "1",
-                            "description": "Completely re-engineer innovative value whereas clicks-and-mortar sources. Compellingly engage future-proof internal or \"organic\" sources and cross functional.",
-                            "quantity": "13",
-                            "price": "1000",
-                            "created_at": "2020-03-29 03:35:31",
-                            "updated_at": "2020-03-29 03:35:31"
-                        },
-                        {
-                            "id": 3,
-                            "name": "Adawnage Hoodie - Black",
-                            "slug": "adawnage-hoodie-black",
-                            "sku_num": "ADG_HD_BL_1",
-                            "image": "IMG_7086_1585442181.jpg",
-                            "category_id": "1",
-                            "description": "Objectively impact high standards in solutions without plug-and-play architectures. Competently evisculate tactical applications after professional models. Appropriately.",
-                            "quantity": "23",
-                            "price": "1000",
-                            "created_at": "2020-03-29 03:36:22",
-                            "updated_at": "2020-03-29 03:36:22"
-                        }
-                    ]
+            swiperOption: {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                // loop: true,
+                autoplay: {
+                    delay: 5000,
+                    disableOnInteraction: false
+                },
+                coverflowEffect: {
+                    rotate: 50,
+                    stretch: 0,
+                    depth: 100,
+                    modifier: 1,
+                    slideShadows : true
+                },
+                // pagination: {
+                //     el: '.swiper-pagination'
+                // }
+            }
+        
         }
     },
     methods:{
-        getHoodies(){
-            self = this
-            axios.get('/api/category/hoodies')
-            .then((response)=>{
-                self.items = response.data[0]
-                console.log(self.items);
-            }).catch((err)=>{
-                console.log(err.repsonse.data.message);
-                
+        ...mapActions({
+            getProductsAction    :   'shop/getByCategories',
+            addToCartAction : 'cart/addToCart'
+        })
+        ,
+
+        addToCart(item){
+            this.addToCartAction({
+                id          : item.id,  
+                name        : item.name,
+                slug        : item.slug,
+                quantity    : 1,
+                image       : item.image,
+                price       : item.price,
             })
         },
-        ...mapActions({
-            getHoodiesAction    :   'shop/getByCategories',
-        })
+
+        openModal() {
+            document.getElementById("myModal").style.display = "block";
+        },
+
+        currentSlide(n) {
+            this.showSlides(n);
+        },
+
+        closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        },
+
+
+
+        showSlides(n) {
+            let i;
+            let slideIndex = 0;
+            let slides = document.getElementsByClassName("mySlides");
+            let dots = document.getElementsByClassName("demo");
+            let captionText = document.getElementById("caption");
+            if (n > slides.length) {slideIndex = 1}
+            if (n < 1) {slideIndex = slides.length}
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            slides[slideIndex-1].style.display = "block";
+            dots[slideIndex-1].className += " active";
+            captionText.innerHTML = dots[slideIndex-1].alt;
+        }
+
+
     },
+    
     mounted(){
-        // this.getHoodiesAction('hoodies')
+        this.getProductsAction('hoodies')
     }
 
 }
 </script>
-<style >
-.albums{
-    position: relative;
-}
-ul.slick-dots{
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    /* z-index: 2; */
-    top:50%;
-    left:0;
-    list-style: none;
-}
-ul.slick-dots li button{ 
-    width: 5px!important;
-    height: 5px!important;
-    border-radius: 50%;
-    color: rgba(255,255,255,0);
-    /* font-size: 5px; */
-    background-color: rgba(0,0,0,.6);
-    border:none;
-    box-shadow: 2px 2px 3px #244;
-}
+<style lang="scss" scoped>
+
+  .example-3d {
+    width: 100%;
+    height: 400px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+
+  .swiper {
+    height: 100%;
+    width: 100%;
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 300px;
+      height: 300px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 12;
+      background-color: transparent;
+      background-position: center;
+      background-size: cover;
+      color: #fff;
+    }
+
+    .swiper-pagination {
+      .swiper-pagination-bullet.swiper-pagination-bullet-active {
+        background-color: #fff;
+      }
+    }
+  }
 </style>

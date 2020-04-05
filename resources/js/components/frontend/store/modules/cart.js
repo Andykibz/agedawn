@@ -5,7 +5,7 @@ export default{
    state:{
       product        :  {},
       cartItems      :  {},
-      totalCost      :  null,
+      totalCost      :  0,
    },
 
    getters: {
@@ -41,6 +41,12 @@ export default{
          localStorage.setItem( 'adawnage.cartItems', JSON.stringify( state.cartItems ) )
       },
 
+      CLEAR_CART( state ){
+         state.cartItems = {}
+         state.totalCost = 0
+         localStorage.removeItem('adawnage.cartItems')
+      },
+
       CHANGE_QUANTITY( state, obj ){
          state.cartItems[obj.slug].quantity = parseInt(obj.num)
       },
@@ -55,18 +61,24 @@ export default{
             }
          }
          console.log(RemCartItems);
-         
          state.cartItems = RemCartItems;
       }
-
    },
    actions:{
-         addToCart( { commit }, product ){
-            commit('ADD_TO_CART',product);
-            
+         addToCart( { commit,dispatch }, product ){
+            commit('ADD_TO_CART',product);            
             commit('SAVE_CART');
             commit('SET_CART');
             dispatch('calc_total')
+         },
+
+         async makeOrder( { state }, details ){
+            
+            details.invoice   =  state.totalCost
+            details.products  =  Object.values(state.cartItems);
+            // return await axios.post(`/api/order`,state.cartItems)
+            return axios.post(`/api/order`,details)
+
          },
         
          retrieveCartItems( { commit, dispatch } ){
@@ -74,8 +86,11 @@ export default{
                if( cartItems ){
                   commit('SET_CART', cartItems )
                }
-
                dispatch('calc_total')
+         },
+
+         clearCart( {commit} ){
+            commit('CLEAR_CART')
          },
 
          calc_total( {commit, state} ){
@@ -86,7 +101,6 @@ export default{
                }
             }
             commit('SET_TOTAL_COST', total)
-
          },
 
          async saveCart( { commit } ){

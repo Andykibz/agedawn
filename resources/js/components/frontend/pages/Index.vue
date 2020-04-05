@@ -26,7 +26,7 @@
             </div> -->
         </div>
         <hr class="m-0 p-0 bg-secondary">
-        <Music></Music>
+        <!-- <Music></Music> -->
         <parallax text="New Beginnings" image="guitar.jpg"/>
         <NewsEvents/>
         <hr class="m-0 p-0 bg-secondary">
