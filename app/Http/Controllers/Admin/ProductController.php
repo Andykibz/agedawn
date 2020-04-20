@@ -64,8 +64,8 @@ class ProductController extends Controller
           $filename = $name.'_'.time().'.'.$ext;
           $img->storeAs('public/Products',$filename);
           $path = storage_path("app/public/Products/{$filename}");
-          Image::make($path)->resize(800, 500, function($constraint) { $constraint->aspectRatio(); })->save($path,80);
-          Image::make($path)->resize(400, 300, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Products/thumbs/{$filename}"),80);
+          Image::make($path)->resize(960, 720, function($constraint) { $constraint->aspectRatio(); })->save($path,100);
+            Image::make($path)->resize(480, 360, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Products/thumbs/{$filename}"),80);
           $product->image = (!empty($filename)) ? $filename : null ;
         endif;
         
@@ -127,8 +127,8 @@ class ProductController extends Controller
             $filename = $name.'_'.time().'.'.$ext;
             $img->storeAs('public/Products',$filename);
             $path = storage_path("app/public/Products/{$filename}");
-            Image::make($path)->resize(800, 500, function($constraint) { $constraint->aspectRatio(); })->save($path,80);
-            Image::make($path)->resize(400, 300, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Products/thumbs/{$filename}"),80);
+            Image::make($path)->resize(1024, 768, function($constraint) { $constraint->aspectRatio(); })->save($path,100);
+            Image::make($path)->resize(480, 360, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Products/thumbs/{$filename}"),90);
             $product->image = (!empty($filename)) ? $filename : null ;
         endif;
 

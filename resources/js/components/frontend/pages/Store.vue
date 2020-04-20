@@ -2,15 +2,12 @@
     <div>
         <Hero :heading="`What do we stock ?`" />
 
-        <div class="container mt-4 mx-auto" data-aos="slide-up">
+        <div class="container mt-5 mx-auto" data-aos="slide-up">
             <!-- <hr class="bg-secondary"> -->
             <div class="row d-flex justify-content-center">
+                    <SubHero :heading="'Music and Merch'"/>
                 <div class="col-lg-10 col-12">
                     <div class="row">
-                        <div class="col-12 mini-heading text-center mb-3">
-                            <h3 class="">Music and Merch</h3>
-                            <p>Synergistically leverage other's ubiquitous e-services.</p>
-                        </div>
                     </div>
                     <div>
                         <span class="row">
@@ -45,10 +42,11 @@
 import MerchItem from '../components/sub/merchitem'
 import Carousel from 'vue-owl-carousel'
 import Hero from '../components/hero'
+import SubHero from '../components/subhero'
 import { mapActions,mapGetters } from 'vuex';
 export default {
     name            :   "Store",
-    components      :   { MerchItem,Carousel, Hero },
+    components      :   { MerchItem,Carousel, Hero, SubHero },
     computed :{
             ...mapGetters({
                     hoodies : 'shop/getHoodies',
@@ -70,6 +68,7 @@ export default {
     mounted(){
         this.getByCategories('hoodies')
         this.getByCategories('music')
+
     },
     beforeMount(){
 

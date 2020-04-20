@@ -6,6 +6,7 @@ export default{
       product        :  {},
       cartItems      :  {},
       totalCost      :  0,
+      totalItems     :  0,
    },
 
    getters: {
@@ -15,6 +16,15 @@ export default{
 
       getTotalCost( state ){
          return state.totalCost
+      },
+
+      getCartItemNums( state ){
+         // state.cartItems.values
+         let nums = 0;
+         Object.values( state.cartItems ).forEach(val=>{
+            nums+=val.quantity;
+         });
+         return nums;
       },
    }, 
 
@@ -49,6 +59,14 @@ export default{
 
       CHANGE_QUANTITY( state, obj ){
          state.cartItems[obj.slug].quantity = parseInt(obj.num)
+      },
+
+      SET_TOTAL_ITEMS( state ){
+         let nums = 0;
+         Object.values( state.cartItems ).forEach(val=>{
+            nums+=val.quantity;
+         });
+         state.totalItems = nums
       },
 
       DELETE_ITEM(state,slug){
@@ -101,6 +119,7 @@ export default{
                }
             }
             commit('SET_TOTAL_COST', total)
+            
          },
 
          async saveCart( { commit } ){
@@ -117,6 +136,7 @@ export default{
             commit('DELETE_ITEM',slug)
             dispatch( 'calc_total' )
             commit('SAVE_CART')
+            
          }
 
    },

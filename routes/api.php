@@ -1,6 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Resources\MetaCollection;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -57,6 +58,14 @@ Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fu
 });
 
 Route::group( [ 'as' => 'frontend.' ],function () {
+
+    Route::GET('getHomeInfoArr', function(){
+        return new MetaCollection( App\Meta::where('type','adawnageArr')->get() );
+    } );
+    Route::GET('getHomeInfo', function(){
+        return App\Meta::where('type','adawnage')->get();
+    } );
+
     Route::GET('news', 'NewsController@index');
     Route::GET('homenews', 'NewsController@homeindex');
     Route::GET('news/{news}', 'NewsController@show');
@@ -66,15 +75,28 @@ Route::group( [ 'as' => 'frontend.' ],function () {
     Route::GET('product/{id}', 'ShopController@getProduct');
 
     Route::POST('order', 'OrdersController@store');
+    
+    Route::POST('product/{product}/rate', 'ReviewController@storeReview');
+    Route::GET('product/{product}/reviews', 'ReviewController@getReviews');
+
+    Route::GET('/metas/about-us', 'MetaController@getAbout');
+    Route::GET('/metas/accolades', 'MetaController@getAccolades');
+    Route::GET('/metas/discography', 'MetaController@getDiscography');
+
+    Route::POST('reachus', 'ReviewController@contactus');
+
 });
+
+
 Route::group( [ 'as' => 'metas.' ],function () {
     
 
-    Route::GET('members/getmembers', 'MetaController@getmembers');
+    Route::GET('metas/getmembers', 'MetaController@getMembers');
     Route::GET('members/updatemembers', 'MetaController@updateMembers');
     Route::GET('category/{name}', 'ShopController@getByCatName');
     Route::GET('product/{id}', 'ShopController@getProduct');
 
+    Route::POST('order', 'OrdersController@store');
     Route::POST('order', 'OrdersController@store');
 });
 

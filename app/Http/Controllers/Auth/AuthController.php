@@ -14,11 +14,18 @@ class AuthController extends Controller
 {
     public function signup(Request $request)
     {
+        $request->validate([
+            
+            'name'      => 'required',
+            'email'     => 'required|email|unique:users,email',
+            'password'  => 'required',
+        ]);
         $user = User::create([
-             'name'     => $request->name,
-             'email'    => $request->email,
-             'password' => $request->password,
-         ]);
+            'name'      => $request->name,
+            'email'     => $request->email,
+            'password'  => $request->password,
+            'oauth'     => FALSE,
+        ]);
 
         $token = auth()->login($user);
 
@@ -28,11 +35,15 @@ class AuthController extends Controller
     public function signin()
     {
         $oauth = User::where('email', request('email'))->first()->pluck('oauth')[0];
-        if( $oauth ){ return response()->json(['error' => 'Unauthorized'], 401); }
+        // return response()->json($oauth);
+        if( $oauth ){ return response()->json(['error' => 'Unauthorized Oauth'], 401); }
         
         $credentials = request(['email', 'password']);
-        if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        $token = auth()->attempt($credentials);
+        if ( !$token ) {
+            return response()->json([
+                'error' => 'Unauthorized, Wrong Credentials'.' : '.$credentials
+            ], 401);
         }
 
         return $this->respondWithToken($token);

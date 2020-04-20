@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="col-md-4 col-sm-6 col-12">
-                    <div @click="redirectPage('users')" class="card bg-dark text-white link-card">
+                    <div @click="redirectPage('article')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/article.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
                             <h3 class="card-title mb-3">Articles</h3>
@@ -38,11 +38,21 @@
 
             <div class="row">
                 <div class="col-md-4 col-sm-6 col-12">
-                    <div @click="redirectPage('users')" class="card bg-dark text-white link-card">
+                    <div @click="redirectPage('products')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/band.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
                             <h3 class="card-title mb-3">Members</h3>
                             <p class="card-text">Update your Band Members with their responsibilities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-12">
+                    <div @click="redirectPage('orders')" class="card bg-dark text-white link-card">
+                        <img src="/imgs/admin/orders.jpg" class="card-img" >
+                        <div class="card-img-overlay d-flex flex-column justify-content-end">
+                            <h3 class="card-title mb-3">Orders</h3>
+                            <p class="card-text">Check the already placed orders.</p>
                         </div>
                     </div>
                 </div>

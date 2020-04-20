@@ -1,4 +1,8 @@
 <?php
+
+use App\Mail\OrderPlaced;
+use App\Mail\ReceiveOrder;
+use App\Order;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -12,6 +16,13 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 // ,'middleware' => ['can:publish articles']
+
+
+Route::get('/email', function () {
+    return new ReceiveOrder(Order::find(3));
+});
+
+
 
 Route::namespace('Admin')->prefix('admin')->group(function () {
     // Controllers Within The "App\Http\Controllers\Admin" Namespace

@@ -8,7 +8,8 @@
 	}
 
 	.site-navbar-top {
-		font-size: $font-size-base - .2rem;
+		// font-size: $font-size-base - .2rem;
+		// font-size: 1em;
 	}
 }
 .site-navbar-top {
@@ -32,8 +33,8 @@
 		
 		.site-menu {
 			margin-bottom: 0;
-			text-transform: uppercase;
-			font-weight: 700;
+			// text-transform: uppercase;
+			font-weight: 600;
 			.active {
 				> a {
 					color: $white;
@@ -44,12 +45,13 @@
 				text-decoration: none!important;
 				font-size: 15px;
 				display: inline-block;
+				font-family: 'Comic Neue', cursive;
 			}
 			> li {
 				display: inline-block;
-				padding: 5px 5px;
+				padding: 4px 3px;
 				> a {
-					padding: 5px 10px;
+					padding: 3px 7px;
 					color: rgba($white, .6);
 					font-size: 15px;
 					text-decoration: none!important;

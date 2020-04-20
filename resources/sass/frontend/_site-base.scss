@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Sarala|Ubuntu&display=swap");
-
+@import url("https://fonts.googleapis.com/css?family=Comic+Neue&display=swap");
 html{
 	width:100%;
 	height:100%;
@@ -23,6 +23,10 @@ html{
 // 	radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
 // 	background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px;
 // 	background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
+
+strong{
+	font-weight: 500;
 }
 body {
 	width:100%;

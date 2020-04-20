@@ -29,10 +29,11 @@ $color-tertiary: #ff5733;
 		}
 	}
 	.sub-text {
-		font-size: $font-size-base + .1rem;	
+		font-size: $font-size-base + .8rem;	
 		text-transform: uppercase;
 		color: rgba($white, .7);
 		letter-spacing: .2em;
+		margin-bottom: 2em;
 	}
 	h1 {
 		font-weight: 900;

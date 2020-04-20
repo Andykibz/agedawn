@@ -6,10 +6,16 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="cartModalLabel">Cart</h5>
                 <button id="closeCartModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+                <div v-if="qErr" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    {{ qErr }}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
                 <div class="accordion" id="OrderDetails">
                     <div class="card mb-2">
                         <label class="mb-0 triggeraccordion" type="button" data-toggle="collapse" data-target="#cartContents" aria-expanded="true" aria-controls="cartContents">
@@ -54,7 +60,7 @@
                     <div class="card">
                         <label @click.prevent="getuserdetails" class="mb-0 triggeraccordion collapsed" type="button" data-toggle="collapse" data-target="#personalDetails" aria-expanded="false" aria-controls="PersonalDetails">
                             <div  class="border rounded p-2 mb-2" id="PersonalDetailsHeading">
-                                    Personal Details                                    
+                                Personal Details                                    
                             </div>
                         </label>
                         <div id="personalDetails" class="collapse" aria-labelledby="PersonalDetailsHeading" data-parent="#OrderDetails">
@@ -116,7 +122,8 @@ export default {
             fname       :   null,
             email       :   null,
             phone       :   null,
-            location       :   null,
+            location    :   null,
+            qErr        :   null,
             validMsgs :{
                 fname   :   null,
                 email   :   null,
@@ -150,30 +157,37 @@ export default {
             this.deleteitemAction(slug)
         },
         processOrder(){
+            let self = this
             this.makeOrderAction({
-                name        :   this.fname,
-                email       :   this.email,
-                location    :   this.location,
-                phone       :   this.phone,
+                name        :   self.fname,
+                email       :   self.email,
+                location    :   self.location,
+                phone       :   self.phone,
             }).then((response)=>{
+                // console.log(response.data);
+                
                 if( response.data == 1 ){
-                    this.checkout = false;
-                    this.countdownTime = 4;
-                    this.fname = null
-                    this.email = null
-                    this.phone = null
-                    this.location = null
+                    self.checkout = false;
+                    self.countdownTime = 4;
+                    self.fname = null
+                    self.email = null
+                    self.phone = null
+                    self.location = null
                     document.querySelector('#closeCartModal').click()
-                    this.clearCartAction()
+                    self.clearCartAction()
                 }
             }).catch((err)=>{
                 let errors = err.response.data.errors
+                // console.log(err.response.data);
+                self.qErr = `${err.response.data.error.item} deficits at ${err.response.data.error.deficit}. Reduce its quantity.`
+                console.log(self.qErr);
                 
+                               
+                ( errors['name'] != undefined ) ? self.validMsgs.fname = errors['name'][0] : '';
+                ( errors['email'] != undefined ) ? self.validMsgs.email = errors['email'][0] : '';
+                ( errors['phone'] != undefined ) ? self.validMsgs.phone = errors['phone'][0] : '';
+                ( errors['location'] != undefined ) ? self.validMsgs.location = errors['location'][0] : '';
                 
-                ( errors['name'] != undefined ) ? this.validMsgs.fname = errors['name'][0] : '';
-                ( errors['email'] != undefined ) ? this.validMsgs.email = errors['email'][0] : '';
-                ( errors['phone'] != undefined ) ? this.validMsgs.phone = errors['phone'][0] : '';
-                ( errors['location'] != undefined ) ? this.validMsgs.location = errors['location'][0] : '';
             })
         },
         validate(){
@@ -201,7 +215,7 @@ export default {
             let err = this.validate()
             if( err == false){
                 this.checkout = !this.checkout;
-                this.countdownTime = 1;
+                this.countdownTime = 2;
                 this.countdownTimeFunc();                
             }else{
                 document.querySelector('.collapse.show').classList.remove('show')
@@ -230,9 +244,7 @@ export default {
     label.triggeraccordion{
         cursor: pointer;
     }
-    img{
-        /* max-height: 56px; */
-    }
+    
     i:hover{
         cursor: pointer;
     }
@@ -243,6 +255,11 @@ export default {
         margin: 0;
         line-height: 0;
     }
+
+    .modal-content{
+        /* background-color: rgba(248, 247, 247, 0.596); */
+    }
+
     label{
         text-transform: uppercase;
         font-weight: 700;

@@ -28,10 +28,11 @@ export default{
    actions:{
       async signIn( {dispatch}, credentials ){
          let response =  await axios.post('/api/auth/signin', credentials)
-         return dispatch('attempt',response.data.access_token)
+         await dispatch('attempt',response.data.access_token)
+         return response
       },
       async googleSignIn( { dispatch }, profile ){
-         await axios.post('api/auth/google/authenticate',profile)
+         await axios.post('/api/auth/google/authenticate',profile)
             .then((response)=>{
                return dispatch('attempt',response.data.access_token)
             }).catch((err)=>{

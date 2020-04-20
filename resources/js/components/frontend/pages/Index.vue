@@ -1,13 +1,13 @@
 <template>
     <div>
-        <homehero></homehero> 
+        <homehero ></homehero> 
 
         <herocards></herocards>
 
         <div class="site-block-3 py-5">
                 <div class="container">
                     <div class="row">
-                        <div class="mx-auto">
+                        <div class="mx-auto px-2">
                             <div class="quote text-center">
                                 <font-awesome-icon icon="quote-right" size="2x"/>
                             </div>
@@ -18,20 +18,14 @@
                         </div>
                     </div>
                 </div>
-            <!-- <div class="container">
-                <div class="intro-text-wrapper py-3">
-                    <blockquote class="blockquote"><p>Behold, I am doing a new thing; now it springs forth, do you not perceive it?</p></blockquote>
-                </div>
-                <div class="line"></div>
-            </div> -->
         </div>
         <hr class="m-0 p-0 bg-secondary">
-        <!-- <Music></Music> -->
-        <parallax text="New Beginnings" image="guitar.jpg"/>
-        <NewsEvents/>
+        <!-- <Music /> -->
+        <parallax text="New Beginnings" image="performance.jpg"/>
+        <NewsEvents />
         <hr class="m-0 p-0 bg-secondary">
         <parallax text="Check out our Merch" image="shop.jpg"/>
-        <Store :items="hoodies"/>
+        <Store/>
         <!-- <hr class="m-0 p-0 bg-secondary"> -->
 
 
@@ -53,19 +47,17 @@
         components:{
             herocards,Music,homehero,parallax,NewsEvents,Store
         },
-        props:[],
         data(){
             return{
-                hoodies :   []
+            
             }
         },
         methods: {
 
         },        
-        mounted() {
-            // setBackgroundImage()
-            
-        },
+        beforeMount(){
+            this.$store.dispatch('getAdawnageAction')
+        }
         
     }
 </script>

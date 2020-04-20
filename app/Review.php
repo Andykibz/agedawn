@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
+    protected $fillable = [ 'review','rating' ];
     /**
      * Get the product that the review belongs to.
      */

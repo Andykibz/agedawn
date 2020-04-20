@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderPlaced;
+use App\Mail\ReceiveOrder;
 use App\Order;
+use App\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+
 
 class OrdersController extends Controller
 {
@@ -62,6 +67,8 @@ class OrdersController extends Controller
             'products'      =>  'required|array'
         ]);
         
+        
+            // return response()->json($request->products);
         $order = new Order();
         $order->name         = $request->name;
         $order->phone        = $request->phone;
@@ -69,10 +76,28 @@ class OrdersController extends Controller
         $order->location     = $request->location;
         $order->invoice      = $request->invoice;
         $order->user_id      = auth()->user() ?  auth()->user()->id : NULL ;
+        foreach ($request->products as $product) {
+            $p = Product::find($product['id']);
+            $p->quantity = (int)$p->quantity - (int)$product['quantity'];
+            if( $p->quantity < 0 ){ 
+                return response()->json([
+                    'error' => [
+                        'item'  => $p->name,
+                        'deficit'   => $p->quantity
+                    ]
+                ], 409);
+            }
+            $p->save();
+        }
         $order->save();
         foreach ($request->products as $product) {
             $order->products()->attach($product['id'],['product_count'=>$product['quantity']]);
+
         }
+
+        Mail::to('andykibz@gmail.com')->send(new ReceiveOrder($order) );
+        Mail::to($order->email)->send( new OrderPlaced($order) );
+
         return response()->json(TRUE);
     }
 

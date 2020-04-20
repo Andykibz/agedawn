@@ -1,4 +1,6 @@
 require('./bootstrap');
+
+require('./main.js');
 window.Vue = require('vue');
 
 import VueRouter from 'vue-router';
@@ -11,31 +13,33 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import CKEditor from '@ckeditor/ckeditor5-vue';
 import GAuth from 'vue-google-oauth2'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-// import ZoomOnHover from "vue-zoom-on-hover";
-// Vue.use(ZoomOnHover);
+import ProductZoomer from 'vue-product-zoomer'
+import VModal from 'vue-js-modal'
+import AOS from 'aos';
+import 'aos/dist/aos.css'
+import VTooltip from 'v-tooltip'
 
 import 'swiper/css/swiper.css'
 
 const gauthOption = {
-  clientId: '948718702232-mr3fnqa6i2gndknegb82mgsreesv2onq.apps.googleusercontent.com',
-  scope: 'profile email',
-  prompt: 'select_account'
+    clientId: '948718702232-mr3fnqa6i2gndknegb82mgsreesv2onq.apps.googleusercontent.com',
+    scope: 'profile email',
+    prompt: 'select_account'
 }
 require('./components/frontend/store/sub')
 
 
-
+Vue.use(VueRouter)
 Vue.use(GAuth, gauthOption)
-Vue.use(CKEditor)
 Vue.use(VueAwesomeSwiper)
+Vue.use(ProductZoomer)
+Vue.use(VModal, { dialog:true, dynamic: true, injectModalsContainer: true })
+Vue.use(VTooltip)
 
 library.add(fas,fab)
-import 'aos/dist/aos.css'
 
-import AOS from 'aos';
 AOS.init({
     duration: 800,
     easing: 'slide',
@@ -57,7 +61,6 @@ const router = new VueRouter({
     routes
 })
 
-Vue.use(VueRouter)
 
 store.dispatch('auth/attempt',localStorage.getItem('token'))
 .then(()=>{
@@ -68,5 +71,3 @@ store.dispatch('auth/attempt',localStorage.getItem('token'))
     }).$mount('#adawnage')
 })
 
-
-require('./main.js');

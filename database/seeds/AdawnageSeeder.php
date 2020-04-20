@@ -1,0 +1,142 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Meta;
+
+class AdawnageSeeder extends Seeder
+{
+    
+    /**
+     * @var string
+     */
+    protected $heroImage = "cover.png";
+
+    /**
+     * @var string
+     */
+    protected $heroText = "Behold ... Isaiah 43:19";
+
+    /**
+     * @var array
+     */
+    protected $heroCards = [
+        'about'     =>  "Bio, members & officials, Discogaphy and Accolades",
+        'shop'      =>  "Checkout our Music and Merch up for sale",
+        'news'      =>  "Have a look at what's new with the Adawnage Band"
+    ];
+
+    /**
+     * List of videos to show on the home page
+     * @var array 
+     */
+    protected $videos = array(
+        array(
+            "title"         =>   "Naomba",
+            "url"           =>   "w0tC60eRFhg",
+            "description"   =>   "NAOMBA is a prayer asking The Potter to make us and mould us so that we may become more like Him; to hide us in His arms and make us His worthy vessels."
+        ),
+        array(
+            "title"         =>   "I Live For You",
+            "url"           =>   "RKGo_xNMpwM",
+            "description"   =>   "I Live For You is a track off Adawnage Band's MAISHA video which was released in 2016. The track is a declaration to live for God no matter the challenges we face in life."
+        ),
+        array(
+            "title"         =>  "Tulizo",
+            "url"           =>  "m09DhQmc63Y",
+            "description"   =>  "Tulizo is a track off Adawnage Band's MAISHA video which was released in 2016. The track emphasizes how in this life nothing and no one can and will satisfy like Jesus can."
+        ),
+        array(
+            "title"         =>   "Uwezo",
+            "url"           =>   "fv75qkXRGBE",
+            "description"   =>   "UWEZO is a prayer asking God to give us strength to stand on His word amidst all the betrayal and pain that we face. Speak these words into your life that God may give you the strength and determination to walk this Christian journey."
+        ),
+        
+    );
+
+    /**
+     * @var string
+     */
+    protected $souncloud = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/users/18630862&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true";
+
+    /**
+     * @var string
+     */
+    protected $musictext = "<p>A peek at our content on <a target='+_blank' href='https://soundcloud.com/adawnage'>Soundcloud</a> and <a target='+_blank' href='https://www.youtube.com/channel/UC8w14pp6McD-PcRagO_1r7A'>Youtube</a></p>";
+
+    /**
+     * @var string
+     */
+    protected $newstext = "<p> Latest news, stories, events etc from Adawnage </p>";
+
+    /**
+     * @var string
+     */
+    protected $storetext = "<p> Checkout our Music and Merch up for sale in our Store </p>";
+
+    /**
+     * @var array
+     */
+    protected $social = [
+        'facebook'        =>   "https://web.facebook.com/pg/adawnage/",
+        'messenger'       =>   "https://m.me/adawnage?fbclid=IwAR3DwLdfP8tGkuqWhv4dhnmeF4-XLxEZKz0ewRHb3nR2Qr0hgLHT2BGOowY",
+        'twitter'         =>   "https://twitter.com/adawnage?lang=en  ",
+        'email'           =>   "info@adawnage.com",
+        'youtube'         =>   "https://www.youtube.com/channel/UC8w14pp6McD-PcRagO_1r7A",
+        'soundcloud'      =>   "https://soundcloud.com/adawnage",
+        'instagram'       =>   "https://www.instagram.com/adawnage/?hl=en"
+    ];
+    
+
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        Meta::create([
+            'type'      =>  'adawnage',     'name'      =>  'heroImage',
+            'slug'      =>  'heroimage',    'value'     =>  $this->heroImage
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnage',     'name'      =>  'heroText',
+            'slug'      =>  'herotext',     'value'     =>  $this->heroText
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnageArr',  'name'      =>  'heroCards',
+            'slug'      =>  'herocards',    'value'     =>  json_encode($this->heroCards)
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnageArr',  'name'      =>  'videos',
+            'slug'      =>  'videos',       'value'     =>  json_encode($this->videos)
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnage',     'name'      =>  'souncloud',
+            'slug'      =>  'souncloud',    'value'     =>  $this->souncloud,
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnage',     'name'      =>  'musictext',
+            'slug'      =>  'musictext',    'value'     =>  $this->musictext,
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnage',     'name'      =>  'newstext',
+            'slug'      =>  'newstext',     'value'     =>  $this->newstext,
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnage',     'name'      =>  'storetext',
+            'slug'      =>  'storetext',    'value'     =>  $this->storetext,
+        ]);
+
+        Meta::create([
+            'type'      =>  'adawnageArr',  'name'      =>  'social',
+            'slug'      =>  'social',       'value'     =>  json_encode($this->social),
+        ]);
+    }
+}

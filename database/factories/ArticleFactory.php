@@ -15,6 +15,6 @@ $factory->define(Article::class, function (Faker $faker) {
             'slug'      => str_slug($title),
             'image'     => $imgArr[ $faker->randomDigit()%3 ],
             'headline'  => $faker->sentence(15),
-            'body'      => "<p>"+$faker->paragraphs(5,true)+"</p>",
+            'body'      => $faker->paragraphs(5,true),
         ];
 });

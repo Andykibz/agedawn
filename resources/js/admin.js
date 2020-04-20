@@ -1,9 +1,9 @@
 require('./bootstrap');
 import VueRouter from 'vue-router'
 
-import Admin from './components/Admin/Admin.vue'
-import routes from './components/Admin/router.js'
-import store from './components/Admin/store';
+import Admin from './components/admin/Admin.vue'
+import routes from './components/admin/router.js'
+import store from './components/admin/store';
 
 
 import VueTimeago from 'vue-timeago'
@@ -18,7 +18,7 @@ export const eventBus = new Vue();
 
 
 Vue.use( CKEditor );
-require('./components/Admin/store/sub')
+require('./components/admin/store/sub')
 
 Vue.use(VueTimeago, {
     name: 'Timeago', // Component name, `Timeago` by default

@@ -14,11 +14,11 @@ class CreateMetasTable extends Migration
     public function up()
     {
         Schema::create('metas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('type');
             $table->string('name');
             $table->string('slug');
-            $table->string('value');
+            $table->text('value');
         });
     }
 

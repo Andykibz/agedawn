@@ -128,8 +128,8 @@ class ArticleController extends Controller
             $filename = $name.'_'.time().'.'.$ext;
             $img->storeAs('public/Articles',$filename);
             $path = storage_path("app/public/Articles/{$filename}");
-            Image::make($path)->resize(800, 500, function($constraint) { $constraint->aspectRatio(); })->save($path,80);
-            Image::make($path)->resize(400, 300, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Articles/thumbs/{$filename}"),80);
+            Image::make($path)->resize(960, 540, function($constraint) { $constraint->aspectRatio(); })->save($path,90);
+            Image::make($path)->resize(480, 360, function($constraint) { $constraint->aspectRatio(); })->save(storage_path("app/public/Articles/thumbs/{$filename}"),80);
             $article->image = (!empty($filename)) ? $filename : null ;
         endif;
 

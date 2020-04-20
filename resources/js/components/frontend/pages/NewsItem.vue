@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(/imgs/guitar.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">            <div class="container">
+        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(/imgs/cover.png)'}" data-aos="fade" data-stellar-background-ratio="0.5">            <div class="container">
                 
                 <div class="align-items-end row text-center justify-content-center">
                 <div class="col-md-8 mb-3">
@@ -13,11 +13,17 @@
         <div class="container mt-5">
             <div class="row mb-5">        
                 <main class="col-8 mx-auto" >
-                    <div v-if="article.image" class="imgwrapper">
+                    <div v-if="article.image" class="imgwrapper mx-auto" data-aos="slide-up">
                         <img class="img-fluid" :src="'/storage/Articles/'+article.image" alt="">                      
                     </div>
                     <hr>
-                    <article data-aos="fade-in" v-html="article.body"></article>
+                    <article data-aos="slide-up" v-html="article.body"></article>
+                    <hr class="bg-secondary">
+                    <section id="comments">
+                        
+                        <Comments :news="article"/>
+
+                    </section>
                 </main>
             </div>            
         </div>
@@ -25,11 +31,13 @@
 </template>
 
 <script>
+import Comments from '../components/comments'
 export default {
     name    : "NewsItem",
     props   : {
 
     },
+    components  :{ Comments },
     data(){
         return{
             article     : { }
@@ -69,5 +77,10 @@ export default {
     .site-blocks-cover{
         /* background-image: url('../imgs/guitar.jpg'); */
         background-image: url('/imgs/guitar.jpg')
+    }
+    h1{
+        font-size: 36px;
+        font-weight: 100;
+        text-shadow: 1px 1px 2px #333;
     }
 </style>

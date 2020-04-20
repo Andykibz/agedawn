@@ -3,8 +3,9 @@
         <div class="container">
             <div class="section_title text-center col-12 mb-3">
                 <h2>Check out our Store</h2>
-                <p>Esteem spirit temper too say adieus who direct esteem. <br>
-                    It esteems luckily or picture placing drawing. </p>
+                <span>
+                    <p> Checkout our Music and Merch up for sale in our <a href="/store">Store</a> </p>
+                </span>
             </div>
             <div class="row">
                 <div class="col-sm-3 col-12 albums">
@@ -23,7 +24,7 @@
                                         <router-link :to="'/product/'+product.id" role="button" class="btn btn-sm btn-outline-info">
                                             View
                                         </router-link>
-                                        <router-link @click.native.prevent="addToCart({
+                                        <router-link @click.native.prevent="promptCart({
                                             id          : product.id, 
                                             name        : product.name,
                                             slug        : product.slug,
@@ -44,17 +45,17 @@
                 </div>
             </div>
         </div>
+        <v-dialog/>
     </section>
 </template>
 <script>
-import albumcard from './sub/albumcards'
+import albumcard from './home/albumcards'
 import LightBoxModal from './home/lightboxModal'
 import carousel from 'vue-owl-carousel'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name        :   "StoreFeature",
-    props       :   [ ],
     components  :   { albumcard,LightBoxModal,carousel },
     computed    :{
         ...mapGetters({
@@ -92,8 +93,18 @@ export default {
         ...mapActions({
             getProductsAction    :   'shop/getByCategories',
             addToCartAction : 'cart/addToCart'
-        })
-        ,
+        }),
+
+        promptCart(item){
+            this.$modal.show('dialog', {
+                title: 'Add to Cart!', text: `Add <em><strong>${item.name}</strong></em> to cart? <i class="icon-shopping_cart"></i>`,
+                buttons: [
+                    {   title: 'Yes', handler: () => {this.addToCart(item); this.$modal.hide('dialog');
+                     } },
+                    {   title: 'Cancel' }
+                ]
+            })
+        },
 
         addToCart(item){
             this.addToCartAction({

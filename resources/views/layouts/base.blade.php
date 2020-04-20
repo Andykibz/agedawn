@@ -14,6 +14,7 @@
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/slick.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/buttons.css') }}" rel="stylesheet">
     
     
 
@@ -50,7 +51,7 @@
        
    });
    
+   
 </script>
-    
 </body>
 </html>

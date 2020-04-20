@@ -2,13 +2,10 @@
     <div>
         <Hero :heading="`What's up, you ask ?`" />
         <div class="container mt-5">
-            <div class="section_title text-center col-12 mb-5"  data-aos="fade-in">
-                <h2>News</h2>
-                <p>What's going On</p>
-            </div>
+            <SubHero :heading="'News'"/>
             <div class="row mb-5">
         
-                <main class="col-8 mx-auto" >
+                <main class="col-md-8 col-12 mx-auto" >
                     <Paginate :current="current_page" :last="last_page" :getPage="getArticles"/>
                     <!-- <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative"> -->
                     <div v-for="article in articles" :key="article.id" class="my-2" data-aos="slide-up">
@@ -37,10 +34,11 @@
 <script>
 import Paginate from '../components/sub/paginate'
 import Hero from '../components/hero'
+import SubHero from '../components/subhero'
 export default {
     name : "News",
     props : [''],
-    components : { Paginate,Hero },
+    components : { Paginate, Hero, SubHero },
     data(){
         return{
             articles : [],

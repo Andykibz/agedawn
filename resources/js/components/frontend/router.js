@@ -5,6 +5,7 @@ import About from './pages/About'
 import News from './pages/News'
 import Product from './pages/ProductItem.vue'
 import NewsItem from './pages/NewsItem.vue'
+import ReachUs from './pages/ReachUs.vue'
 export default [
     {
         path        :   '/',
@@ -40,6 +41,11 @@ export default [
         path        :   '/product/:id',
         component   :   Product,
         name        :   'product'
+    },
+    {
+        path        :   '/contact-us',
+        component   :   ReachUs,
+        name        :   'reachus'
     },
 
 ]

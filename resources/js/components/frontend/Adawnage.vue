@@ -3,6 +3,7 @@
         <navigation></navigation>
         <SignIn/>
         <SignUp/>
+        <SignOut/>
         <Cart/>
         <main style="flex: 1 0 auto;" class="mb-5">
             <router-view></router-view>
@@ -20,21 +21,26 @@
     import SignIn from './components/signin'
     import SignUp from './components/signup'
     import Cart from './components/cart'
-    
+    import SignOut from './components/sub/signout'
     
 
     export default {
 
         components: {
-            Navigation,Footing,SignIn,SignUp,Cart
+            Navigation,Footing,SignIn,SignUp,Cart,SignOut
         },
-
+        data(){
+            return {
+    
+            }
+        },
         methods:{
 
         },
         mounted(){
             this.$store.dispatch('cart/retrieveCartItems')
             this.$store.dispatch('auth/initUser')
+            
 
             // this.$gAuth.getAuthCode()
             //     .then(authCode => {
