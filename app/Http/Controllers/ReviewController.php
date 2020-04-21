@@ -28,8 +28,9 @@ class ReviewController extends Controller
 
         $reviews = new ReviewsCollection( Product::find( $p_id )->reviews()->get() );
         $ratings =  Product::find( $p_id )->reviews()->pluck('rating')->toArray() ;
+        $arr = array_filter($ratings, function($x) { return !empty($x); });
         return response()->json([
-            'ratings'   => array_sum($ratings)/count(array_filter($ratings, function($x) { return !empty($x); })),
+            'ratings'   => ( $arr ) ? array_sum($ratings)/count( $arr ) : null ,
             'reviews'   => $reviews
         ]);
     }
@@ -67,9 +68,31 @@ class ReviewController extends Controller
         $review =  new Review();
         $review->user_id = auth()->user()->id;
         $review->product_id = $prod_id;
-        $review->rating = ($request->rating) ? $request->rating : NULL ;
+        $review->rating = ($request->rating!="null") ? $request->rating : NULL ;
         $review->review = $request->review;
         $review->save();
+
+        return response()->json(TRUE);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteReview( Request $request, $review_id)
+    {
+        if ( !$user =  auth()->user() ){
+            return response()->json(['error' => 'You have to be authenticated first'], 401);
+        }else{
+            
+            if ($user->id ==  $request->user){
+                Review::destroy($review_id);
+            }else{
+                return response()->json(['error' => 'Unauthorized'], 401);
+            }
+        }
 
         return response()->json(TRUE);
     }

@@ -100,8 +100,7 @@ export default {
                 .then((response)=>{
                     self.product = response.data.data
                 }).catch((err)=>{
-                    console.log(err.response.data.message);
-                    
+                    console.log(err.response.data.message);                    
             })
         },
 

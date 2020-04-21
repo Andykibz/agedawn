@@ -6,7 +6,7 @@ export default{
       hoodies   :   {},
       music     :   {},
       cart      :   {},
-      reviews   :   {},
+      reviews   :   null,
       rating    :   null,
    },
 
@@ -56,7 +56,7 @@ export default{
         queryReviews( { commit }, id){
             axios.get(`/api/product/${id}/reviews`)
                 .then((response)=>{
-                    console.log(response.data);
+                    // console.log(response.data);
                     
                     commit('SET_REVIEWS',response.data)
                 }).catch((err)=>{

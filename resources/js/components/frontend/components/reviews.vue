@@ -44,31 +44,29 @@
   <div class="col-md-8 col-12">
     <div class="row">
 
-            <div class="commentsWrapper mb-5">
+            <div style="width:100%" class="commentsWrapper mb-5">
               <h4 class="text-light mb-3">Review(s) on {{ product.name }}</h4>
-                <div class="timeline-item" date-is='20-07-1990'>
+              <template v-if="reviews">
+                <div v-for="review in reviews" :key="review.id" class="timeline-item position-relative" :date-is="created_date( review.created)" >
+                    
+                    <template v-if="user">
+                        <i v-if="user.id == review.user[0].id " @click="delReview( review.id )" style="right:5px;cursor:pointer" class="btn-sm btn-outline-warning position-absolute left icon-trash"> </i>
+                    </template>
+                    <!-- {{ review }} -->
                     <h5 class="d-flex">
-                        Andrew Kibor
-                        <star-rating class="ml-3" :rating="4" :star-size="10" :show-rating="false" border-color="transparent" active-color="#f6993f"></star-rating>
+                        {{ review.user[0].name }}
+                        <star-rating class="ml-3" :read-only="true" :rating="review.rating" :star-size="10" :show-rating="false" border-color="transparent" active-color="#f6993f"></star-rating>
                     </h5>
-                    <div class="py-2 px-3 review-content">
-                        <p>
-                            I'm speaking with myself, number one, because I have a very good brain and I've said a lot of things. I write the best placeholder text, and I'm the biggest developer on the web by far... 
-                        </p>
+                    <div class="py-2 px-3 review-content" v-html="review.reviews">
+                        
                     </div>
-                </div>  
-                <div class="timeline-item" date-is='20-07-1990'>
-                    <h5 class="d-flex">
-                        Locust Covid
-                        <star-rating class="ml-3" :rating="5" :star-size="10" :show-rating="false" border-color="transparent" active-color="#f6993f"></star-rating>
-                    </h5>
-                    <div class="py-2 px-3 review-content">
-                        <p>
-                            I'm speaking with myself, number one, because I have a very good brain and I've said a lot of things. I write the best placeholder text, and I'm the biggest developer on the web by far... 
-                        </p>
-                    </div>
-                </div>       
-        
+                </div>
+              </template>
+              <template v-if="!reviews">
+                  <div  class="py-4 d-flex flex-row justify-content-center">
+                      <h5 class="text-secondary"> <em> No reviews have been published yet </em> </h5>
+                  </div>
+              </template>      
             </div>
         </div>  
   </div>
@@ -76,16 +74,18 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { Editor, EditorContent,EditorMenuBar } from 'tiptap'
 import { HardBreak, HorizontalRule, OrderedList, BulletList, ListItem, Bold, Italic, Link, Strike, Underline, Placeholder } from 'tiptap-extensions'
 import StarRating from 'vue-star-rating'
 import { mapGetters } from 'vuex'
 export default {
     name    :    "Reviews",
-    props   :   ['product'],
+    props   :   { product : Object },
     computed:   {
         ...mapGetters({
-            reviews: 'shop/getReviews'
+            reviews :   'shop/getReviews',
+            user    :   'auth/user'
         })
     },
     components:{ EditorContent,EditorMenuBar, StarRating },
@@ -116,11 +116,22 @@ export default {
                     }),
                 ]
             }),
+            // reviews : [],
 
         }
     },
     methods:{
-        
+
+        ...mapActions({
+            getReviewsAction    :   'shop/queryReviews',
+        }),
+
+        created_date( date ){
+            let months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov','Dec' ]
+            let month   = months[new Date(date).getUTCMonth()]
+            let year    = String( new Date(date).getUTCFullYear() ).replace('20',"'")
+            return `${month} ${new Date(date).getUTCDate()} ${year}`
+        },
         submitReview(){
             let reviewForm = new FormData();
             reviewForm.set('rating',this.rating)
@@ -130,14 +141,38 @@ export default {
                 .then((response)=>{
                     self.editor.clearContent();
                     self.rating=null;
+                    // console.log(response.data);
+                    this.getReviewsAction(this.$route.params.id)
                 })  
+                
                 .catch((err)=>{
                     console.log(err.response.data);                    
                 })
+        },
+
+        getReviews(){
+            self =  this
+            axios.get(`/api/product/${this.product.name}/reviews`).then((response)=>{
+                self.reviews = response.data.reviews
+            });
+        },
+        delReview( review ){
+            let delRev = new FormData()
+            console.log(this.user.id);
+            
+            delRev.set('user',this.user.id)
+            axios.delete(`/api/product/${review}/review/`, {data : { user: this.user.id }})
+            .then((response)=>{
+                // console.log(response.data);
+                this.getReviewsAction(this.$route.params.id)
+                
+            }).catch((err)=>{
+                console.log(err.response.data);
+            });
         }
     },
     mounted(){
-    
+        // this.getReviews()
     },
     beforeDestroy() {
         this.editor.destroy()

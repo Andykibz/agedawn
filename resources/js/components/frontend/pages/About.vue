@@ -52,7 +52,7 @@
             </div>
             <div class="row">
               <div v-for="(discography,index) in discographies" :key="index" class="col-md-4 col-12 mb-3" data-aos="slide-up">
-                    <div class="card bg-dark text-white discog">
+                    <div class="card bg-dark text-white discog" @click="showDiscog( discography.data )">
                         <div class="disco-cover" :style="{'background-image':'url(./storage/About/discography/'+discography.data.image+')'}" data-aos="fade" data-stellar-background-ratio="0.5">
                             
                         </div>
@@ -122,9 +122,10 @@
 import Social from "../components/sub/social";
 import Hero from "../components/hero";
 import SubHero from "../components/subhero";
+import Discog from '../components/sub/discog'
 export default {
   name: "AboutPage",
-  components: { Social, Hero, SubHero },
+  components: { Social, Hero, SubHero, Discog },
   data() {
     return {
       accolades: [],
@@ -146,6 +147,20 @@ export default {
     };
   },
   methods: {
+
+    showDiscog( discography ){
+
+          this.$modal.show(
+            Discog, 
+            {
+                discog  : discography
+          }, {
+            width   :  "480px",
+            height  :   'auto',
+            delay   :   300,
+
+          })
+    },
     getBand() {
       axios.get("/api/metas/getmembers").then(response => {
         this.members = response.data.data;
@@ -224,7 +239,10 @@ export default {
 $primaryCol : #00c4f3;
 $primaryCol : #f6993f;
 
-
+.discog-description{
+        p{ color: #333 !important; }
+        
+    }
 .about-info p {
   font-size: medium;
   font-family: "Sarala", sans-serif;

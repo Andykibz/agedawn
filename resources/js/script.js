@@ -20,6 +20,8 @@ import VModal from 'vue-js-modal'
 import AOS from 'aos';
 import 'aos/dist/aos.css'
 import VTooltip from 'v-tooltip'
+import VueTimeago from 'vue-timeago'
+
 
 import 'swiper/css/swiper.css'
 
@@ -37,6 +39,12 @@ Vue.use(VueAwesomeSwiper)
 Vue.use(ProductZoomer)
 Vue.use(VModal, { dialog:true, dynamic: true, injectModalsContainer: true })
 Vue.use(VTooltip)
+Vue.use(VueTimeago, {
+    locale: 'en',
+    locales: {
+      'zh-CN': require('date-fns/locale/zh_cn')
+    }
+  })
 
 library.add(fas,fab)
 

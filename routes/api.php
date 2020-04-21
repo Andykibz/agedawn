@@ -78,12 +78,12 @@ Route::group( [ 'as' => 'frontend.' ],function () {
     
     Route::POST('product/{product}/rate', 'ReviewController@storeReview');
     Route::GET('product/{product}/reviews', 'ReviewController@getReviews');
+    Route::DELETE('product/{product}/review', 'ReviewController@deleteReview');
 
     Route::GET('/metas/about-us', 'MetaController@getAbout');
     Route::GET('/metas/accolades', 'MetaController@getAccolades');
     Route::GET('/metas/discography', 'MetaController@getDiscography');
 
-    Route::POST('reachus', 'ReviewController@contactus');
 
 });
 
