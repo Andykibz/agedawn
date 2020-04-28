@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Sarala|Ubuntu&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Comic+Neue&display=swap");
@@ -52,6 +52,8 @@ h1,h2,h3,h4{
 p{
 	color: $textcol;
 	font-family: $formal;
+	// font-family: 'Sarala', serif;
+	font-weight: 200;
 	line-height: 1.75;
 	font-size: medium;
 
@@ -72,6 +74,12 @@ a {
 }
 h1, h2, h3, h4, h5, h6 {
 	color: $black;
+}
+.readmore{
+	color: rgba(246, 153, 63, 0.8);
+	&:hover{
+		color: rgba(246, 153, 63, 1);
+	}
 }
 
 .text-black {

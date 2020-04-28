@@ -19,7 +19,8 @@ export default {
     name: "NewsCard",
     data(){
         return{
-            articles: []   
+            articles    : [],
+            weeklies    : [],  
         }
     },
     methods:{
@@ -33,7 +34,8 @@ export default {
             self = this
             axios.get(`/api/homenews`)
             .then((response)=>{
-                self.articles = response.data                
+                self.articles = response.data.articles,
+                self.weeklies = response.data.weeklies
             }).catch((err)=>{
                 console.log( err.response.data.errors );
             })

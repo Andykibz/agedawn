@@ -1,7 +1,12 @@
 require('./bootstrap');
 
 require('./main.js');
-window.Vue = require('vue');
+
+
+
+// window.Vue = require('vue');
+import Vue from 'vue'
+
 
 import VueRouter from 'vue-router';
 import Adawnage from './components/frontend/Adawnage.vue';
@@ -79,3 +84,14 @@ store.dispatch('auth/attempt',localStorage.getItem('token'))
     }).$mount('#adawnage')
 })
 
+// var siteStellar = function() {
+//     $(window).stellar({
+//     responsive: false,
+//     parallaxBackgrounds: true,
+//     parallaxElements: true,
+//     horizontalScrolling: false,
+//     hideDistantElements: false,
+//     scrollProperty: 'scroll'
+//   });
+// };
+// siteStellar();

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(/imgs/cover.png)'}" data-aos="fade" data-stellar-background-ratio="0.5">
+        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(/imgs/cover_final.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">
             <div class="container">
                 <div class="row align-items-end text-center justify-content-center">
                 <div class="col-md-8 mb-4">

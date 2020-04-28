@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap);@import url(https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap);@import url(https://fonts.googleapis.com/css?family=Sarala|Ubuntu&display=swap);@import url(https://fonts.googleapis.com/css?family=Comic+Neue&display=swap);/* Float Shadow */
+@import url(https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap);@import url(https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap);@import url(https://fonts.googleapis.com/css?family=Sarala|Ubuntu&display=swap);@import url(https://fonts.googleapis.com/css?family=Comic+Neue&display=swap);/* Float Shadow */
 
 .hvr-float-shadow {
   display: inline-block;
@@ -10054,6 +10054,7 @@ h4 {
 p {
   color: #f2f1f2;
   font-family: "Times New Roman", Times, serif;
+  font-weight: 200;
   line-height: 1.75;
   font-size: medium;
 }
@@ -10084,6 +10085,14 @@ h4,
 h5,
 h6 {
   color: #000;
+}
+
+.readmore {
+  color: rgba(246, 153, 63, 0.8);
+}
+
+.readmore:hover {
+  color: #f6993f;
 }
 
 .text-black {
@@ -10703,6 +10712,18 @@ h6 {
 }
 
 /* Blocks */
+
+@media only screen and (max-width: 900px) {
+  .site-blocks-cover {
+    height: 50vh !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .site-blocks-cover {
+    height: 30vh !important;
+  }
+}
 
 .site-blocks-cover {
   background-size: cover;

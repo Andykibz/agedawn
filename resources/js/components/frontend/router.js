@@ -6,6 +6,8 @@ import News from './pages/News'
 import Product from './pages/ProductItem.vue'
 import NewsItem from './pages/NewsItem.vue'
 import ReachUs from './pages/ReachUs.vue'
+import notFound from './pages/notFound.vue'
+
 export default [
     {
         path        :   '/',
@@ -33,11 +35,6 @@ export default [
         name        :   'store'
     },
     {
-        path        :   '/media',
-        component   :   Media,
-        name        :   'media'
-    },
-    {
         path        :   '/product/:id',
         component   :   Product,
         name        :   'product'
@@ -47,5 +44,10 @@ export default [
         component   :   ReachUs,
         name        :   'reachus'
     },
+    {
+        path        :   "*",
+        component   :   notFound,
+        name        :   404
+    }
 
 ]

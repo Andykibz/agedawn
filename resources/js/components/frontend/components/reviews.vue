@@ -68,6 +68,7 @@
                   </div>
               </template>      
             </div>
+            
         </div>  
   </div>
 </div>
@@ -157,10 +158,6 @@ export default {
             });
         },
         delReview( review ){
-            let delRev = new FormData()
-            console.log(this.user.id);
-            
-            delRev.set('user',this.user.id)
             axios.delete(`/api/product/${review}/review/`, {data : { user: this.user.id }})
             .then((response)=>{
                 // console.log(response.data);

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="homeWrapper">
         <homehero ></homehero> 
 
         <herocards></herocards>
@@ -22,7 +22,7 @@
         <hr class="m-0 p-0 bg-secondary">
         <!-- <Music /> -->
         <parallax text="New Beginnings" image="performance.jpg"/>
-        <NewsEvents />
+        <Posts />
         <hr class="m-0 p-0 bg-secondary">
         <parallax text="Check out our Merch" image="shop.jpg"/>
         <Store/>
@@ -37,7 +37,7 @@
     import homehero from '../components/homehero'
     import parallax from '../components/parallaxbg'
     import Music from '../components/music'
-    import NewsEvents from '../components/news_events'
+    import Posts from '../components/posts'
     import Store from '../components/store'
     
 
@@ -45,7 +45,7 @@
     export default {
         name: "Home",
         components:{
-            herocards,Music,homehero,parallax,NewsEvents,Store
+            herocards, Music, homehero, parallax, Posts, Store
         },
         data(){
             return{
@@ -54,9 +54,14 @@
         },
         methods: {
 
-        },        
+        },
+        mounted(){
+            // window.siteStellar()
+        },
         beforeMount(){
             this.$store.dispatch('getAdawnageAction')
+            
+            // window.alert(23)
         }
         
     }

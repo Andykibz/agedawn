@@ -12,10 +12,13 @@ class Tag extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'name'
     ];
 
     protected $guarded = [];
+
+    public $timestamps = false;
+
 
 
     /**
@@ -24,14 +27,6 @@ class Tag extends Model
     public function articles()
     {
         return $this->morphedByMany('App\Article', 'taggable');
-    }
-
-    /**
-     * Get all of the events that are assigned this tag.
-     */
-    public function events()
-    {
-        return $this->morphedByMany('App\Event', 'taggable');
     }
     
 }

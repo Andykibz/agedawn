@@ -5,6 +5,7 @@ import Orders from './pages/Orders.vue'
 import Info from './pages/Info.vue'
 import Band from './pages/Band.vue'
 import Users from './pages/Users.vue'
+import Metas from './pages/Metas.vue'
 
 export default [
     {
@@ -41,5 +42,10 @@ export default [
         path        :   '/users',
         component   :   Users,
         name        :   'users'
+    },
+    {
+        path        :   '/metas',
+        component   :   Metas,
+        name        :   'metas'
     },
 ]

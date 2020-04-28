@@ -29,6 +29,9 @@ Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fu
     Route::GET('article/{article}/edit', 'ArticleController@edit')->name('article.edit');
     Route::POST('article/{article}', 'ArticleController@update')->name('article.update');
     Route::DELETE('article/{article}', 'ArticleController@destroy')->name('article.destroy');
+    
+    Route::GET('article/tags', 'ArticleController@getAllTags');
+    Route::PUT('createTag', 'ArticleController@createTag');
 
     Route::post('product', 'ProductController@store')->name('product.store');
     Route::post('product/{product}', 'ProductController@update')->name('product.update');
@@ -55,6 +58,8 @@ Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fu
     Route::get('users', 'UserController@index');
     Route::delete('user/{id}', 'UserController@destroy');
 
+    Route::post('saveVideos', 'MetaController@storeVideos');
+    Route::put('metasave/{key}', 'MetaController@saveMeta');
 });
 
 Route::group( [ 'as' => 'frontend.' ],function () {
@@ -80,11 +85,13 @@ Route::group( [ 'as' => 'frontend.' ],function () {
     Route::GET('product/{product}/reviews', 'ReviewController@getReviews');
     Route::DELETE('product/{product}/review', 'ReviewController@deleteReview');
 
-    Route::GET('/metas/about-us', 'MetaController@getAbout');
-    Route::GET('/metas/accolades', 'MetaController@getAccolades');
-    Route::GET('/metas/discography', 'MetaController@getDiscography');
+    Route::GET('metas/about-us', 'MetaController@getAbout');
+    Route::GET('metas/accolades', 'MetaController@getAccolades');
+    Route::GET('metas/discography', 'MetaController@getDiscography');
 
-
+    Route::POST('article/{article}/comment', 'NewsController@storeComments');
+    Route::DELETE('article/{comment}/comments/delete', 'NewsController@destroyComment');
+    
 });
 
 

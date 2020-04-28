@@ -7,13 +7,16 @@ use Faker\Generator as Faker;
 
 $factory->define(Article::class, function (Faker $faker) {
         $imgArr = [
-            'default_medium.jpg','faith_1.jpeg','hands.jpg'
+            'default_medium.jpg','faith_1.jpeg','hands.jpg',null,null,null
         ];
         $title = $faker->sentence(2);
+
+        $index = $faker->randomDigit()%6;
         return [
             'title'     => $title,
             'slug'      => str_slug($title),
-            'image'     => $imgArr[ $faker->randomDigit()%3 ],
+            'type'      => ( $index > 2  ) ? 'weekly' : 'article',
+            'image'     => $imgArr[ $index ],
             'headline'  => $faker->sentence(15),
             'body'      => $faker->paragraphs(5,true),
         ];

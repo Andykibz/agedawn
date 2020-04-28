@@ -223,7 +223,7 @@ export default {
 .about-contents p {
   /* font-family: 'Sarala', sans-serif !important; */
   font-family: "Ubuntu", sans-serif;
-  font-weight: 300;
+  font-weight: 200;
 }
 
 .disco-cover{

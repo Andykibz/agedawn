@@ -14,10 +14,9 @@ class CreateTaggablesTable extends Migration
     public function up()
     {
         Schema::create('taggables', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->unsignedBigInteger('tagable_id');
-            $table->string('tagable_type');
-            $table->timestamps();
+            $table->integerIncrements('tag_id');
+            $table->unsignedBigInteger('taggable_id');
+            $table->string('taggable_type');
         });
     }
 

@@ -1,8 +1,8 @@
 <template>
     <div >
         <div class="container-fluid">
-            <div class="row mb-3">
-                <div class="col-md-4 col-sm-6 col-12">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12 mb-3">
                     <div @click="redirectPage('products')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/shop.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
@@ -12,7 +12,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12 mb-3">
                     <div @click="redirectPage('article')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/article.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12 mb-3">
                     <div @click="redirectPage('users')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/users.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
@@ -34,10 +34,8 @@
 
                 
 
-            </div>
 
-            <div class="row">
-                <div class="col-md-4 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12 mb-3">
                     <div @click="redirectPage('products')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/band.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
@@ -47,7 +45,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4 col-sm-6 col-12">
+                <div class="col-lg-4 col-md-6 col-12 mb-3">
                     <div @click="redirectPage('orders')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/orders.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
@@ -57,10 +55,9 @@
                     </div>
                 </div>
             </div>
-        </div>
 
            
-
+        </div>
             
     </div>
 </template>

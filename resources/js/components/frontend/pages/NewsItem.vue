@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(/imgs/cover.png)'}" data-aos="fade" data-stellar-background-ratio="0.5">            <div class="container">
+        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(/imgs/cover_final.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">            <div class="container">
                 
                 <div class="align-items-end row text-center justify-content-center">
                 <div class="col-md-8 mb-3">
@@ -17,11 +17,11 @@
                         <img class="img-fluid" :src="'/storage/Articles/'+article.image" alt="">                      
                     </div>
                     <hr>
-                    <article data-aos="slide-up" v-html="article.body"></article>
+                    <article class="article-body" data-aos="slide-up" v-html="article.body"></article>
                     <hr class="bg-secondary">
                     <section id="comments">
                         
-                        <Comments :news="article"/>
+                        <Comments :article="article" :comments="comments.data" :query="getArticle" />
 
                     </section>
                 </main>
@@ -40,7 +40,8 @@ export default {
     components  :{ Comments },
     data(){
         return{
-            article     : { }
+            article     : {},
+            comments    : [],
         }
     },
     computed:{
@@ -54,9 +55,10 @@ export default {
             self = this
             axios.get(`/api/news/${id}`)
                 .then((response)=>{
-                    self.article = response.data
+                    self.article = response.data.article
+                    self.comments = response.data.comments
                 }).catch((err)=>{
-    
+                    console.log(err.response.data)
                 })
         },
         created_date( date ){
@@ -82,5 +84,9 @@ export default {
         font-size: 36px;
         font-weight: 100;
         text-shadow: 1px 1px 2px #333;
+    }
+    .article-body{
+        line-height: 2;
+        color: aliceblue;
     }
 </style>

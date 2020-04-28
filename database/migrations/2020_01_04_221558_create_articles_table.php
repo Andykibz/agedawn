@@ -19,6 +19,7 @@ class CreateArticlesTable extends Migration
             $table->string('slug')->unique();
             $table->text('headline')->nullable();
             $table->mediumText('body');
+            $table->string('type')->default('article');
             $table->string('image')->default('default.png')->nullable();
             $table->boolean('published')->nullable()->default(false);
             $table->dateTime('published_at')->nullable();

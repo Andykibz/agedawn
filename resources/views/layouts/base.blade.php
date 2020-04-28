@@ -36,7 +36,7 @@
 
    jQuery(document).ready(function() {
     
-       var siteStellar = function() {
+       window.siteStellar = function() {
            $(window).stellar({
            responsive: false,
            parallaxBackgrounds: true,

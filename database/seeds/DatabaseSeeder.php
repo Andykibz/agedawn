@@ -1,5 +1,6 @@
 <?php
 
+use App\Tag;
 use Illuminate\Database\Seeder;
 
 
@@ -17,6 +18,8 @@ class DatabaseSeeder extends Seeder
             ProductTableSeeder::class,
             AdawnageSeeder::class,
         ]);
-        factory(App\Article::class, 15)->create();       
+        Tag::insert([['name'=>'worship'],['name'=>'faith'],['name'=>'children']]);
+
+        factory(App\Article::class, 20)->create();       
     }
 }

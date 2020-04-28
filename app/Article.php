@@ -22,4 +22,13 @@ class Article extends Model
     {
         return $this->morphToMany('App\Tag', 'taggable');
     }
+
+    /**
+     * Get the comments belonging to the Article
+     */
+    public function comments()
+    {
+        return $this->hasMany('App\Comment');
+    }
+
 }

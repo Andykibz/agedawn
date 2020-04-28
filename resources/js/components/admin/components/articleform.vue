@@ -16,6 +16,27 @@
             </div>  
 
             <div class="form-group">
+                <label for=""> Tags </label>
+                <div class="row">
+                    <vue-tags-input class="col-md-8" v-model="tag" :tags="tags" :add-only-from-autocomplete="true"
+                        :autocomplete-items="autocompleteItems" @tags-changed="newTags => tags = newTags"/>
+                    <input class="col-md-3 border rounded-sm" style="font-size:small;" type="text" v-model="freshTag" placeholder="New Tag">
+                    <i @click="AddFreshTag" style="border-radius:0px" class="btn btn-outline-info fa fa-plus ml-1"></i>
+                    <small class="form-text text-danger" v-bind="errMsg['tagErr'] || ''"></small>
+                </div>
+                    
+            </div>
+
+            <div class="form-group">
+                <label for="">Content Type</label>
+                <select name="type" v-model="type" class="custom-select">
+                    <option value="" disabled selected>Select content type</option>
+                    <option value="article">Article</option>
+                    <option value="weekly">Weeklies</option>
+                </select>
+            </div>
+
+            <div class="form-group">
                 <label for="">Headline</label>
                 <textarea class="form-control" v-model="headline" placeholder="Enter Headline Here"></textarea>
                 <small class="form-text text-danger" v-bind="errMsg['headline'] || ''"></small>
@@ -42,25 +63,27 @@
 </template>
 
 <script>
-import TextInput from './inputs/text'
-import TextAreaInput from './inputs/textarea'
 import ImageFile from './inputs/imagefile'
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { eventBus } from '../../../admin';
-import { format } from 'path';
+import VueTagsInput from '@johmun/vue-tags-input';
 export default {
     name        :   "ArticleForm",
-    components  :   { TextInput, TextAreaInput, ImageFile },
+    components  :   { VueTagsInput, ImageFile },
     data(){
         return{
+            // tagItems : [ 'dad','addsa' ],
+            autocompleteItems: [],
             editor: ClassicEditor,
+            freshTag    : null,
             editorConfig: {
             },
             formTitle   :   '',
             title       :   '',
+            type        :   '',
             headline    :   '',
             body        :   '',
-            image   :   '',
+            image       :   '',
             ImageFile   :   '',
             errMsg      :   {   'title' : null,
                                 'headline' : null,
@@ -68,21 +91,51 @@ export default {
                                 'body' : null,
                             },
             upadateID   :   null,
+            tagErr      :   null,
+            tag         :   '',
+            tags        :   [],
             
         }
     },
     methods:{
         clearForm(){
             this.upadateID = '';
-            document.getElementById('articleForm').reset();
+            document.getElementQuerySelector('#articleForm').reset();
+            this.title = '';
             this.body = '';
             this.imgsource = ''
+            this.tags= []
+            this.headline = ''
+            this.type = ''
+            this.image = ''
             document.getElementById('custom-file-label').textContent = "Choose an Image"
         },
         changelabel(event){
             let filename = event.target.value.split('\\').pop()
             document.getElementById('custom-file-label').textContent = filename
             this.ImageFile = event.target.files[0]
+        },
+        formatTags( tags ){
+            let TagsArr = []
+            tags.forEach((item,index)=>{
+                TagsArr.push({
+                    'text'  : item.name,
+                    'id'    : item.id,
+                })
+            })
+            return TagsArr;
+
+        },
+
+        AddFreshTag(){
+            axios.put( '/api/admin/createTag',{ name: this.freshTag } )
+                .then((response)=>{
+                    this.getTags();
+                    this.freshTag = null;  
+                })
+                .catch((err)=>{
+                    console.log(err.response.data);                    
+                })
         },
 
         handling(){
@@ -91,11 +144,30 @@ export default {
             }
         },
 
+        getTags(){
+            axios.get('/api/admin/article/tags').then((response)=>{
+                console.log(response.data);
+                this.autocompleteItems = this.formatTags( response.data )
+            }).catch((err)=>{
+                console.log(err.response.data);                
+            })
+        },
+
+        getTagIDs( tags ){
+            let tagIDs = []
+            tags.forEach((tag)=>{
+                tagIDs.push( tag.id )
+            })
+            return tagIDs;
+        },
+
         submitArticle(){
             // console.log(form);
             let articleForm = new FormData();
             articleForm.set('title',this.title)
+            articleForm.set('type',this.type)
             articleForm.set('body',this.body)
+            articleForm.set('tags',this.getTagIDs(this.tags))
             articleForm.set('headline',this.headline)
             if (this.ImageFile) { articleForm.append('image', this.ImageFile || null ) }
 
@@ -110,15 +182,16 @@ export default {
             })
             .then(function (response) {
                 console.log(response.data);
+                this.clearForm()
             })
             .catch(function (err) {
-                console.log(err.response.data.errors);
+                console.log(err.response.data);
             });    
         }
 
     },
     mounted(){
-        
+        this.getTags()
         
     },
     created() {
@@ -128,11 +201,13 @@ export default {
             let url = '/api/admin/article/'+id+'/edit';
             axios.get(url)
             .then(response => { 
-                this.upadateID = response.data.id;
-                this.title     =   response.data.title;
-                this.image    =   (response.data.image) ?'/storage/Articles/'+response.data.image : '';
-                this.headline =       response.data.headline;
-                this.body     =   response.data.body
+                this.upadateID  =   response.data.article.id;
+                this.title      =   response.data.article.title;
+                this.type       =   response.data.article.type;
+                this.image      =   (response.data.image) ?'/storage/Articles/'+response.data.image : '';
+                this.headline   =   response.data.article.headline;
+                this.body       =   response.data.article.body;
+                this.tags       =   this.formatTags( response.data.tags );
             })
             .catch( error => {  console.log(error); });
         });
@@ -141,7 +216,11 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
+    .ti-input{
+        width: 100%;
+        border-radius: 4px;
+    }
     .ck-editor__editable {
         min-height: 300px;
     }

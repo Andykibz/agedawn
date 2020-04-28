@@ -21,7 +21,44 @@ class MetaController extends Controller
         return new BandCollection( Meta::where('type','members')->get() ) ;
         // return response()->json($members);
     }
-    
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function storeVideos(Request $request)
+    {
+        $request->validate([
+            'videos'    => 'required|array'
+        ]);
+
+        $videos = Meta::where('slug', 'videos')->first();
+        $videos->value = json_encode( $request->videos );
+        $videos->save();
+        return response()->json( True );
+
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveMeta(Request $request, $key)
+    {
+        $request->validate([
+            'name'      => 'required',
+            'value'     => 'required'
+        ]);
+        $meta = Meta::where( 'name', $key )->first();
+        $meta->value = $request->value;
+        $meta->save();
+        return response()->json( True );
+
+    }
 
     /**
      * Store a newly created resource in storage.

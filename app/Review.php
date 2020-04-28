@@ -12,7 +12,7 @@ class Review extends Model
      */
     public function product()
     {
-        return $this->belongsTo('App\product');
+        return $this->belongsTo('App\Product');
     }
 
     /**

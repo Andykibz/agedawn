@@ -61,43 +61,63 @@
         <!-- <button role="button" class="btn btn-sm btn-outline-success btn-square d-flex flex-row-reverse "> Submit </button> -->
         <div class="div">
 
-        <a role="button" href="#" class="btn btn-sm animated-button sandy-two">Submit</a>
+        <a @click.prevent="submitComment" role="button" href="#" class="btn btn-sm animated-button sandy-two">Submit</a>
         </div>
   </div>
-  <div class="col-md-8 col-12">
-    <div class="row">
-
-            <div class="commentsWrapper mb-5">
-              <h4 class="text-light mb-3">Comment(s) on {{ news.title }}</h4>
-                <div class="timeline-item" date-is='20-07-1990'>
+    <div class="col-md-8 col-12">
+        <div class="row">
+            <div style="width:100%" class="commentsWrapper mb-5">
+                <h4 class="text-light mb-3">Comment(s) on {{ article.title }}</h4>
+                <template v-if="comments">
+                <div v-for="comment in comments" :key="comment.id" class="timeline-item position-relative" :date-is="created_date( comment.created)" >
+                    
+                    <template v-if="user">
+                        <i v-if="user.id == comment.user[0].id" @click="delComment( comment.id )" style="right:5px;cursor:pointer" class="btn-sm btn-outline-warning position-absolute left icon-trash"> </i>
+                    </template>
                     <h5 class="d-flex">
-                        Andrew Kibor
+                        {{ comment.user[0].name }}
+                        
                     </h5>
-                    <div class="py-2 px-3 review-content">
-                        <p>
-                            I'm speaking with myself, number one, because I have a very good brain and I've said a lot of things. I write the best placeholder text, and I'm the biggest developer on the web by far... 
-                        </p>
+                    <div class="py-2 px-3 review-content" v-html="comment.comment">
+                        
                     </div>
-                </div>       
-        
+                </div>
+                
+                </template>
+                <template v-if="!comments">
+                    <div  class="py-4 d-flex flex-row justify-content-center">
+                        <h5 class="text-secondary"> <em> No comments have been published yet </em> </h5>
+                    </div>
+                </template>      
             </div>
         </div>  
-  </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { Editor, EditorContent,EditorMenuBar } from 'tiptap'
 import { HardBreak, HorizontalRule, OrderedList, BulletList, ListItem, Bold, Italic, Link, Strike, Underline, Placeholder } from 'tiptap-extensions'
+import { mapGetters } from 'vuex';
 export default {
     name :    "Comments",
-    props   :   ['news'],
-    components:{ EditorContent,EditorMenuBar }  ,
+    props   :   { 
+                    article     : Object,
+                    comments    : Array,
+                    query       : Function,
+                },
+    components:{ EditorContent, EditorMenuBar },
+    computed    : {
+        ...mapGetters({
+            user    :   'auth/user'
+        })
+    },
     data(){
         return{
-            rating: 6,
-            editor : new Editor({
+            comment     : null,
+            editor      : new Editor({
                 content: "<p></p>",
+                onUpdate: () => this.comment = this.editor.getHTML(),
                 extensions: [
                     new BulletList(),
                     new HorizontalRule(),
@@ -109,25 +129,55 @@ export default {
                     new Strike(),
                     new Underline(),
                     new Placeholder({
-
-                        emptyEditorClass: 'is-editor-empty',
-                        emptyNodeClass: 'is-empty',
-                        emptyNodeText: 'What is your take?...',
-                        showOnlyWhenEditable: true,
-                        showOnlyCurrent: true,
-                                }),
+                            emptyEditorClass: 'is-editor-empty',
+                            emptyNodeClass: 'is-empty',
+                            emptyNodeText: 'What is your take?...',
+                            showOnlyWhenEditable: true,
+                            showOnlyCurrent: true,
+                        }),
                     ]
             }),
 
         }
     },
     methods:{
-        setRating( val ){
-            this.rating = val;
-        }
+        created_date( date ){
+            let months = [ 'Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct','Nov','Dec' ]
+            let month   = months[new Date(date).getUTCMonth()]
+            let year    = String( new Date(date).getUTCFullYear() ).replace('20',"'")
+            return `${month} ${new Date(date).getUTCDate()} ${year}`
+        },
+        submitComment(){
+            let commentForm = new FormData();
+            commentForm.set('comment',this.comment)
+            let self = this
+            axios.post(`/api/article/${this.article.id}/comment`,commentForm)
+                .then((response)=>{
+                    self.editor.clearContent();
+                    self.content = ''
+                    // console.log(response.data);
+                    // this.getReviewsAction(this.$route.params.id)
+                    this.query(this.$route.params.id)
+                })  
+                
+                .catch((err)=>{
+                    console.log(err.response.data);                    
+                })
+        },
+
+        delComment( comment ){
+            axios.delete(`/api/article/${comment}/comments/delete`, { data : { user: this.user.id } })
+            .then((response)=>{
+                console.log(response.data);
+                
+                this.query(this.$route.params.id)
+            }).catch((err)=>{
+                console.log(err.response.data);
+            });
+        }      
     },
     mounted(){
-        
+          
     },
     beforeDestroy() {
         this.editor.destroy()
