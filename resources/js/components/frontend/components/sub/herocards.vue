@@ -2,9 +2,7 @@
     <div class="site-block-1">
       <div class="container">
         <div class="row">
-          
           <div v-for="card in cards" v-bind:key="card.id" class="col-lg-4"
-                data-aos="fade-down"
                 data-aos-easing="linear">
             <a :href="card['link']" class="site-block-feature d-flex p-4 rounded mb-4">
               <div class="mr-3 text-secondary">
@@ -48,8 +46,18 @@ export default {
     
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .text h3{
    font-size: medium;
+}
+.site-block-feature p{
+  font-weight: bold;
+  &:hover{
+    color: rgb(50, 50, 50);
+  }
+}
+.site-block-feature h3{
+  font-weight: bold;
+  font-family: 'Times New Roman', Times, serif;
 }
 </style>

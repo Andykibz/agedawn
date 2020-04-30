@@ -25,7 +25,7 @@
                                     :ytSrc="video.url">
                                     <img :src="'https://i.ytimg.com/vi/'+video.url+'/mqdefault.jpg'" alt="" class="img-fluid img-thumbnail">
                                     <div class="video-info">
-                                        <p><font-awesome-icon class="text-muted" :icon="['fas','play-circle']" size="3x"/></p>
+                                        <p><font-awesome-icon class="text-muted" :icon="['fas','play-circle']" size="2x"/></p>
                                     </div>
                                 </a>
                                 <h4 class="text-light text-center">{{ video.title }}</h4>

@@ -11,6 +11,15 @@
                             <!-- <small>  “Behold, I am doing a new thing; now it springs forth, do you not perceive it?"</small> -->
                             <small v-text="hero.text"></small>
                         </h1>
+                        <div>
+                            <!-- <swiper class="swiper" :options="swiperOption">
+                                <swiper-slide>
+                                    <label>Apr 30 '20</label>
+                                    <span> Progressively procrastinate 2.0 niches with orthogonal sources. Collaboratively streamline parallel. </span>
+                                </swiper-slide>
+                                <swiper-slide>Intrinsicly facilitate turnkey potentialities without viral best.</swiper-slide>
+                            </swiper> -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -25,7 +34,27 @@ export default {
     },
     data(){
         return{
-            
+            // swiperOption: {
+            //     effect: 'coverflow',
+            //     grabCursor: true,
+            //     centeredSlides: true,
+            //     slidesPerView: 'auto',
+            //     // loop: true,
+            //     autoplay: {
+            //         delay: 5000,
+            //         disableOnInteraction: false
+            //     },
+            //     coverflowEffect: {
+            //         rotate: 50,
+            //         stretch: 0,
+            //         depth: 100,
+            //         modifier: 1,
+            //         slideShadows : true
+            //     },
+            //     // pagination: {
+            //     //     el: '.swiper-pagination'
+            //     // }
+            // }
         }
     }
 }

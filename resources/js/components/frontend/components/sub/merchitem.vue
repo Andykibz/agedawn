@@ -18,7 +18,7 @@
               <h2 class="text-light">{{ item.name }}</h2>
               <span class="sub-title">Ksh {{ item.price }}</span>
             </div>
-            <v-dialog/>
+            
     </div>
 </template>
 <script>

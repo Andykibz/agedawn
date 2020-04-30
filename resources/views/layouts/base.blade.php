@@ -13,12 +13,10 @@
     <link href="{{ asset('fonts/flaticon/font/flaticon.css') }}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/slick.css') }}" rel="stylesheet">
     <link href="{{ asset('css/buttons.css') }}" rel="stylesheet">
-    
-    
 
-     
+    <link href="https://cdn.jsdelivr.net/npm/vue-loading-overlay@3/dist/vue-loading.css" rel="stylesheet">
+         
 </head>
 <body style="">
     <div class="" style="height:100%">
@@ -26,11 +24,9 @@
 
     </div>
 
-<!-- Scripts -->
 <script src="{{ asset('js/script.js') }}" ></script>
 <script src="{{ asset('js/jquery-migrate.js') }}" defer></script>   
 <script src="{{ asset('js/stellar.js') }}" defer></script>   
-<script src="{{ asset('js/slick.js') }}" defer></script>   
 
     <script type="text/javascript">
 

@@ -14,7 +14,7 @@ class AdawnageSeeder extends Seeder
     /**
      * @var string
      */
-    protected $heroText = "Behold ... Isaiah 43:19";
+    protected $heroText = "Behold, I am doing ... Isaiah 43:19";
 
     /**
      * @var array
@@ -31,24 +31,21 @@ class AdawnageSeeder extends Seeder
      */
     protected $videos = array(
         array(
-            "title"         =>   "Naomba",
-            "url"           =>   "w0tC60eRFhg",
-            "description"   =>   "NAOMBA is a prayer asking The Potter to make us and mould us so that we may become more like Him; to hide us in His arms and make us His worthy vessels."
+            "title"         =>   "Your Name",
+            "url"           =>   "Y5rC2yd3aZE",
+            
         ),
         array(
             "title"         =>   "I Live For You",
             "url"           =>   "RKGo_xNMpwM",
-            "description"   =>   "I Live For You is a track off Adawnage Band's MAISHA video which was released in 2016. The track is a declaration to live for God no matter the challenges we face in life."
         ),
         array(
             "title"         =>  "Tulizo",
             "url"           =>  "m09DhQmc63Y",
-            "description"   =>  "Tulizo is a track off Adawnage Band's MAISHA video which was released in 2016. The track emphasizes how in this life nothing and no one can and will satisfy like Jesus can."
         ),
         array(
             "title"         =>   "Uwezo",
             "url"           =>   "fv75qkXRGBE",
-            "description"   =>   "UWEZO is a prayer asking God to give us strength to stand on His word amidst all the betrayal and pain that we face. Speak these words into your life that God may give you the strength and determination to walk this Christian journey."
         ),
         
     );

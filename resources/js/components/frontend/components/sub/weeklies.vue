@@ -1,22 +1,34 @@
 <template>
-    <div>
-        <!-- <h5 class="text-light text-center"> Weekly News </h5> -->
-        <div v-for="weekly in weeklies" :key="weekly.id" class="weekly-item" data-aos="slide-up">
-            <div class="row no-gutters  overflow-hidden rounded flex-md-row mb-4 shadow-lg position-relative">
-                <div class="col-12 py-3 px-2 d-flex flex-column position-static">
-                    <h4 class="mb-0 text-light" v-text="'~ '+weekly.title">-</h4>
-                    <div class="mb-1 text-muted">{{ created_date(weekly.created_at) }}</div>
-                    <!-- <p v-if="weekly.headline" class="card-text mb-auto">{{ weekly.headline }}</p> -->
-                    <router-link :to="{ name : 'newsitem', params: { id : weekly.id } }" class="stretched-link">Continue reading</router-link>
+        
+    <div class="row no-gutters  overflow-hidden rounded flex-md-row mb-3 shadow-lg position-relative">
+        <div class="col-12 pt-3 px-2 d-flex flex-column position-static">
+            <h4 class="mb-1 text-light" v-text="'~ '+weekly.title">-</h4>
+                <font-awesome-icon class="position-absolute text-info" style="right:1em;" icon="calendar-week"/>
+            <div class="metas pl-3">
+                <div class="d-dlex justify-content-center">
+                    <!-- <font-awesome-icon icon="tag" size="1x" /> -->
+                    <div v-if="weekly.tags" class="tagsWrapper">
+                        <a v-for="tag in weekly.tags" :key="tag.id" class="tag-item mr-1" 
+                            style="padding:2px 4px"> 
+                            {{ tag.name }} 
+                        </a>
+                    </div>
                 </div>
             </div>
+            <div class="d-flex justify-content-between">
+                <router-link :to="{ name : 'weeklyitem', params: { id : weekly.id } }" class="pl-3 stretched-link readmore">Continue reading</router-link>
+                    <div class="pl-3 mb-1 text-muted">{{ created_date(weekly.created_at) }}</div>
+                
+            </div>
+            <!-- <div class="pl-3 mb-1 text-muted">{{ created_date(weekly.created_at) }}</div> -->
+            <!-- <p v-if="weekly.headline" class="card-text mb-auto">{{ weekly.headline }}</p> -->
         </div>
     </div>
 </template>
 <script>
 export default {
     name    : "Weeklies",
-    props   : ['weeklies'],
+    props   : ['weekly'],
     data(){
         return{
             
@@ -52,4 +64,5 @@ export default {
         height: 250px;
         width: 100%;
     }
+    
 </style>

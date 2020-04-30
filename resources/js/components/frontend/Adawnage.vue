@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column" style="height:100%">
+    <div class="d-flex flex-column" style="height:100% vld-parent">
         <navigation></navigation>
         <SignIn/>
         <SignUp/>

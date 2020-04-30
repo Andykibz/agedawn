@@ -54,7 +54,7 @@
                 </main>
             </div>            
         </div>
-        <v-dialog/>
+        <!-- <v-dialog/> -->
     </div>
 </template>
 <script>

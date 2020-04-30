@@ -2,7 +2,9 @@
 <div class="">
     <div class="row d-flex justify-content-center mb-4">
         <div class="col-lg-7 col-md-8 col-sm-11 col-12 mb-3 "> 
-        <h4 class="text-light mb-3">Leave a Review</h4>
+        <h4 class="text-light mb-3">Leave a Review <small v-if="!user">  - 
+            <a role="button" href="#signin" data-toggle="modal" data-target="#signinModal"> Sign In </a> first </small> 
+        </h4>
             <star-rating class="mb-2" v-model="rating" :star-size="20" :show-rating="true" 
             border-color="transparent" active-color="#f6993f"></star-rating>
             <editor-menu-bar class="mb-2" :editor="editor" v-slot="{ commands, isActive }">

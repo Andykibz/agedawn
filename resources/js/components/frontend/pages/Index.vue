@@ -3,8 +3,8 @@
         <homehero ></homehero> 
 
         <herocards></herocards>
-
-        <div class="site-block-3 py-5">
+        
+        <div class="site-block-3 py-3">
                 <div class="container">
                     <div class="row">
                         <div class="mx-auto px-2">
@@ -19,10 +19,11 @@
                     </div>
                 </div>
         </div>
+        <!-- <WeeklySlider/> -->
         <hr class="m-0 p-0 bg-secondary">
-        <!-- <Music /> -->
-        <parallax text="New Beginnings" image="performance.jpg"/>
         <Posts />
+        <parallax text="New Beginnings" image="performance.jpg"/>
+        <Music />
         <hr class="m-0 p-0 bg-secondary">
         <parallax text="Check out our Merch" image="shop.jpg"/>
         <Store/>
@@ -39,17 +40,17 @@
     import Music from '../components/music'
     import Posts from '../components/posts'
     import Store from '../components/store'
-    
+    import WeeklySlider from '../components/weekliesSlider'
 
 
     export default {
         name: "Home",
         components:{
-            herocards, Music, homehero, parallax, Posts, Store
+            herocards, Music, homehero, parallax, Posts, Store, WeeklySlider
         },
         data(){
             return{
-            
+                
             }
         },
         methods: {

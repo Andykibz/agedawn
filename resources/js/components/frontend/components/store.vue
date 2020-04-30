@@ -41,22 +41,19 @@
                         </swiper-slide>
                         <div class="swiper-pagination" slot="pagination"></div>
                     </swiper>
-                    <LightBoxModal v-if="products" :items="products" />
                 </div>
             </div>
         </div>
-        <v-dialog/>
+        <!-- <v-dialog/> -->
     </section>
 </template>
 <script>
 import albumcard from './home/albumcards'
-import LightBoxModal from './home/lightboxModal'
-import carousel from 'vue-owl-carousel'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
     name        :   "StoreFeature",
-    components  :   { albumcard,LightBoxModal,carousel },
+    components  :   { albumcard },
     computed    :{
         ...mapGetters({
             products    : 'shop/getHoodies',
@@ -65,6 +62,7 @@ export default {
     },
     data(){
         return{
+            loader : null,
             swiperOption: {
                 effect: 'coverflow',
                 grabCursor: true,
@@ -155,7 +153,15 @@ export default {
     
     mounted(){
         this.getProductsAction('hoodies')
+    },
+    beforeMount(){
+         this.loader = this.$loading.show({
+            // Optional parameters
+            container: this.fullPage ? null : this.$refs.formContainer,
+            onCancel: this.onCancel,
+        });
     }
+
 
 }
 </script>

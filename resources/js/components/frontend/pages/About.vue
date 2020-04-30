@@ -26,20 +26,20 @@
             <span>{{ label }}</span>
           </div>
           <!-- <hr class="bg-secondary m-1" /> -->
-          <div class="about-sub-section  mb-3" data-aos="fade-right">
+          <div class="about-sub-section mb-3" data-aos="fade-right">
             <h5 class="text-muted ">Mission</h5>
             <div class="py-2" v-html="mission"></div>
           </div>
-          <Social class="mt-3 shadow-lg" />
+          <Social class="mt-3 adg-shadow" />
         </aside>
         <main class="col-sm-8 col-12 about-contents" data-aos="fade-left">
-          <section id="adawnage" class="shadow-lg px-4 pb-3">
-            <article id="about" v-html="about.about"></article>
-            <article id="bio">
+          <section id="adawnage" class="adg-shadow px-4 pt-2 pb-3">
+            <article id="about" class="text-justify" v-html="about.about"></article>
+            <article id="bio" class="text-justify">
               <div class="heading">
                 <h4 class="text-light">Biography</h4>
               </div>
-              <div v-html="about.bio"></div>
+              <div  v-html="about.bio"></div>
             </article>
           </section>
           
@@ -207,7 +207,7 @@ export default {
 .about-sub-section {
   -webkit-box-shadow: 4px 4px 16px 4px rgba(0,0,0,0.28);
   -moz-box-shadow: 4px 4px 16px 4px rgba(0,0,0,0.28);
-  box-shadow: 4px 4px 16px 4px rgba(0,0,0,0.28);
+  box-shadow: 4px 4px 16px 4px rgba(0,0,0,0.4);
   padding-left: 1em;
 }
 .about-sub-section h5 {
@@ -217,13 +217,8 @@ export default {
 }
 .about-sub-section span,
 .about-info p {
-  font-size: small;
+  font-size: medium;
   font-weight: 300;
-}
-.about-contents p {
-  /* font-family: 'Sarala', sans-serif !important; */
-  font-family: "Ubuntu", sans-serif;
-  font-weight: 200;
 }
 
 .disco-cover{
@@ -231,6 +226,11 @@ export default {
     background-size: cover;
     background-position: center;
     
+}
+#bio p, #about p{
+  font-size: 1.2rem;
+  line-height: 2;
+  color: #fff;
 }
 
 </style>
@@ -245,11 +245,14 @@ $primaryCol : #f6993f;
     }
 .about-info p {
   font-size: medium;
-  font-family: "Sarala", sans-serif;
+  // font-family: "Sarala", sans-serif;
   /* font-family: 'Ubuntu', sans-serif; */
 }
 .about-contents p {
-  font-family: "Sarala", sans-serif !important;
+  // font-family: "Sarala", sans-serif !important;
+  font-size: 1.2rem;
+        line-height: 2;
+        color: #fff;
 }
 .hexa{
   border: 0px;

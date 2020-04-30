@@ -24,7 +24,7 @@ class OrderController extends Controller
     {
         
         // $order =  new OrdersCollection( Order::paginate(7) );
-        return new OrdersCollection( Order::paginate(5) ) ;
+        return new OrdersCollection( Order::orderBy('id','desc')->get() ) ;
         // return response()->json( $order );
     }
 

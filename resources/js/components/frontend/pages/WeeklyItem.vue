@@ -1,13 +1,10 @@
 <template>
     <div>
-        <div class="site-blocks-cover overlay inner-page" 
-            :style="{'background-image':'url(/imgs/cover_final.jpg)'}" 
-            data-aos="fade" >
-            <div class="container">                
+        <div class="site-blocks-cover overlay inner-page" :style="{'background-image':'url(/imgs/cover_final.jpg)'}" data-aos="fade" data-stellar-background-ratio="0.5">            <div class="container">
                 <div class="align-items-end row text-center justify-content-center">
                 <div class="col-md-8 mb-3">
-                    <span class="sub-text">{{ created_date(article.created_at) }}</span>
-                    <h1 v-text="article.title"></h1>
+                    <span class="sub-text">{{ created_date(weekly.created_at) }}</span>
+                    <h1 v-text="weekly.title"></h1>
                 </div>
                 </div>
             </div>
@@ -15,18 +12,19 @@
         <div class="container mt-5">
             <div class="row mb-5">        
                 <main class="col-8 mx-auto" >
-                    <div v-if="article.image" class="imgwrapper d-flex justify-content-center" data-aos="fade-in">
-                        <img class="img-fluid" :src="'/storage/Articles/'+article.image" alt="">                      
+                    <div class="imgwrapper d-flex justify-content-center" data-aos="slide-up">
+                        <img class="img-fluid" src="/imgs/weekly.jpg" alt="">                      
+                    </div>
+                    <div v-if="weekly.tags" class="tagsWrapper ml-4">
+                        <a v-for="tag in weekly.tags" :key="tag.id" class="tag-item mr-1" 
+                            style="padding:2px 4px"> 
+                            {{ tag.name }} 
+                        </a>
                     </div>
                     <hr class="py-0">
-                    <article class="article-body px-3 py-2 adg-shadow" data-aos="slide-up" v-html="article.body"></article>
-                    
+                    <article class="article-body px-3 py-2 adg-shadow" data-aos="slide-up" v-html="weekly.body"></article>
                     <hr class="bg-secondary">
-
-                    <section id="comments">
-                        
-                        <Comments :article="article" :comments="comments.data" :query="getArticle" />
-
+                    <section id="related">
                     </section>
                 </main>
             </div>            
@@ -35,17 +33,15 @@
 </template>
 
 <script>
-import Comments from '../components/comments'
 export default {
     name    : "NewsItem",
     props   : {
 
     },
-    components  :{ Comments },
+    components  :{},
     data(){
         return{
-            article     : {},
-            comments    : [],
+            weekly     : {},
         }
     },
     computed:{
@@ -55,12 +51,11 @@ export default {
         '$route': 'fetchData'
     },
     methods:{
-        getArticle( id ){
+        getPost( id ){
             self = this
-            axios.get(`/api/news/${id}`)
+            axios.get(`/api/weekly/${id}`)
                 .then((response)=>{
-                    self.article = response.data.article
-                    self.comments = response.data.comments
+                    self.weekly = response.data                                      
                 }).catch((err)=>{
                     console.log(err.response.data)
                 })
@@ -74,31 +69,26 @@ export default {
 
     },
     mounted(){
-       this.getArticle(this.$route.params.id)
+       this.getPost(this.$route.params.id)
     },
 }
 </script>
 
 <style scoped>
-    .site-blocks-cover{
-        /* background-image: url('../imgs/guitar.jpg'); */
-        background-origin: content-box;
-        background-position: center;
-        
-    }
     h1{
         font-size: 36px;
         font-weight: 100;
         text-shadow: 1px 1px 2px #333;
     }
     .article-body{
-        font-size: 1.2rem;
-        line-height: 1.8;
         color: #fff;
         text-align: justify;
     }
-</style>
-
-<style lang="scss" scoped>
-
+    .tag-item{
+        margin-right: 10px;
+        border : 1px solid #333;
+        color:aliceblue ;
+        font-size: small;
+        cursor: pointer;
+    }
 </style>

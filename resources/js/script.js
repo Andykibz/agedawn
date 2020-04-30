@@ -1,26 +1,21 @@
 require('./bootstrap');
 
-require('./main.js');
 
 
 
 // window.Vue = require('vue');
 import Vue from 'vue'
 
-
 import VueRouter from 'vue-router';
-import Adawnage from './components/frontend/Adawnage.vue';
-// import axios from 'axios'
+import Adawnage from './components/frontend/Adawnage';
 import routes from './components/frontend/router.js';
 import store from './components/frontend/store';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fas } from '@fortawesome/free-solid-svg-icons'
-import { fab } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import GAuth from 'vue-google-oauth2'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
-import ProductZoomer from 'vue-product-zoomer'
 import VModal from 'vue-js-modal'
 import AOS from 'aos';
 import 'aos/dist/aos.css'
@@ -28,22 +23,20 @@ import VTooltip from 'v-tooltip'
 import VueTimeago from 'vue-timeago'
 
 
-import 'swiper/css/swiper.css'
-
 const gauthOption = {
     clientId: '948718702232-mr3fnqa6i2gndknegb82mgsreesv2onq.apps.googleusercontent.com',
     scope: 'profile email',
     prompt: 'select_account'
 }
 require('./components/frontend/store/sub')
-
+import 'swiper/css/swiper.css'
 
 Vue.use(VueRouter)
 Vue.use(GAuth, gauthOption)
 Vue.use(VueAwesomeSwiper)
-Vue.use(ProductZoomer)
 Vue.use(VModal, { dialog:true, dynamic: true, injectModalsContainer: true })
 Vue.use(VTooltip)
+
 Vue.use(VueTimeago, {
     locale: 'en',
     locales: {
@@ -51,7 +44,7 @@ Vue.use(VueTimeago, {
     }
   })
 
-library.add(fas,fab)
+library.add(fas)
 
 AOS.init({
     duration: 800,
@@ -75,7 +68,7 @@ const router = new VueRouter({
 })
 
 
-store.dispatch('auth/attempt',localStorage.getItem('token'))
+store.dispatch('auth/attempt',localStorage.getItem('adawnage.token'))
 .then(()=>{
     new Vue({
         store,
@@ -84,14 +77,5 @@ store.dispatch('auth/attempt',localStorage.getItem('token'))
     }).$mount('#adawnage')
 })
 
-// var siteStellar = function() {
-//     $(window).stellar({
-//     responsive: false,
-//     parallaxBackgrounds: true,
-//     parallaxElements: true,
-//     horizontalScrolling: false,
-//     hideDistantElements: false,
-//     scrollProperty: 'scroll'
-//   });
-// };
-// siteStellar();
+
+require('./main.js');

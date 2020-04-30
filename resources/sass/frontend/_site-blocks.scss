@@ -12,8 +12,7 @@ $color-tertiary: #ff5733;
 .site-blocks-cover {
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-position: top;
-	
+	background-position: center;	
 	// background-attachment: fixed;
 	&.overlay {
 		position: relative;

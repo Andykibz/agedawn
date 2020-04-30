@@ -2,7 +2,7 @@
       <div>
         <div class="d-flex flex-row justify-content-around ">
             <h3>Orders</h3>
-            <small class="d-flex align-items-center"> {{ current_page }} of {{ last_page }} </small>
+            <!-- <small class="d-flex align-items-center"> {{ current_page }} of {{ last_page }} </small> -->
         </div>
 
         <div id="artcile-list" class="mb-1 d-flex justify-content-center row">
@@ -12,7 +12,6 @@
                         <h5 class="my-0 font-weight-normal d-flex flex-column justify-content-between"> 
                             <div v-text="order.name" class="mb-1"></div>
                             <small class="text-muted mb-1" v-text="order.email"></small>
-                            <small class="text-muted mb-1" v-text="order.phone"></small>
                         </h5>
                     </div>
                     <div class="card-body">
@@ -27,14 +26,14 @@
     
                     </div>
                     <div class="card-footer">
-                        
+                        Phone : <small class="text-muted mb-1" v-text="order.phone"></small>
                     </div>
                 </div>
 
         </div>
         </div>
 
-        <paginate :prevpage="prevpage" :nextpage="nextpage" />
+        <!-- <paginate :prevpage="prevpage" :nextpage="nextpage" /> -->
     </div>
 </template>
 
@@ -60,13 +59,16 @@ export default {
             this.getOrders(this.nextlink)
         },
         getOrders( link = '/api/admin/orders' ){
+            let self = this
             axios.get( link )
             .then((response)=>{
-                this.current_page   =   response.data.meta.current_page
-                this.orders         =   response.data.data  
-                this.nextlink       =   response.data.links.next_page_url,
-                this.prevlink       =   response.data.links.prev_page_url
-                this.last_page      =   response.data.meta.last_page
+                // this.current_page   =   response.data.meta.current_page
+                self.orders         =   response.data.data
+                // this.nextlink       =   response.data.links.next_page_url,
+                // this.prevlink       =   response.data.links.prev_page_url
+                // this.last_page      =   response.data.meta.last_page
+                
+                
             }).catch( (err) => console.log(err.response.data) )
         },
         created_date( date ){

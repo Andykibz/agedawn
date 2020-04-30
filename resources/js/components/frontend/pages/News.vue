@@ -52,8 +52,8 @@ export default {
             axios.get(`/api/news?page=${page}`)
             .then((response)=>{
                 self.articles = response.data.data;
-                self.current_page = response.data.current_page;
-                self.last_page = response.data.last_page;
+                self.current_page = response.data.pagination.current_page;
+                self.last_page = response.data.pagination.last_page;
                 
             }).catch((err)=>{
                 console.log( err.response.data.errors );

@@ -181,7 +181,7 @@ export default {
                 headers: {'Content-Type': 'multipart/form-data' }
             })
             .then(function (response) {
-                console.log(response.data);
+                
                 this.clearForm()
             })
             .catch(function (err) {

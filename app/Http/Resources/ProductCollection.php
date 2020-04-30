@@ -20,13 +20,13 @@ class ProductCollection extends ResourceCollection
         return [
             'data' => $this->collection->transform(function($product){
                 return [ 
-                    'id'        => $product->id,
+                    'id'        =>  $product->id,
                     'name'      =>  $product->name,
-                    'quantity'=>  $product->quantity,
-                    'image'=>  $product->image,
-                    'price'=>  $product->price,
-                    'category'  => $product->category->name,
-                    'created'=>  $product->created_at,
+                    'quantity'  =>  $product->quantity,
+                    'image'     =>  $product->image,
+                    'price'     =>  $product->price,
+                    'category'  =>  $product->category->name,
+                    'created'   =>  $product->created_at,
 
                 ];
             })

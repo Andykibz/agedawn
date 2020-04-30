@@ -241,6 +241,7 @@ export default {
 </script>
 
 <style scoped>
+[]
     label.triggeraccordion{
         cursor: pointer;
     }
@@ -258,10 +259,11 @@ export default {
 
     .modal-content{
         /* background-color: rgba(248, 247, 247, 0.596); */
+        font-size: 1em !important;
     }
 
     label{
         text-transform: uppercase;
-        font-weight: 700;
+        font-weight: 600;
     }
 </style>

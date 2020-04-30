@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Comment;
 use App\Article;
 use App\Http\Resources\CommentsCollection;
-use Facade\FlareClient\Solutions\ReportSolution;
+use App\Http\Resources\PostResource;
 use Illuminate\Http\Request;
+use App\Http\Resources\PostCollection;
 
 class NewsController extends Controller
 {
@@ -17,8 +18,11 @@ class NewsController extends Controller
      */
     public function index()
     {
-        $article = Article::where('type','article')->orderBy('id','desc')->paginate(7);
-        return response()->json( $article );
+        $articles = new PostCollection(
+            Article::where('type','article')->orderBy('id','desc')->paginate(7)
+        );
+        // $articles = Article::where('type','article')->orderBy('id','desc')->paginate(7);
+        return response()->json( $articles );
     }
 
     /**
@@ -28,13 +32,45 @@ class NewsController extends Controller
      */
     public function homeindex( )
     {
-        $article = Article::where('type','article')->take(2)->orderBy('id','desc')->get();
-        $weeklies = Article::where('type','weekly')->take(5)->orderBy('id','desc')->get();
+        // $articles = Article::where('type','article')->take(2)->orderBy('id','desc')->get();
+        $articles = new PostCollection( 
+            Article::where('type','article')->take(2)->orderBy('id','desc')->paginate(2)
+         );
+        $weeklies = new PostCollection(
+            Article::where('type','weekly')->take(4)->orderBy('id','desc')->paginate(4)
+        );
+        // $weeklies = Article::where('type','weekly')->take(4)->orderBy('id','desc')->get();
         return response()->json( [
-            'articles'       => $article,
+            'articles'       => $articles,
             'weeklies'      => $weeklies,
-        ] );
+        ]);
     }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function homeweeklies()
+    {
+        
+        $weeklies = Article::where('type','weekly')->take(5)->orderBy('id','desc')->get();
+        return response()->json( $weeklies );
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function showWeekly($id)
+    {
+        $article = Article::find($id);
+        
+        return response()->json( new PostResource( $article ) );
+    }
+
 
     /**
      * Show the form for creating a new resource.

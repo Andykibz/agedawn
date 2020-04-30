@@ -46,7 +46,7 @@ class ProductController extends Controller
     {
         
         $product = new Product();
-        $validatedData = $request->validate([
+        $request->validate([
           'name'        =>  'required',
           'image'       =>  'required|image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1999',
           'category_id' =>  'numeric'

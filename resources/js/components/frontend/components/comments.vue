@@ -1,9 +1,9 @@
 <template>
 <div class="row d-flex justify-content-center">
-
-
-  <div class="col-md-8 col-sm-11 col-12 mb-4">
-      <h4 class="text-light mb-3">Leave a Comment</h4>
+    <div class="col-md-8 col-sm-11 col-12 mb-4">
+        <h4 class="text-light mb-3">Leave a Comment <small v-if="!user"> - 
+            <a role="button" href="#signin" data-toggle="modal" data-target="#signinModal"> Sign In </a> first </small> 
+        </h4>
       <editor-menu-bar class="mb-2" :editor="editor" v-slot="{ commands, isActive }">
             <div class="menubar">
                 <button

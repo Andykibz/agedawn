@@ -30,7 +30,6 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex'
-import carousel from 'vue-owl-carousel'
 
 export default {
     name        :   "AlbumCard",
@@ -76,7 +75,7 @@ export default {
         
         
     },
-    components  :   { carousel },
+    components  :   {  },
 }
 </script>
 <style lang="scss" scoped>

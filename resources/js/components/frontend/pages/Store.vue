@@ -40,13 +40,12 @@
 </template>
 <script>
 import MerchItem from '../components/sub/merchitem'
-import Carousel from 'vue-owl-carousel'
 import Hero from '../components/hero'
 import SubHero from '../components/subhero'
 import { mapActions,mapGetters } from 'vuex';
 export default {
     name            :   "Store",
-    components      :   { MerchItem,Carousel, Hero, SubHero },
+    components      :   { MerchItem, Hero, SubHero },
     computed :{
             ...mapGetters({
                     hoodies : 'shop/getHoodies',

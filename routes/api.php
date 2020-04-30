@@ -73,6 +73,8 @@ Route::group( [ 'as' => 'frontend.' ],function () {
 
     Route::GET('news', 'NewsController@index');
     Route::GET('homenews', 'NewsController@homeindex');
+    Route::GET('homeweeklies', 'NewsController@homeweeklies');
+    Route::GET('weekly/{id}', 'NewsController@showWeekly');
     Route::GET('news/{news}', 'NewsController@show');
 
     Route::GET('shop', 'ShopController@index');
