@@ -216,7 +216,6 @@ export default {
             margin-bottom: .4em;
             text-align: center;
             font-size: 16px;
-            font-family: inherit;
             font-weight: 300;
             line-height: 1.5;
             color: inherit;
@@ -226,7 +225,6 @@ export default {
                 font-style: italic;
                 color: #bba2aa;
                 text-align: left;
-                font-family: "Times New Roman", Times, serif;
             }
         }
 

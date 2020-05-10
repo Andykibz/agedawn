@@ -25,17 +25,8 @@
             </div>
         </div>
 
-        <!-- <div class="col-12"><h5>Hero Text</h5></div> -->
         <div class="col-12"><hr></div>
-        <!-- <div class="form-group">
-            <div class="input-group mb-3">
-                <label for="herotext"> Hero Text </label>
-                <input id="herotext" type="text" class="form-control mb-1" v-model="herotext" placeholder="Hero Text">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">Button</button>
-                </div>
-            </div>
-        </div> -->
+
         <div class="px-3">
             <div class="form-group">
                     <label for="herotext"> Hero Text </label>
@@ -47,10 +38,8 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="col-12">
-            
-            <input id="herotext" type="text" class="form-control mb-1" v-model="herotext">
-        </div> -->
+
+
     </div>
 </template>
 
@@ -69,18 +58,16 @@ export default {
             let self = this
             axios.get('/api/getHomeInfo').then((response)=>{
               //  response.data
-              console.log(response.data);
+            //   console.log(response.data);
                 self.herotext = response.data[1].value                              
             });
             axios.get('/api/getHomeInfoArr').then((response)=>{
                 self.videos = response.data.data[1].data
-                console.log(self.videos);
             });
         },
         saveVideo(){
             axios.post('/api/admin/saveVideos', {'videos' : this.videos} )
             .then(( response )=>{
-               console.log( response.data );               
             }).catch((err)=>{
                 console.log(err.response.data);
             });
@@ -88,7 +75,6 @@ export default {
         saveMetas( key ,value ){
             axios.put(`/api/admin/metasave/${key}`,{ name: key, value: value })
                 .then((response)=>{
-                    console.log(response.data)
                 })
                 .catch((err)=>{
                     console.log(err.response.data);                    

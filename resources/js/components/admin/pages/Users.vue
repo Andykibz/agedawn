@@ -1,6 +1,15 @@
 <template>
 <div class="container-fluid">
+    <div class="mb-3">
+        <h5>Access Control</h5>
+        <div class="custom-control custom-checkbox">
+            <input @change="saveAccess" type="checkbox" class="custom-control-input" v-model="accessControl" id="actl">
+            <label class="custom-control-label" for="actl">Check this custom checkbox</label>
+        </div>
+
+    </div>
     <div class="row">
+        
         <div v-for="user in users" :key="user.id" class="col-lg-3 col-sm-4 col-12">
             <div class="card ">
                 <div class="card-header">
@@ -57,18 +66,32 @@ export default {
     data(){
         return{
             users : [],
-            permissions: null
+            permissions: null,
+            accessControl : null,
         }
     },
     methods:{
         getUsers(){
             axios.get('/api/admin/users').then((response)=>{
-                this.users = response.data.data
+                this.users = response.data.users.data
+                this.accessControl = (response.data.access.value == 0 ) ? false : true;
             }).catch((err)=>{
-                console.log(err.response.data);                
+                console.log(err.response.data.value);                
             })
         },
 
+        saveAccess(){
+            axios.put('/api/admin/user/enforce_access',{
+                access : this.accessControl
+            })
+            .then((response)=>{
+                console.log(response.data);
+            })
+            .catch(( err )=>{
+                console.log(err.response.data);
+                
+            })
+        },
         save(id,form){
             let PermissionsForm = new FormData( document.querySelector(`#${form}`) )
 

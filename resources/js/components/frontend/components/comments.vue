@@ -320,7 +320,6 @@ a.animated-button.sandy-two:hover:after {
 	color: #FFF;
 }
 .commentsWrapper{
-    h3,h4,h5{font-family: 'Ubuntu', serif ;}
     h5 {
         font-size: 1.3rem;
         margin-bottom: .44em;
@@ -328,7 +327,6 @@ a.animated-button.sandy-two:hover:after {
     }
 
     p {
-        // font-family: 'Roboto', sans-serif;
         font-size: 1rem;
     }
 

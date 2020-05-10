@@ -44,6 +44,7 @@
             <span>Info </span>
           </h6>
           <router-link class="dropdown-item" :to="{ name  : 'band' }">Band Members</router-link>
+          <router-link class="dropdown-item" :to="{ name  : 'adawnage' }">Adawnage</router-link>
           <router-link class="dropdown-item" :to="{ name  : 'metas' }">Metas</router-link>
           <div class="dropdown-divider"></div>
           <h6 class="dropdown-header">

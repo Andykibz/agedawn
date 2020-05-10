@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use Laravel\Socialite\Facades\Socialite;
-use Illuminate\Support\Str;
+use App\Meta;
 
 class AuthController extends Controller
 {
@@ -106,13 +105,18 @@ class AuthController extends Controller
     }
 
     public function is_admin(){
-        // $user = auth()->user();
-        // if (!$user->hasPermissionTo('backend_access')){
-        //     return response()->json(['error' => 'Unauthorized'], 401);
-        // }else{
-        //     return response()->json(true);
-        // }
+        $user = auth()->user();
+        if (!$user->hasPermissionTo('backend_access')){
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }else{
             return response()->json(true);
+        }
+            // return response()->json(true);
+    }
+
+    public function enforced(){
+        $accessCtl = Meta::where('slug','accesscontrol')->first()->value;
+        return response()->json($accessCtl);
     }
 
 //     /**

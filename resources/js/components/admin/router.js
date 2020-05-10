@@ -6,6 +6,7 @@ import Info from './pages/Info.vue'
 import Band from './pages/Band.vue'
 import Users from './pages/Users.vue'
 import Metas from './pages/Metas.vue'
+import Adawnage from './pages/Adawnage.vue'
 
 export default [
     {
@@ -47,5 +48,10 @@ export default [
         path        :   '/metas',
         component   :   Metas,
         name        :   'metas'
+    },
+    {
+        path        :   '/adawnage',
+        component   :   Adawnage,
+        name        :   'adawnage'
     },
 ]

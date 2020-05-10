@@ -8,10 +8,10 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <link rel="stylesheet" href="{{ asset('fonts/icomoon/style.css') }}">
     <link href="{{ asset('fonts/flaticon/font/flaticon.css') }}" rel="stylesheet">
     <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Abel|Dosis|Lato|Oxygen|Spectral:300i|Titillium+Web&display=swap" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/buttons.css') }}" rel="stylesheet">
 
@@ -25,10 +25,11 @@
     </div>
 
 <script src="{{ asset('js/script.js') }}" ></script>
-<script src="{{ asset('js/jquery-migrate.js') }}" defer></script>   
+{{-- <script src="{{ asset('js/jquery-migrate.js') }}" defer></script>    --}}
+<script src="https://code.jquery.com/jquery-migrate-3.2.0.min.js" defer></script>
 <script src="{{ asset('js/stellar.js') }}" defer></script>   
 
-    <script type="text/javascript">
+<script type="text/javascript" defer>
 
    jQuery(document).ready(function() {
     

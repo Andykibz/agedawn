@@ -105,7 +105,7 @@
                               <div class="bottom-text">
                                 <h5 class="card-title">{{ member.data.name }}</h5>
                                 <p class="card-text">
-                                  {{ member.data.role }},&nbsp;<small><em>{{ member.data.type }}</em></small>
+                                  {{ member.data.role }},&nbsp;<small></small>
                                 </p>
                               </div>
                             </div>
@@ -245,11 +245,8 @@ $primaryCol : #f6993f;
     }
 .about-info p {
   font-size: medium;
-  // font-family: "Sarala", sans-serif;
-  /* font-family: 'Ubuntu', sans-serif; */
 }
 .about-contents p {
-  // font-family: "Sarala", sans-serif !important;
   font-size: 1.2rem;
         line-height: 2;
         color: #fff;

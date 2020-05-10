@@ -260,7 +260,6 @@ export default {
     }
 
 .commentsWrapper{
-    h3,h4,h5{font-family: 'Ubuntu', serif ;}
     h5 {
         font-size: 1.3rem;
         margin-bottom: .44em;
@@ -268,7 +267,6 @@ export default {
     }
 
     p {
-        // font-family: 'Roboto', sans-serif;
         font-size: 1rem;
     }
 

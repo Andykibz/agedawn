@@ -169,7 +169,6 @@ form {
         border: 0;
         border-bottom: 1px solid #aaa;
         padding: 4px 8px;
-        font-family: inherit;
         transition: all .5s;
         outline: none;
     }

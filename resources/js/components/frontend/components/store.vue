@@ -155,11 +155,6 @@ export default {
         this.getProductsAction('hoodies')
     },
     beforeMount(){
-         this.loader = this.$loading.show({
-            // Optional parameters
-            container: this.fullPage ? null : this.$refs.formContainer,
-            onCancel: this.onCancel,
-        });
     }
 
 

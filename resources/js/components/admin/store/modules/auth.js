@@ -5,7 +5,7 @@ export default{
    state:{
       token : null,
       user  : null, 
-      admin : true,
+      admin : null,
    },
 
    getters: {
@@ -34,29 +34,25 @@ export default{
       },
    },
    actions:{
-      async signIn( {dispatch}, credentials ){
-         let response =  await axios.post('/api/auth/signin', credentials)
-         return dispatch('attempt',response.data.access_token)
-      },
-      async googleSignIn( { dispatch }, profile ){
-         await axios.post('api/auth/google/authenticate',profile)
-            .then((response)=>{
-               return dispatch('attempt',response.data.access_token)
-            }).catch((err)=>{
-               console.log(err.response.data);
-            })
+      async initUser( { dispatch,commit } ){
+         let res = await axios.get('/api/admin/isenforced')
+         if( res.data != 0 ){
+            let adawnage_token = localStorage.getItem('adawnage.token')         
+            dispatch('attempt',adawnage_token)
+         }else{
+            commit('SET_ADMIN', true)
+         }
       },
 
-      async initUser( { dispatch } ){
-         let adawnage_token = localStorage.getItem('adawnage.token')         
-         dispatch('attempt',adawnage_token)
-      },
-
-      isAdmin( { dispatch } ){
+      isAdmin( { commit },token ){
+         
+         
          axios.get('/api/admin/isBackend').then((response)=>{
-            
+            commit('SET_ADMIN', true)
          }).catch((err)=>{
-
+            console.log(err.response.data);
+            
+            commit('SET_ADMIN', false)
          });
       },
 
@@ -65,7 +61,7 @@ export default{
          if ( token ){
             commit('SET_TOKEN',token)         
          }
-         if( !state.token ){
+         if( !token ){
             return
          }
          try {

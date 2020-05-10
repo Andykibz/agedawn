@@ -1,6 +1,7 @@
 <?php
 
 use App\Tag;
+use App\Meta;
 use Illuminate\Database\Seeder;
 
 
@@ -12,6 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        Meta::create([ 'type' =>  'config',  'name' =>  'AccessControl', 'slug' =>  'accesscontrol', 'value' =>  FALSE]);
+
         $this->call([
             UserTableSeeder::class,
             AboutTableSeeder::class,

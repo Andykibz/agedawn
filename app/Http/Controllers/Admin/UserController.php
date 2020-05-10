@@ -19,9 +19,24 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-        return new UserCollection( User::get() ) ;
-        $users = User::get();
-        return response()->json($users);
+        $users = new UserCollection( User::get() ) ;
+        $accessCtl = Meta::where('slug','accesscontrol')->first();
+        return response()->json([ 'users' => $users, 'access' => $accessCtl ]);
+    }
+
+    /**
+     * 
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function enforce( Request $request ){
+        $request->validate([
+            'access'    => 'boolean'
+        ]);
+        $accessCtl = Meta::where('slug','accesscontrol')->first();
+        $accessCtl->value = $request->access;
+        $accessCtl->save();
+        return response()->json(True);
     }
 
     /**

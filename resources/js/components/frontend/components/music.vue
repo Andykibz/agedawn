@@ -146,7 +146,6 @@ export default {
       
       size: 20px;
       line-height: 2;
-      /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
   }
   .butn{
       cursor: pointer;

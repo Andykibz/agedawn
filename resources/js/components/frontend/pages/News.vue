@@ -84,7 +84,6 @@ export default {
         width: 100%;
     }
     .readmore{
-        font-family: 'Times New Roman', Times, serif;
         color: rgba(#f6993f,0.8);
         font-size: medium;
         &:hover{

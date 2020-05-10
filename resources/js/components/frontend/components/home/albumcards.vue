@@ -98,13 +98,11 @@ export default {
     background-color: rgba($color: #000000, $alpha: .5);
     // text-align: justify;
     h3{
-        // font-family: 'Courier New', Courier, monospace;
         color: aliceblue;
         text-shadow: 1px 1px 2px 2px #333;
     }
     small{
       font-size: large;
-      // font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
   }
 

@@ -97,7 +97,6 @@ export default {
         
     }
     .footler-links{
-        font-family: 'Comic Neue', cursive;
         a{
             color: #d1d1cd;
             text-shadow: -3px 0px 7px rgba(99, 91, 80, 0.24);

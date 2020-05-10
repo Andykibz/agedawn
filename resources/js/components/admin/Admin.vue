@@ -49,9 +49,8 @@
         },
         methods:{
         },
-        beforeMount(){
-            // this.$store.dispatch('auth/initUser');
-            
+        beforeCreate(){
+            this.$store.dispatch('auth/initUser');   
         }
     }
 </script>

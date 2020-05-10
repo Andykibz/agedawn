@@ -58,6 +58,5 @@ export default {
 }
 .site-block-feature h3{
   font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
 }
 </style>

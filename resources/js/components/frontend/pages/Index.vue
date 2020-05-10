@@ -11,9 +11,9 @@
                             <div class="quote text-center">
                                 <font-awesome-icon icon="quote-right" size="2x"/>
                             </div>
-                            <blockquote class="blockquote">
-                                <p class="mb-0">Behold, I am doing a new thing; now it springs forth, do you not perceive it?</p>
-                                <footer class="blockquote-footer">Yahweh <cite title="Source Title">Isaiah 43:19</cite></footer>
+                            <blockquote class="blockquot">
+                                <p class="mb-0">I am doing something new! Now it's springing up...can't you see it?&nbsp;&nbsp;I am making a road in the desert..rivers in the waste land.</p>
+                                <footer class="blockquote-footer">Yahweh<cite title="Source Title">Isaiah 43:19</cite></footer>
                             </blockquote>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
         <parallax text="New Beginnings" image="performance.jpg"/>
         <Music />
         <hr class="m-0 p-0 bg-secondary">
-        <parallax text="Check out our Merch" image="shop.jpg"/>
+        <parallax text="Merch and Music" image="merch.jpg"/>
         <Store/>
         <!-- <hr class="m-0 p-0 bg-secondary"> -->
 

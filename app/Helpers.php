@@ -1,4 +1,7 @@
 <?php
+
+use Faker\Factory as Faker;
+
 if( !function_exists('slugify') ){
     function slugify( $cls, $str ){
         $slug = str_slug( $str );

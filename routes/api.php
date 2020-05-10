@@ -18,9 +18,10 @@ use App\Http\Resources\MetaCollection;
 //     return $request->user();
 // });
 // Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.','middleware' => ['web','api'] ],function () {
+Route::get('admin/isenforced','Auth\AuthController@enforced');
 Route::get('admin/isBackend','Auth\AuthController@is_admin');
 
-Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],function () {
+Route::group( [  'namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],function () {
 
 
     Route::resource('event', 'EventController');
@@ -54,9 +55,11 @@ Route::group( ['namespace' => 'Admin', 'prefix' => 'admin', 'as' => 'admin.'],fu
     Route::post('member/{id}', 'MetaController@updateMember');
     Route::delete('member/{id}', 'MetaController@deleteMember');
 
+    Route::put('user/enforce_access', 'UserController@enforce');
     Route::post('user/{id}/permission', 'UserController@assignPermissions');
     Route::get('users', 'UserController@index');
     Route::delete('user/{id}', 'UserController@destroy');
+    
 
     Route::post('saveVideos', 'MetaController@storeVideos');
     Route::put('metasave/{key}', 'MetaController@saveMeta');
@@ -97,8 +100,7 @@ Route::group( [ 'as' => 'frontend.' ],function () {
 });
 
 
-Route::group( [ 'as' => 'metas.' ],function () {
-    
+Route::group( [ 'as' => 'metas.' ],function () {    
 
     Route::GET('metas/getmembers', 'MetaController@getMembers');
     Route::GET('members/updatemembers', 'MetaController@updateMembers');
