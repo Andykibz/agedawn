@@ -241,7 +241,6 @@ export default {
 </script>
 
 <style scoped>
-[]
     label.triggeraccordion{
         cursor: pointer;
     }

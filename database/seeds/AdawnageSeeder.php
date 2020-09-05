@@ -31,23 +31,21 @@ class AdawnageSeeder extends Seeder
      */
     protected $videos = array(
         array(
+            'title'         => "Adawnage Live Concert",
+            'url'           => "zkUll2qg5_U"
+        ),
+        array(
             "title"         =>   "Your Name",
-            "url"           =>   "Y5rC2yd3aZE",
-            
+            "url"           =>   "Y5rC2yd3aZE",            
         ),
         array(
             "title"         =>   "I Live For You",
             "url"           =>   "RKGo_xNMpwM",
         ),
         array(
-            "title"         =>  "Tulizo",
-            "url"           =>  "m09DhQmc63Y",
-        ),
-        array(
             "title"         =>   "Uwezo",
             "url"           =>   "fv75qkXRGBE",
         ),
-        
     );
 
     /**
