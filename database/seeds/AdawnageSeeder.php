@@ -39,8 +39,8 @@ class AdawnageSeeder extends Seeder
             "url"           =>   "Y5rC2yd3aZE",            
         ),
         array(
-            "title"         =>   "I Live For You",
-            "url"           =>   "RKGo_xNMpwM",
+            "title"         =>   "Hakuna",
+            "url"           =>   "Xz4IUUvGbsI",
         ),
         array(
             "title"         =>   "Uwezo",

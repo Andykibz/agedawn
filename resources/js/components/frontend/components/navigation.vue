@@ -49,6 +49,7 @@
                         <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#" class="site-menu-toggle js-menu-toggle text-white"><span class="icon-menu h3"></span></a></div>
 
                         <ul class="site-menu js-clone-nav d-none d-lg-block">
+                            <li class=""><router-link :to="{name: 'home'}">Home</router-link></li>
                             <li class=""><router-link :to="{name: 'about'}">About Us</router-link></li>
                             <li class=""><router-link :to="{name: 'news'}" >News</router-link></li>
                             <li class=""><router-link :to="{name: 'store'}">Store</router-link></li>
