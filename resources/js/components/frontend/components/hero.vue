@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row align-items-end text-center justify-content-center">
             <div class="col-md-8 mb-4">
-                <span data-aos="zoom-in" class="sub-text">Adawnage Band</span>
+                <span data-aos="zoom-in" class="hero-sub-text">Adawnage Band</span>
                 <!-- <h1> {{heading}} </h1> -->
             </div>
             </div>
@@ -17,12 +17,3 @@ export default {
     props   : ['subheading','heading']
 }
 </script>
-
-<style lang="scss" scoped>
-    h1{
-        font-size: 36px;
-        font-weight: 100;
-        text-shadow: 1px 1px 2px #333;
-    }
-    .sub-text{ border-bottom: 1px solid rgba(255, 255, 255, 0.7); }
-</style>>

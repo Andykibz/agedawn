@@ -14,27 +14,27 @@
         <div id="site-navbar-wrap" class="site-navbar-wrap">
             <div class="site-navbar-top">
                 <div class="container py-2">
-                <div class="row align-items-center">
-                    <div class="col-6">
-                        <a target="+_blank" style="font-size: 1.1em !important;" :href="facebook" class="p-2 pl-0"><span class="icon-facebook"></span></a>
-                        <a target="+_blank" style="font-size: 1.1em !important;" :href="twitter" class="p-2 pl-0"><span class="icon-twitter"></span></a>
-                        <a target="+_blank" style="font-size: 1.1em !important;" :href="instagram" class="p-2 pl-0"><span class="icon-instagram"></span></a>
-                        <a target="+_blank" style="font-size: 1.1em !important;" :href="soundcloud" class="p-2 pl-0"><span class="icon-soundcloud"></span></a>
-                        <a target="+_blank" style="font-size: 1.1em !important;" :href="youtube" class="p-2 pl-0"><span class="icon-youtube"></span></a>
+                    <div class="row align-items-center">
+                        <div class="col-7">
+                            <a target="+_blank" style="font-size: 1.1em !important;" :href="facebook" class="p-2 pl-0"><span class="icon-facebook"></span></a>
+                            <a target="+_blank" style="font-size: 1.1em !important;" :href="twitter" class="p-2 pl-0"><span class="icon-twitter"></span></a>
+                            <a target="+_blank" style="font-size: 1.1em !important;" :href="instagram" class="p-2 pl-0"><span class="icon-instagram"></span></a>
+                            <a target="+_blank" style="font-size: 1.1em !important;" :href="soundcloud" class="p-2 pl-0"><span class="icon-soundcloud"></span></a>
+                            <a target="+_blank" style="font-size: 1.1em !important;" :href="youtube" class="p-2 pl-0"><span class="icon-youtube"></span></a>
+                        </div>
+                        <div class="col-5">
+                            <div class="d-flex ml-auto">
+                                <a href="mailto:info@adawnage,com" class="d-flex align-items-center ml-auto mr-4">
+                                    <span class="icon-envelope mr-2"></span>
+                                    <span class="d-none d-lg-inline-block"  style="font-size: .85em !important;">info@adawnage.com</span>
+                                </a>
+                                <a href="tel:+254728778384" class="d-flex align-items-center">
+                                    <span class="icon-phone mr-2"></span>
+                                    <span class="d-none d-lg-inline-block" style="font-size: .85em !important;">+254 (0) 728 778 384</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                    <div class="d-flex ml-auto">
-                        <a href="#" class="d-flex align-items-center ml-auto mr-4">
-                        <span class="icon-envelope mr-2"></span>
-                        <span class="d-none d-md-inline-block"  style="font-size: .85em !important;">info@adawnage.com</span>
-                        </a>
-                        <a href="#" class="d-flex align-items-center">
-                        <span class="icon-phone mr-2"></span>
-                        <span class="d-none d-md-inline-block" style="font-size: .85em !important;">+254 (0) 728 778 384</span>
-                        </a>
-                    </div>
-                    </div>
-                </div>
                 </div>
             </div>
             <div id="navbar-wrap" class="site-navbar">

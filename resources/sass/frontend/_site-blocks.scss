@@ -1,5 +1,5 @@
 $color-tertiary: #ff5733;
-@media only screen and (max-width:900px) {
+@media only screen and (max-width:992px) {
 	.site-blocks-cover {
 		height: 50vh !important;
 	}
@@ -14,6 +14,15 @@ $color-tertiary: #ff5733;
 	background-repeat: no-repeat;
 	background-position: center;	
 	// background-attachment: fixed;
+	@media only screen and (max-width:992px) {
+		background-image: url("./imgs/drums.jpg") !important;
+		&.overlay {
+			&:before {
+				background: rgba($black, .7) !important;
+			}
+		}	
+	}
+
 	&.overlay {
 		position: relative;
 		&:before {
@@ -67,6 +76,17 @@ $color-tertiary: #ff5733;
 		font-size: 16px;
 		line-height: 1.5;
 	}
+	.hero-head-text{
+		font-size: 36px;
+        font-weight: 100;
+        text-shadow: 1px 1px 2px #333;
+	}
+	.hero-sub-text{
+		border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
+		text-transform: uppercase;
+	}
+
+	
 }
 
 .site-heading {

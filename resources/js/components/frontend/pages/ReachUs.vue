@@ -8,7 +8,7 @@
             </div>
             <div class="row mb-5">
         
-                <main class="col-md-7 col-12 mx-auto" >
+                <main class="col-md-8 col-xs-12 mx-auto" >
                    <section id="contactForm" class="contact-box col-md-10 col-12 mx-auto" data-aos="slide-up">
                        <form @submit.prevent="submitContactUs" class="contact" id="reachus-form">
                            <input v-model="msg.name" autocomplete="off" type="text" placeholder="Name" required>
@@ -205,7 +205,7 @@ export default {
     }
     .contact {
         width: 100%;
-        max-width: 500px;
+        // max-width: 500px;
         margin: auto;
         input {
             width: 100%;

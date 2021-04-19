@@ -24,7 +24,7 @@
                                         <a target="+_blank" style="font-size: 1.1em !important;" v-tooltip="'Subscribe on YouTube'" :href="youtube" class="p-2 pl-0"><span class="icon-youtube"></span></a>
                                    </div>
                                 </div>
-                                <div class=" text-light" data-aos="fade-up">                                    
+                                <div class="footer-contacts text-light" data-aos="fade-up">                                    
                                     <span class=" mb-1 d-flex justify-content-around footler-links">
                                         <a href="mailto:info@adawnage.com">info@adawnage.com</a>
                                         <a href="/">www.adawnage.com</a>
@@ -102,12 +102,18 @@ export default {
             text-shadow: -3px 0px 7px rgba(99, 91, 80, 0.24);
             font-size: 1.4em;
         }
+        @media only screen and (max-width: 800px) {
+            font-size:small;
+            // flex-direction: column;
+        
+        }
     }
     .socialIcons{
         a { color: #d1d1cd; }
         font-size:x-large;
         @media only screen and (max-width: 900px) {
-            font-size:large;
+            font-size:medium;
+        
         }
 
     }

@@ -28,4 +28,8 @@ export default {
             width:400px
         }
     }
+
+    @media only screen and (max-width: 800px) {
+        /* background-size: 10% !important; */
+    }
 </style>

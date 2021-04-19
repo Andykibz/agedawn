@@ -1,30 +1,28 @@
 <template>
-    <section class="">
-        <div class="container py-4">
-            <div class="row">
-                <div class="section_title text-center col-12 mb-3">
-                    <h2>Our Music</h2>
-                    <span>
-                        <p>A peek at our content on <a target='+_blank' href='https://soundcloud.com/adawnage'>Soundcloud</a> and <a target='+_blank' href='https://www.youtube.com/channel/UC8w14pp6McD-PcRagO_1r7A'>Youtube</a></p>
-                    </span>
-                </div>
+    <section class="section-wrapper py-3 mt-3">
+        <div class="container">
+            <div class="section_title text-center col-12 mb-3">
+                <h2>Our Music</h2>
+                <span>
+                    <p>A peek at our content on <a target='+_blank' href='https://soundcloud.com/adawnage'>Soundcloud</a> and <a target='+_blank' href='https://www.youtube.com/channel/UC8w14pp6McD-PcRagO_1r7A'>Youtube</a></p>
+                </span>
             </div>
             <div class="row">
-                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-up-right">            
+                <div class="col-lg-6 mb-5 mb-lg-0" data-aos="fade-up">            
                     <iframe width="100%" height="450" scrolling="no" 
                         frameborder="no" allow="autoplay" 
                         :src="soundcloud">
                     </iframe>
                 </div> 
-                <div class="col-lg-6" data-aos="fade-up-left">
+                <div class="col-lg-6 " data-aos="fade-down">
                     <div class="row">
-                        <div v-for="video in videos" :key="video.id" class="col-sm-6 col-12 videothumb mb-3" >
-                            <div class="video-thumb">
+                        <div v-for="video in videos" :key="video.id" class="col-sm-6 col-12 videothumb mb-3">
+                            <div class="video-thumb mx-auto">
                                 <a href="#" @click="popYoutube($event,video.url)"                        
                                     class="vid youtube"
                                     :ytSrc="video.url">
                                     <img :src="'https://i.ytimg.com/vi/'+video.url+'/mqdefault.jpg'" alt="" class="img-fluid img-thumbnail">
-                                    <div class="video-info">
+                                    <div class="video-info text-center">
                                         <p><font-awesome-icon class="text-muted" :icon="['fas','play-circle']" size="2x"/></p>
                                     </div>
                                 </a>

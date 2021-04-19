@@ -10,7 +10,6 @@
             <div class="row">
                 <div class="col-sm-3 col-12 albums">
                     <albumcard :albums="albums"/>
-
                 </div>
                 <div class="col-sm-9 col-12">
                     <swiper class="swiper" :options="swiperOption">
@@ -44,7 +43,6 @@
                 </div>
             </div>
         </div>
-        <!-- <v-dialog/> -->
     </section>
 </template>
 <script>

@@ -5,9 +5,7 @@
             <div class="container">
                 <div class="row align-items-center text-center justify-content-center">
                     <div class="col-md-8 col-11">
-                        <div>
-
-                        </div>
+                            <span class="hero-sub-text">Adawnage Band</span>
                     </div>
                 </div>
             </div>
@@ -22,35 +20,8 @@ export default {
     },
     data(){
         return{
-            // swiperOption: {
-            //     effect: 'coverflow',
-            //     grabCursor: true,
-            //     centeredSlides: true,
-            //     slidesPerView: 'auto',
-            //     // loop: true,
-            //     autoplay: {
-            //         delay: 5000,
-            //         disableOnInteraction: false
-            //     },
-            //     coverflowEffect: {
-            //         rotate: 50,
-            //         stretch: 0,
-            //         depth: 100,
-            //         modifier: 1,
-            //         slideShadows : true
-            //     },
-            //     // pagination: {
-            //     //     el: '.swiper-pagination'
-            //     // }
-            // }
+
         }
     }
 }
 </script>
-<style scoped>
-    .herotext{
-        font-size: 42px;
-        font-weight: 100;
-    }
-    .sub-text{ border-bottom: 1px solid rgba(255, 255, 255, 0.7); }
-</style>
