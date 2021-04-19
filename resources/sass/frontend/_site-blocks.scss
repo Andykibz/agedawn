@@ -16,11 +16,17 @@ $color-tertiary: #ff5733;
 	// background-attachment: fixed;
 	@media only screen and (max-width:992px) {
 		background-image: url("./imgs/drums.jpg") !important;
+		background-size: cover !important;
 		&.overlay {
 			&:before {
 				background: rgba($black, .7) !important;
 			}
 		}	
+		.hero-sub-text{
+			border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
+			border-color: rgba(255, 255, 255, 0.7) !important;
+			text-transform: uppercase;
+		}
 	}
 
 	&.overlay {
@@ -83,6 +89,7 @@ $color-tertiary: #ff5733;
 	}
 	.hero-sub-text{
 		border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
+		border-color: rgba(255, 255, 255, 0.7) !important;
 		text-transform: uppercase;
 	}
 

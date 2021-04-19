@@ -7566,7 +7566,6 @@ button.bg-dark:focus {
 }
 
 .position-sticky {
-  position: -webkit-sticky !important;
   position: sticky !important;
 }
 
@@ -7586,9 +7585,8 @@ button.bg-dark:focus {
   z-index: 1030;
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
+@supports (position: sticky) {
   .sticky-top {
-    position: -webkit-sticky;
     position: sticky;
     top: 0;
     z-index: 1020;
@@ -10281,10 +10279,17 @@ h6 {
 @media only screen and (max-width: 992px) {
   .site-blocks-cover {
     background-image: url(/images/drums.jpg?346e61f364d6ed8535c1915b49b1b30c) !important;
+    background-size: cover !important;
   }
 
   .site-blocks-cover.overlay:before {
     background: rgba(0, 0, 0, 0.7) !important;
+  }
+
+  .site-blocks-cover .hero-sub-text {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
+    border-color: rgba(255, 255, 255, 0.7) !important;
+    text-transform: uppercase;
   }
 }
 
@@ -10357,6 +10362,7 @@ h6 {
 
 .site-blocks-cover .hero-sub-text {
   border-bottom: 1px solid rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
   text-transform: uppercase;
 }
 

@@ -16,7 +16,7 @@
                 </div> 
                 <div class="col-lg-6 " data-aos="fade-down">
                     <div class="row">
-                        <div v-for="video in videos" :key="video.id" class="col-sm-6 col-12 videothumb mb-3">
+                        <div v-for="video in videos" :key="video.id" class="col-sm-6 col-12 videothumb text-center mb-3">
                             <div class="video-thumb mx-auto">
                                 <a href="#" @click="popYoutube($event,video.url)"                        
                                     class="vid youtube"

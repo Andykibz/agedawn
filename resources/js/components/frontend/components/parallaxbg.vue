@@ -4,8 +4,8 @@
             :style="{'background-image':'url(./imgs/'+image+')'}"
             data-stellar-background-ratio="0.3">
         <div class="container">
-            <div class="inner-content d-flex justify-content-center" data-aos="zoom-in-up">
-                <h2 class="">{{ text }}</h2>
+            <div class="col-12 inner-content d-flex justify-content-center" data-aos="zoom-in-up">
+                <h2 class="text-center">{{ text }}</h2>
             </div>
         </div>
     </div> 

@@ -22,10 +22,10 @@
         <!-- <WeeklySlider/> -->
         <hr class="m-0 p-0 bg-secondary">
         <Posts />
-        <parallax text="New Beginnings" image="performance.jpg"/>
+        <parallax class="text-center" text="New Beginnings" image="performance.jpg"/>
         <Music />
         <hr class="m-0 p-0 bg-secondary">
-        <parallax text="Merch and Music" image="merch.jpg"/>
+        <parallax class="text-center" text="Merch and Music" image="merch.jpg"/>
         <Store/>
         <!-- <hr class="m-0 p-0 bg-secondary"> -->
 
