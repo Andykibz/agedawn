@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row align-items-center text-center justify-content-center">
                     <div class="col-md-8 col-11">
-                            <span class="hero-sub-text">Adawnage Band</span>
+                            <span class="d-md-block d-lg-none hero-sub-text border-bottom border-light">Adawnage Band</span>
                     </div>
                 </div>
             </div>
@@ -25,3 +25,4 @@ export default {
     }
 }
 </script>
+<style lang="scss">

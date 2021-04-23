@@ -12,7 +12,7 @@
         </div>  
         <div class="container mt-5">
             <div class="row mb-5">        
-                <main class="col-10 mx-auto" >
+                <main class="col-12 mx-auto" >
                     <div class="row">
                         <div class="col-md-6 col-12 d-flex justify-content-center align-items-center" data-aos="slide-up">
                             <img class="imghov img-fluid" :src="`/storage/Products/thumbs/${product.image}`" :data-zoom="`/storage/Products/${product.image}`">
