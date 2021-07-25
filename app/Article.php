@@ -12,7 +12,7 @@ class Article extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'body','slug','image'
+        'title', 'body', 'slug', 'image'
     ];
 
     /**
@@ -30,5 +30,4 @@ class Article extends Model
     {
         return $this->hasMany('App\Comment');
     }
-
 }

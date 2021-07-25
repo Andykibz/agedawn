@@ -4,7 +4,7 @@
         <div class="site-mobile-menu">
             <div class="site-mobile-menu-header">
             <div class="site-mobile-menu-close mt-3">
-                <span class="icon-close2 js-menu-toggle"></span>
+                <span id="closeMenuMobi" class="icon-close2 js-menu-toggle"></span>
             </div>
             </div>
             <div class="site-mobile-menu-body"></div>
@@ -55,9 +55,11 @@
                             <li class=""><router-link :to="{name: 'store'}">Store</router-link></li>
                             <li class=""><router-link :to="{name: 'reachus'}">Reach Us</router-link></li>
                             <li style="" class="">
-                                <router-link @click.prevent class="cart-link d-inline" 
-                                    data-toggle="modal" data-target="#cartModal" to="#cart"> 
-                                    Cart
+                                <router-link class="cart-link d-inline" 
+                                    data-toggle="modal" data-target="#cartModal" to="#cart" ref="cartLink">
+                                    <span @click="hideNav()">
+                                        Cart
+                                    </span> 
                                     <span class="badge-cus mr-1 ">
                                         <i class=""> {{ nums }} </i>
                                     </span>
@@ -77,11 +79,11 @@
                                     <template v-if="!!!authenticated">
                                         
                                         <a role="button" id="signInLink" class="nav-link dropdown-item" to="#signin"
-                                            data-toggle="modal" data-target="#signinModal" @click.prevent >
+                                            data-toggle="modal" data-target="#signinModal" @click.prevent="hideNav" ref="signInNavLink">
                                                 Sign In 
                                         </a>
                                         <a role="button" id="signUpLink" class="nav-link dropdown-item" href="#signup" type="button"
-                                                data-toggle="modal" data-target="#signupModal" @click.prevent >
+                                                data-toggle="modal" data-target="#signupModal" @click.prevent="hideNav" ref="signUpNavLink">
                                                 Sign Up 
                                         </a>                                        
                                     </template>
@@ -111,8 +113,6 @@
 
 
 import { mapGetters, mapActions } from 'vuex'
-import SignIn from './sub/signin'
-import SignUp from './sub/signup'
   export default{
         computed: {
             ...mapGetters({
@@ -152,25 +152,8 @@ import SignUp from './sub/signup'
                     });
                 })
             },
-            signIN(){
-                
-                this.$modal.show(SignIn, {
-                    text: 'This text is passed as a property'
-                }, {
-                    height: 'auto'
-                }, {
-                    'before-close': (event) => { console.log('this will be called before the modal closes'); }
-                })
-            },
-
-            signUP(){
-                this.$modal.show(SignUp, {
-                    text: 'This text is passed as a property'
-                }, {
-                    height: 'auto'
-                }, {
-                    'before-close': (event) => { console.log('this will be called before the modal closes'); }
-                })
+            hideNav(){
+                document.querySelector('body').classList.remove('offcanvas-menu');
             }
         },
         mounted(){
@@ -185,6 +168,11 @@ import SignUp from './sub/signup'
 //   if( document.getElementById('signOutLink') ){
 // }
 </script>
+<style>
+.modal{
+    z-index: 99999 !important;
+}
+</style>
 <style lang="scss" scoped>
     .dropdown-menu a{
         color: rgba(255, 255, 255, 0.6);

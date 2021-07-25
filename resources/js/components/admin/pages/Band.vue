@@ -106,8 +106,7 @@ export default {
         getBand(){
             axios.get('/api/admin/members').then((response)=>{
                 this.members = response.data.data
-                console.log(this.members);
-                
+    
             }).catch((err)=>{
                 console.log(err.response.data); 
             });

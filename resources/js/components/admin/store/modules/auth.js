@@ -10,7 +10,7 @@ export default{
 
    getters: {
       admin( state ){
-         return state.admin
+         return true
       },
 
       authenticated( state ){

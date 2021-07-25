@@ -8,6 +8,7 @@ import store from './components/admin/store';
 
 import VueTimeago from 'vue-timeago'
 import CKEditor from '@ckeditor/ckeditor5-vue';
+// import "@fortawesome/fontawesome-free/css/all.min.css"
 
 window.axios = require('axios');
 

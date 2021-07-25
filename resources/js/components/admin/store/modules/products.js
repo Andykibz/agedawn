@@ -94,7 +94,7 @@ export default{
             })
         },
 
-        async queryCategories( {commit, state} ){
+        async queryCategories( {commit} ){
             let response =  await axios.get('/api/admin/categories').then((response)=>{
                 commit('SET_CATEGORIES',response.data)    
             })
@@ -114,6 +114,15 @@ export default{
                 data: productForm,
                 headers: {'Content-Type': 'multipart/form-data' }
             })
+        },
+
+        async deleteProduct(_,id) {
+            let url = '/api/admin/product/' + id;
+            return await axios({
+                method: 'DELETE',
+                url: url,
+            })
+
         },
 
         async resetProduct( { commit } ){

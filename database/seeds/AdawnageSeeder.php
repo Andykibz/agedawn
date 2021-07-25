@@ -5,7 +5,7 @@ use App\Meta;
 
 class AdawnageSeeder extends Seeder
 {
-    
+
     /**
      * @var string
      */
@@ -36,16 +36,17 @@ class AdawnageSeeder extends Seeder
         ),
         array(
             "title"         =>   "Your Name",
-            "url"           =>   "Y5rC2yd3aZE",            
+            "url"           =>   "Y5rC2yd3aZE",
         ),
         array(
-            "title"         =>   "Hakuna",
-            "url"           =>   "Xz4IUUvGbsI",
+            "title"         =>   "Najitoa",
+            "url"           =>   "NXPAg_M3MGw",
         ),
         array(
             "title"         =>   "Uwezo",
             "url"           =>   "fv75qkXRGBE",
         ),
+
     );
 
     /**
@@ -80,7 +81,7 @@ class AdawnageSeeder extends Seeder
         'soundcloud'      =>   "https://soundcloud.com/adawnage",
         'instagram'       =>   "https://www.instagram.com/adawnage/?hl=en"
     ];
-    
+
 
     /**
      * Run the database seeds.

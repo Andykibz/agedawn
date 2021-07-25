@@ -7,6 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'name', 'quantity', 'slug', 'image', 'sku_num', 'category_id',
+        'description', 'price'
+    ];
+
+    /**
      * Get the category that product belongs to.
      */
     public function category()
@@ -27,7 +37,6 @@ class Product extends Model
      */
     public function orders()
     {
-        return $this->belongsToMany('App\Order','orders_products','product_id','order_id')->withPivot('product_count');
+        return $this->belongsToMany('App\Order', 'orders_products', 'product_id', 'order_id')->withPivot('product_count');
     }
-
 }

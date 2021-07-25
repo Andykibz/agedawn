@@ -20,7 +20,7 @@
                     <span>
                         <a @click="initEdit(product.id)" role="button" href="#edit" class="mr-3" >Edit</a>
                         <span>&nbsp;|&nbsp;</span>
-                        <a @click="initDelete(product.id)" role="button" href="#edit" class="mr-3">Delete</a>
+                        <a @click="initDelete(product.id)" role="button" href="#delete" class="mr-3">Delete</a>
                     </span>
                 </div>
         </div>
@@ -56,7 +56,8 @@ export default {
     methods:{
         ...mapActions({
                 queryProductsAction: 'products/queryProducts',
-                queryProductAction: 'products/queryProduct'
+                queryProductAction: 'products/queryProduct',
+                deleteProductAction: 'products/deleteProduct',
         }),
         
         ...mapGetters({
@@ -82,7 +83,9 @@ export default {
             this.queryProductAction(id)
         },     
         initDelete( id ){
-
+            this.deleteProductAction(id).then((resp)=>{
+                location.reload()
+            })
         },
     },
     beforeMount(){
@@ -90,7 +93,6 @@ export default {
     },
 
     mounted(){
-        console.log(this.total_pages);
         
     }
     

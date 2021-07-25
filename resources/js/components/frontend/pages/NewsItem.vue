@@ -14,7 +14,7 @@
         </div>  
         <div class="container mt-5">
             <div class="row mb-5">        
-                <main class="col-8 mx-auto" >
+                <main class="col-sm-12 col-lg-8 mx-auto" >
                     <div v-if="article.image" class="imgwrapper d-flex justify-content-center" data-aos="fade-in">
                         <img class="img-fluid" :src="'/storage/Articles/'+article.image" alt="">                      
                     </div>

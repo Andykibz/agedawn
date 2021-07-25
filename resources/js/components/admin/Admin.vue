@@ -19,7 +19,7 @@
             </div>
 
         </div>
-        <div v-else class="Err401">
+        <div v-if="!isAdmin" class="Err401">
             <div class="content d-flex justify-content-center align-items-center">
 
             <h1 class="heading text-light ">
@@ -31,6 +31,9 @@
 </template>
 
 <script>
+    import "@fortawesome/fontawesome-free"
+    import "@fortawesome/free-solid-svg-icons"
+    import "@fortawesome/free-solid-svg-icons"
     import breadcrumb from './components/breadcrumb'
     import cards from './components/cards'
     import foot from './components/footer'
@@ -56,6 +59,7 @@
 </script>
 
 <style lang="scss" scoped>
+
 .Err401{
     position: absolute;
     width: 100%;

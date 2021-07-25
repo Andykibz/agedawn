@@ -3,18 +3,16 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>Adawnage Admin - Dashboard</title>
-
-
-  <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
-  <link href="{{ asset('vendor/css/all.min.css') }}" rel="stylesheet">
+    <title>Adawnage Admin - Dashboard</title>
+    <link href="{{ asset('css/sb-admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
 
 </head>
 
@@ -23,9 +21,9 @@
         <admin></admin>
     </div>
 
-  {{-- @include('admin.components.nav') --}}
+    {{-- @include('admin.components.nav') --}}
 
-  {{-- <div id="wrapper">
+    {{-- <div id="wrapper">
 
     @include('admin.components.sidebar')
 
@@ -54,15 +52,15 @@
   </div>
   <!-- /#wrapper --> --}}
 
-  <!-- Scroll to Top Button-->
-  <a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-  </a>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
 
-  <!-- Logout Modal-->
-  @include('admin.components.logoutmodal')
+    <!-- Logout Modal-->
+    @include('admin.components.logoutmodal')
 
-  <script src="{{ asset('js/admin.js') }}" defer></script>
+    <script src="{{ asset('js/admin.js') }}" defer></script>
 
 
 </body>

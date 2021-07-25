@@ -18,8 +18,8 @@ class ProductCollection extends ResourceCollection
         //     'data' => $this->collection,
         // ];
         return [
-            'data' => $this->collection->transform(function($product){
-                return [ 
+            'data' => $this->collection->transform(function ($product) {
+                return [
                     'id'        =>  $product->id,
                     'name'      =>  $product->name,
                     'quantity'  =>  $product->quantity,
@@ -27,10 +27,22 @@ class ProductCollection extends ResourceCollection
                     'price'     =>  $product->price,
                     'category'  =>  $product->category->name,
                     'created'   =>  $product->created_at,
-
                 ];
-            })
-        ];
+            }),
+            'meta' => [
+                'total' => $this->total(),
+                'count' => $this->count(),
+                'per_page' => $this->perPage(),
+                'current_page' => $this->currentPage(),
+                'last_page' => $this->lastPage()
+            ],
+            'links'  =>  [
+                'first'     => $this->url(1),
+                'next'      => $this->nextPageUrl(),
+                'prev'      => $this->previousPageUrl(),
+                'last'      => $this->url($this->lastPage())
 
+            ],
+        ];
     }
 }

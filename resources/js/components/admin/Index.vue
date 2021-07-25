@@ -36,7 +36,7 @@
 
 
                 <div class="col-lg-4 col-md-6 col-12 mb-3">
-                    <div @click="redirectPage('products')" class="card bg-dark text-white link-card">
+                    <div @click="redirectPage('bandmembers')" class="card bg-dark text-white link-card">
                         <img src="/imgs/admin/band.jpg" class="card-img" >
                         <div class="card-img-overlay d-flex flex-column justify-content-end">
                             <h3 class="card-title mb-3">Members</h3>

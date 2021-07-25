@@ -125,7 +125,7 @@ class AboutTableSeeder extends Seeder
             "type"  =>      "official"
         ),
     );
-    
+
     /**
      * General Profile
      * @var array
@@ -208,10 +208,10 @@ class AboutTableSeeder extends Seeder
      */
     protected $accolades = array(
         [
-          "name"    =>  "Groove Awards",
-          "title"   =>  "Group of the Year",
-          "year"   =>  "2011/12/14/15",
-          "scooped"   =>  false,
+            "name"    =>  "Groove Awards",
+            "title"   =>  "Group of the Year",
+            "year"   =>  "2011/12/14/15",
+            "scooped"   =>  false,
         ],
         [
             "name"    =>  "AGMA",
@@ -247,14 +247,14 @@ class AboutTableSeeder extends Seeder
     {
         foreach ($this->members as $member) {
             Meta::create([
-                'type'  => 'members', 'name'    =>  $member['name'], 
-                'slug'   =>  slugify(Meta::class,$member['name']),
+                'type'  => 'members', 'name'    =>  $member['name'],
+                'slug'   =>  slugify(Meta::class, $member['name']),
                 'value' =>  json_encode(array(
-                                'name'  => $member['name'],
-                                'role'  => $member['role'],
-                                'image' => $member['image'],
-                                'type'  => $member['type'],
-                            ))
+                    'name'  => $member['name'],
+                    'role'  => $member['role'],
+                    'image' => $member['image'],
+                    'type'  => $member['type'],
+                ))
             ]);
         }
 
@@ -263,14 +263,14 @@ class AboutTableSeeder extends Seeder
          */
         foreach ($this->accolades as $accolade) {
             Meta::create([
-                'type'  => 'accolades', 'name'    =>  $accolade['name'].'_'.str_slug($accolade['year']), 
-                'slug'   =>  slugify(Meta::class,$accolade['name'].'_'.str_slug($accolade['year'])),
+                'type'  => 'accolades', 'name'    =>  $accolade['name'] . '_' . str_slug($accolade['year']),
+                'slug'   =>  slugify(Meta::class, $accolade['name'] . '_' . str_slug($accolade['year'])),
                 'value' =>  json_encode(array(
-                                'name'      => $accolade['name'],
-                                'title'     => $accolade['title'],
-                                'year'      => $accolade['year'],
-                                'scooped'   => $accolade['scooped'],
-                            ))
+                    'name'      => $accolade['name'],
+                    'title'     => $accolade['title'],
+                    'year'      => $accolade['year'],
+                    'scooped'   => $accolade['scooped'],
+                ))
             ]);
         }
 
@@ -279,28 +279,28 @@ class AboutTableSeeder extends Seeder
          */
         foreach ($this->discography as $disco) {
             Meta::create([
-                'type'  => 'discography', 'name'    =>  $disco['title'], 
-                'slug'   =>  slugify(Meta::class,$disco['title']),
+                'type'  => 'discography', 'name'    =>  $disco['title'],
+                'slug'   =>  slugify(Meta::class, $disco['title']),
                 'value' =>  json_encode(array(
-                                'title'         =>  $disco['title'],
-                                'tracks'        =>  $disco['tracks'],
-                                'release'       =>  $disco['release'],
-                                'description'   =>  $disco['description'],
-                                'type'          =>  $disco['type'],
-                                'image'         =>  $disco['image']
-                            ))
+                    'title'         =>  $disco['title'],
+                    'tracks'        =>  $disco['tracks'],
+                    'release'       =>  $disco['release'],
+                    'description'   =>  $disco['description'],
+                    'type'          =>  $disco['type'],
+                    'image'         =>  $disco['image']
+                ))
             ]);
         }
 
         Meta::create([
-            'name'      => 'about', 
+            'name'      => 'about',
             'slug'      => 'about-us',
             'type'      => 'about',
             'value'     =>  json_encode(array(
-                    'about'     =>  $this->about,
-                    'bio'       =>  $this->bio,
-                    'pi'        =>  $this->pi,
-                ))
+                'about'     =>  $this->about,
+                'bio'       =>  $this->bio,
+                'pi'        =>  $this->pi,
+            ))
 
         ]);
 
@@ -308,7 +308,7 @@ class AboutTableSeeder extends Seeder
             'name'  => 'profile',
             'slug'  =>  'profile',
             'type'  =>  'profile',
-            'value' =>  json_encode( $this->profile )
+            'value' =>  json_encode($this->profile)
         ]);
     }
 }
